@@ -12,6 +12,12 @@
 <link rel="stylesheet" href="../FlervalgsStyle.css">
 <script src="../FlervalgScript.js" defer></script>
 
+<style>
+img {
+    max-height: 300px;
+    max-width: 200px;
+}
+</style>
 </head>
 
 <body>
@@ -31,37 +37,40 @@
 
 <div class="container">
     <div class="box">
-        $$
-                (x - 1)(x + 2) < 0
-        $$
+        <p>I den ikke-rettvinklede trekanten \(ABC\) er \(AB = 4\), \(BC = 3\) og \( AC = 6\).</p>
 
-        <p><strong>Hva er løsningen av ulikheten?</strong></p>
+        <p><strong>Hva er riktig?</strong></p>
 
         <form id="quiz">
             <label class="svar" tabindex="0">
                 <input type="radio" name="svar" value="feil">
-                <span>\(  x < - 2 \;\; \vee \;\; x > 1 \)</span>
+                <span>\(  \cos \angle A = \frac{4}{5} \)</span>
             </label>
 
-            <label class="svar" tabindex="0">
-                <input type="radio" name="svar" value="feil">
-                <span>\(  x < - 1 \;\; \vee \;\; x > 2 \)</span>
-            </label>
-
-            <label class="svar" tabindex="0">
+                       <label class="svar" tabindex="0">
                 <input type="radio" name="svar" value="riktig">
-                <span>\(  -2 < x < 1 \)</span>
+                <span>\(  3^2 = 4^2 + 6^2 - 2 \cdot 4 \cdot 6 \cdot \cos \angle A \)</span>
             </label>
 
-            <label class="svar" tabindex="0">
-                <input type="radio" name="svar" value="feil">
-                <span>\(  -1 < x < 2 \)</span>
+                         <label class="svar" tabindex="0">
+                <input type="radio" name="svar" value="riktig">
+                <span>\(  4^2 = 3^2 + 6^2 - 2 \cdot 3 \cdot 6 \cdot \cos \angle A \)</span>
             </label>
+
+                                  <label class="svar" tabindex="0">
+                <input type="radio" name="svar" value="riktig">
+                <span>\(  6^2 = 4^2 + 3^2 - 2 \cdot 4 \cdot 3 \cdot \cos \angle A \)</span>
+            </label>
+
+
         </form>
 
         <button id="neste" onclick="nesteSporsmal()">Neste spørsmål</button>
     </div>
 
+    <div class="box" style="display: grid; place-items: center;">
+        <img src="trekant2.png" alt="">
+    </div>
 </div>
 
 </body>
