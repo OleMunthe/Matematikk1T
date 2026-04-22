@@ -105,26 +105,38 @@ function shuffle(array) {
     }
 }
 
+
 function velgKategori(kategori) {
 
     const TOTAL = {
         Kap2: 51, Kap3: 33, Kap4: 63, Kap5: 23, Kap6: 24
     };
 
+    // ✅ Nullstill ALT for ny kategori
+    const storageKey = `quizData_${kategori}`;
+    localStorage.removeItem(storageKey);
+    sessionStorage.removeItem("harStartet");
+
     const alle = [];
     for (let i = 1; i <= (TOTAL[kategori] || 1); i++) {
         alle.push(i);
     }
 
+    // Stokk oppgavene
     shuffle(alle);
 
-    const antall = Math.min(10, alle.length);
+    const antall = Math.min(
+        parseInt(sessionStorage.getItem("antallOppgaver") || "10"),
+        alle.length
+    );
+
     const tilfeldig = alle.slice(0, antall);
 
     sessionStorage.setItem("valgtKategori", kategori);
     sessionStorage.setItem("aktivtOppgavesett", JSON.stringify(tilfeldig));
-    sessionStorage.removeItem("harStartet");
 }
+
+
 </script>
 
 </body>
