@@ -28,12 +28,10 @@
         }
 
         .hero {
-            background-image: url('TjomeTom.png');
-            background-size: cover;
-            background-position: center;
-            padding: 60px 20px;
-            min-height: 500px;
-        }
+    background-color: #0877ab;
+    padding: 60px 20px;
+    min-height: 500px;
+}
 
         
         /* 📱 Skjul bakgrunnsbilde på mobil */
@@ -43,7 +41,6 @@
         background-color: #0877ab; /* valgfri ensfarget bakgrunn */
         }
         }
-
 
         main {
             background: rgba(255, 255, 255, 0.7);
@@ -68,6 +65,61 @@
         ul li {
             margin-bottom: 10px;
         }
+
+
+
+
+
+
+/* Inkludere for å få med teori */
+        .teori-link {
+  margin-left: 12px;
+  padding: 4px 10px;
+  background-color: #0877ab;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.9em;
+  font-weight: bold;
+}
+
+.teori-link:hover {
+  background-color: #055f88;
+}
+
+/* Skjul teori-lenker på mobil */
+@media (max-width: 768px) {
+  .teori-link {
+    display: none;
+  }
+}
+
+.app-link-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.app-link-list li {
+  margin-bottom: 14px;
+}
+
+.app-link {
+  display: inline-block;
+  padding: 12px 18px;
+  background-color: #ffffff;
+  color: #0877ab;
+  border: 2px solid #0877ab;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  min-width: 220px;
+  text-align: center;
+}
+
+.app-link:hover {
+  background-color: #0877ab;
+  color: white;
+}
     </style>
 </head>
 
@@ -75,21 +127,66 @@
 
 <div class="hero">
     <main>
-        <h1>1T</h1>
+        <h1>Matematikk 1T</h1>
 
-        <p><strong>Nedenfor 👇 er flervalgsoppgaver til Matematikk 1T. Hver gang du går inn på en av lenkene får du 10 tilfeldige spørsmål fra det valgte emnet.</strong></p>
+        <p><strong>Nedenfor 👇 er flervalgsoppgaver til ulike emner i Matematikk 1T. </strong></p>
 
-        <ul class="app-link-list">
-            <li><a class="app-link" href="./Kap2/Oppgave1.html" onclick="velgKategori('Kap2')">Regneregler</a></li>
-            <li><a class="app-link" href="./Kap3/Oppgave1.html" onclick="velgKategori('Kap3')">Likninger og identiteter</a></li>
-            <li><a class="app-link" href="./Kap4/Oppgave1.html" onclick="velgKategori('Kap4')">Funksjoner</a></li>
-            <li><a class="app-link" href="./Kap5/Oppgave1.html" onclick="velgKategori('Kap5')">Ulikheter</a></li>
-            <li><a class="app-link" href="./Kap6/Oppgave1.html" onclick="velgKategori('Kap6')">Trigonometri</a></li>
-        </ul>
+        <div class="antall-velger">
+  <strong>Før du starter; Velg hvor mange oppgaver du vil ha:</strong><br><br>
+  <label>
+    <input type="radio" name="antallOppgaver" value="10">
+    10
+  </label>
+  <label>
+    <input type="radio" name="antallOppgaver" value="20">
+    20
+  </label>
+  <label>
+    <input type="radio" name="antallOppgaver" value="30">
+    30
+  </label>
+        </div>
+        <p></p>
+        <p><strong>Hver gang du går inn på en av lenkene får du trukket ut ulike tilfeldige oppgaver fra det aktuelle emnet.</strong></p>
+       
+<ul class="app-link-list">
+
+    <li>
+    <a class="app-link" href="./Kap6/Oppgave1.html" onclick="velgKategori('Kap6')">Trigonometri</a>
+    <a class="teori-link" href="./Kap6/Teori.html">Teori</a>
+  </li>
+
+  <li>
+    <a class="app-link" href="./Kap1/Oppgave1.html" onclick="velgKategori('Kap2')">Regneregler</a>
+    <a class="teori-link" href="./Kap1/Teori.html">Teori</a>
+  </li>
+
+  <li>
+    <a class="app-link" href="./Kap2/Oppgave1.html" onclick="velgKategori('Kap3')">Faktorisering og identiteter</a>
+    <a class="teori-link" href="./Kap2/Teori.html">Teori</a>
+  </li>
+
+  <li>
+    <a class="app-link" href="./Kap3/Oppgave1.html" onclick="velgKategori('Kap4')">Polynomfunksjoner</a>
+    <a class="teori-link" href="./Kap3/Teori.html">Teori</a>
+  </li>
+
+    <li>
+    <a class="app-link" href="./Kap4/Oppgave1.html" onclick="velgKategori('Kap5')">Likningssystemer og ulikheter</a>
+    <a class="teori-link" href="./Kap4/Teori.html">Teori</a>
+  </li>
+
+    <li>
+    <a class="app-link" href="./Kap5/Oppgave1.html" onclick="velgKategori('Kap5')">Funksjonsdrøfting</a>
+    <a class="teori-link" href="./Kap5/Teori.html">Teori</a>
+  </li>
+
+</ul>
+
 
         <p><strong>
-        Trykk deg inn på emnet du vil jobbe med. Riktig svar blir grønt 💚, feil blir rødt 🤬.
-        </strong></p>
+        Riktig svar blir grønt 💚<br>
+        Feil svar blir rødt 🤬</strong></p>
 
         <p><strong>
         Spørsmål du svarer feil på kommer igjen senere.
@@ -98,6 +195,7 @@
 </div>
 
 <script>
+    
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -109,7 +207,7 @@ function shuffle(array) {
 function velgKategori(kategori) {
 
     const TOTAL = {
-        Kap2: 51, Kap3: 33, Kap4: 63, Kap5: 23, Kap6: 24
+        Kap6: 34, Kap1: 51, Kap2: 33, Kap3: 38, Kap4: 33, Kap5: 32
     };
 
     // ✅ Nullstill ALT for ny kategori
@@ -137,7 +235,41 @@ function velgKategori(kategori) {
 }
 
 
-</script>
 
+  // Sett default hvis ikke valgt tidligere
+  if (!sessionStorage.getItem("antallOppgaver")) {
+    sessionStorage.setItem("antallOppgaver", "10");
+  }
+
+  // Sett riktig radio som valgt ved lasting
+  document.querySelectorAll("input[name='antallOppgaver']").forEach(radio => {
+    if (radio.value === sessionStorage.getItem("antallOppgaver")) {
+      radio.checked = true;
+    }
+
+    radio.addEventListener("change", () => {
+      sessionStorage.setItem("antallOppgaver", radio.value);
+    });
+  });
+
+
+</script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

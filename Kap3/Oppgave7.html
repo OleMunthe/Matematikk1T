@@ -32,22 +32,28 @@
 <div class="container">
     <div class="box">
         $$
-                (x + 2)(x + 3) = x^2 + 5x + 6
+                f(x) = x^2 + 5x + 6
         $$
 
-        <p><strong>Er likningen en identitet?</strong></p>
+        <p><strong>Hva er løsningen av \(f(x) = 0\)?</strong></p>
 
         <form id="quiz">
             <label class="svar" tabindex="0">
-                <input type="radio" name="svar" value="riktig">
-                <span>Ja</span>
+                <input type="radio" name="svar" value="feil">
+                <span>\( 6 \)</span>
             </label>
 
             <label class="svar" tabindex="0">
                 <input type="radio" name="svar" value="feil">
-                <span>Nei</span>
+                <span>\( 2 \vee 3 \)</span>
             </label>
 
+            <label class="svar" tabindex="0">
+                <input type="radio" name="svar" value="riktig">
+                <span>\( -2 \vee -3 \)</span>
+            </label>
+
+      
         </form>
 
         <button id="neste" onclick="nesteSporsmal()">Neste spørsmål</button>

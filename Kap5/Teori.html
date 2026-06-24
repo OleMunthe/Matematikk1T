@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Funksjonsdrøfting</title>
+
+  <!-- MathJax -->
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      max-width: 900px;
+      margin: auto;
+      line-height: 1.6;
+      background-color: #fafafa;
+    }
+
+    h1, h2, h3 {
+      margin-top: 2em;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+      margin: 1em auto;
+    }
+
+    /* ---------- BOKSER ---------- */
+
+    /* Definisjon */
+    .definition {
+      background-color: #ecfeff;
+      border-left: 6px solid #0891b2;
+      padding: 1.2em 1.5em;
+      margin: 2em 0;
+      border-radius: 8px;
+    }
+
+    .definition h3::before {
+      content: "📘 ";
+    }
+
+    /* Eksempel */
+    .example {
+      background-color: #ecfdf5;
+      border: 2px solid #10b981;
+      border-left-width: 6px;
+      padding: 1.2em 1.5em;
+      margin: 2em 0;
+      border-radius: 10px;
+    }
+
+    .example h3 {
+      margin-top: 0;
+      color: #065f46;
+    }
+
+    .example h3::before {
+      content: "📌 ";
+    }
+
+    .solution {
+      background-color: #ffffff;
+      border: 1px dashed #34d399;
+      padding: 1em;
+      margin-top: 1em;
+      border-radius: 6px;
+    }
+
+    /* Merk */
+    .note {
+      background-color: #fff7ed;
+      border-left: 6px solid #f59e0b;
+      padding: 1.2em 1.5em;
+      margin: 2em 0;
+      border-radius: 8px;
+    }
+
+    .note strong::before {
+      content: "⚠️ ";
+    }
+
+    /* Programkode */
+    .codebox {
+      background-color: #0f172a;
+      color: #e5e7eb;
+      padding: 1.5em;
+      border-radius: 10px;
+      margin: 2em 0;
+      overflow-x: auto;
+      font-family: Consolas, Monaco, monospace;
+    }
+
+    .codebox::before {
+      content: "💻 Programkode";
+      display: block;
+      color: #34d399;
+      margin-bottom: 0.8em;
+      font-weight: bold;
+    }
+
+    .outputbox {
+  background-color: #f8fafc;
+  color: #0f172a;
+  border: 1px solid #cbd5e1;
+  border-left: 6px solid #64748b;
+  padding: 1em 1.2em;
+  margin: -1em 0 2em 0;
+  border-radius: 8px;
+  font-family: Consolas, Monaco, monospace;
+  white-space: pre-wrap;
+}
+
+.outputbox::before {
+  content: "🖨️ Utskrift";
+  display: block;
+  font-weight: bold;
+  color: #475569;
+  margin-bottom: 0.5em;
+}
+
+.formel-tabell table {
+    border-collapse: collapse;
+    margin: 1rem auto;
+}
+.formel-tabell td {
+    border: 1px solid #999;
+    padding: 18px 28px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+
+    /* ===========================
+   Mobiltilpasning
+   =========================== */
+
+@media (max-width: 700px) {
+
+  body {
+    padding: 1em;
+    font-size: 1rem;
+  }
+
+  h1 {
+    font-size: 1.7rem;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+  }
+
+  /* Bokser: mindre padding på mobil */
+  .example,
+  .definition,
+  .note,
+  .codebox {
+    padding: 1em;
+    margin: 1.5em 0;
+  }
+  .outputbox {
+  padding: 1em;
+  margin: 1.5em 0;
+}
+
+  /* Bilder: litt større på mobil */
+  img {
+    width: 100% !important;
+    max-width: 100%;
+  }
+
+  /* Programkode: lettere å lese */
+  .codebox {
+    font-size: 0.9rem;
+  }
+
+}
+
+/* ===== Skriv til PDF-knapp ===== */
+
+.print-button {
+  display: block;
+  margin: 1.5em auto;
+  padding: 0.6em 1.4em;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #10b981;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.print-button:hover {
+  background-color: #059669;
+}
+
+/* Skjul knappen på mobil */
+@media (max-width: 700px) {
+  .print-button {
+    display: none;
+  }
+}
+
+@media print {
+  .print-button {
+    display: none;
+  }
+}
+
+
+/* ===========================
+   PDF / Utskrift
+   =========================== */
+
+@media print {
+
+  /* Generelle marger for A4 */
+  body {
+    margin: 1.5cm;
+    background: white;
+  }
+
+  /* Overskrifter starter på ny side */
+  h1,
+  h2 {
+    page-break-before: always;
+  }
+
+  /* Aldri del disse boksene over sider */
+  .definition,
+  .example,
+  .note,
+  .codebox {
+    page-break-inside: avoid;
+  }
+  .outputbox {
+  page-break-inside: avoid;
+}
+
+  /* Tillat at løsninger deles om nødvendig */
+  .solution {
+    page-break-inside: auto;
+  }
+
+  /* Bilder bør heller flyttes enn å deles */
+  img {
+    page-break-inside: avoid;
+  }
+
+  /* PDF skal ikke vise knappen */
+  .print-button {
+    display: none !important;
+  }
+}
+@media print {
+  .no-print {
+    display: none;
+  }
+}
+  </style>
+</head>
+
+<body>
+<a href="../index.html" class="no-print">← Tilbake til hovedsiden</a>
+<button class="print-button" onclick="window.print()">
+  🖨️ Skriv til PDF
+</button>
+
+<main>
+    <h1>Funksjonsdrøfting</h1>
+
+    <p>Du skal ha kompetanse om</p>
+    <ul>
+      <li>vekstfart og derivasjon</li>
+      <ul>
+        <li>gjennomsnittlig vekstfart</li>
+        <li>momentan vekstfart</li>
+        <li>derivasjonsregler</li>
+        <li>tangenter</li>
+        <li>ekstremalpunkter</li>
+        <li>monotoniegenskaper</li>
+        </ul>
+      <li>optimering</li>
+      <ul>
+          <li>bruk av derivasjon for å optimere</li>
+          <li>bruk av programmering for å derivere</li>
+      </ul>
+      <li>rasjonale funksjoner</li>
+      <li>potensfunksjoner</li>
+      <li>eksponentialfunksjoner</li>
+            <ul>
+        <li>vekstfaktor</li>
+        <li>programmering med prosentvis endring</li>
+        </ul>
+    </ul>
+
+    <section>
+      <h2>Vekstfart og derivasjon</h2>
+
+      <h3>Vekstfart</h3>
+<strong>Gjennomsnittlig vekstfart:</strong> Hvor mye \(y\) endrer seg i forhold til \(x\) mellom to punkter, \(\frac{\Delta y}{\Delta x}\).
+<img src="gjvek.png" alt="..." style="width: 67%;">
+
+
+         <div class="example">
+        <h3>Eksempel</h3>
+        Grafen viser høyden til en plante \(x\) uker etter at vi har plantet den. 
+        <img src="plantegj.png" alt="..." style="width: 67%;">
+        Bestem den gjennomsnittlge vekstfarten mellom uke 5 og uke 10.<br>
+        Gi en praktisk tolkning av svaret.
+
+        <div class="solution">
+         \[  \frac{\Delta y}{\Delta x} = \frac{30 - 15}{10 - 5} = \frac{15}{5} = 3 \]
+         Praktisk tolkning: I gjennomsnitt vokser planta 3 cm per uke mellom uke 5 og uke 10.
+        </div>
+      </div>
+
+
+      <strong>Momentan vekstfart:</strong> Hvor mye \(y\) endrer seg i forhold til \(x\) mellom to punkter som ligger <em>uendelig</em> nærme hverandre.
+<img src="momvek.png" alt="..." style="width: 67%;">
+      I praksis kan vi bestemme den momentane vekstfarten ved å se på to punkter som ligger <em>veldig</em> nærme hverandre.
+
+
+         <div class="example">
+        <h3>Eksempel</h3>
+        Grafen viser høyden til en plante \(x\) uker etter at vi har plantet den. 
+        <img src="plantemom.png" alt="..." style="width: 67%;">
+        Bestem den momentane vekstfarten etter 5 uker.<br>
+        Gi en praktisk tolkning av svaret.
+
+        <div class="solution">
+         Ved å tegne en linje som går gjennom to punkter som ligger nær \(x=5\) kan vi se hvor bratt grafen er der. Vi ser at stigningstallet er omtrent 2.
+         Altså er den momentane vekstfarten ca. 2.<br><br>
+
+         Praktisk tolkning: Etter 5 uker er planta i ferd med å vokse med 2 cm per uke.
+
+        </div>
+      </div>
+
+<h3>Derivasjon</h3>
+
+Den deriverte i et punkt er det samme som den momentane vekstfarten i punktet. <br><br>
+
+Den deriverte til \(f(x)\) når \(x=a\) skrives som \(f'(a)\).
+
+         <div class="example">
+        <h3>Eksempel</h3>
+        Høyden til planta i de forrige eksemplene er gitt ved 
+        \[ h(x) = 0\text{,}20x^2 + 10 \]
+        Bestem \(f'(5)\) ved regning.
+
+        <div class="solution">
+          $$
+          \begin{align}
+         f'(5) = \frac{\Delta y}{\Delta x} \approx \frac{f(5\text{,}1) - f(5)}{5\text{,}1 - 5} &= \frac{0\text{,}20\cdot 5\text{,}1^2 + 10 - (0\text{,}20\cdot 5^2 + 10)}{0\text{,}1} \\
+         &= \frac{5\text{,}202 + 10 - 5 - 10}{0\text{,}1} \\ 
+         &= \frac{0\text{,}202}{0\text{,}1} \\
+         &= 2\text{,}02
+         \end{align}
+         $$
+        </div>
+      </div>
+
+<h3>Derivasjonsregler</h3>
+<div class="formel-tabell">
+<table>
+<tr>
+<td>\(f(x) = ax^n\)</td>
+<td>\(g(x) = ax + b\)</td>
+<td>\(h(x) = a\)</td>
+</tr>
+<tr>
+<td>\(f'(x) = a\cdot n x^{n-1}\)</td>
+<td>\(g'(x) = a\)</td>
+<td>\(h'(x) = 0\)</td>
+</tr>
+</table>
+</div>
+
+ <div class="example">
+        <h3>Eksempel</h3>
+<div class="formel-tabell">
+<table>
+<tr>
+<td>\(f(x) = 3x^5\)</td>
+<td>\(g(x) = 3x + 7\)</td>
+<td>\(h(x) = 42\)</td>
+</tr>
+<tr>
+<td>\(f'(x) = 15 x^{4}\)</td>
+<td>\(g'(x) = 3\)</td>
+<td>\(h'(x) = 0\)</td>
+</tr>
+</table>
+</div>
+
+      </div>
+
+
+         <div class="example">
+        <h3>Eksempel</h3>
+        Høyden til planta i de forrige eksemplene er gitt ved 
+        \[ h(x) = 0\text{,}20x^2 + 10 \]
+        Bestem \(f'(5)\) ved regning.
+
+        <div class="solution">
+          Derivasjonsreglene gir
+          \[  f'(x) = 0\text{,}20\cdot 2x + 0 = 0\text{,}40x \]
+          Altså er
+          \[ f'(5) = 0\text{,}40 \cdot 5 = 2\text{,}0 \]
+        </div>
+      </div>
+
+<strong>Tangent:</strong> En rett linje \(y=ax+b\) som tangerer en graf. Stigningstallet er den deriverte i tangeringspunktet.
+         <div class="example">
+        <h3>Eksempel</h3>
+        <img src="tangent.png" alt="..." style="width: 67%;">
+        Bestem likningen til tangenten i punktet \((-2, f(-2))\).
+
+        <div class="solution">
+          Tangenten er gitt av ett-punktsformelen:
+          \[  y - y_1 = a(x - x_1) \]
+          \(y\)-verdien i punktet er
+          \[ y_1 = f(-2) = \frac{1}{3}\cdot (-2)^3 + \frac{1}{2}\cdot (-2)^2 - 6 \cdot (-2) = -\frac{8}{3} + 2 + 12 = \frac{34}{3}  \]
+          Derivasjonsreglene gir
+          \[  f'(x) = \frac{1}{3}\cdot 3x^2 + \frac{1}{2}\cdot 2x - 6 = x^2 + x - 6 \]
+          Dermed er stigningstallet 
+          \[  a = f'(-2) = (-2)^2 + (-2) - 6 = 4 - 2 - 6 = - 4 \]
+          Likningen til tangeten er dermed
+          $$
+          \begin{align} 
+            y - y_1 &= a(x - x_1) \\
+            y - \frac{34}{3} &= -4(x - (-2)) \\
+            y &= -4x - 8 + \frac{34}{3}  \\
+            y &= -4x + \frac{10}{3}
+          \end{align}
+          $$
+          
+        </div>
+      </div>
+
+<h3>Ekstremalpunkter og monotoniegenskaper</h3>
+
+<strong>Ekstremalpunkter:</strong> Der vekstfarten er null.
+<img src="ekstremal.png" alt="..." style="width: 42%;">
+For funksjonen over gjelder \(f'(1)=f'(3)=f'(5) = 0\).<br><br>
+
+<strong>Monotoniegenskaper:</strong> Beskrivelse av hvor grafen vokser, og hvor den synker.
+
+        <div class="example">
+        <h3>Eksempel</h3>
+        \[ f(x) = 2x^3 - 3x^2 \]
+          Bestem monotoniegenskapene og eventuelle ekstremalpunkter på grafen til \(f(x)\).
+
+        <div class="solution">
+       $$
+\begin{align} 
+          f'(x) &= 0\\
+          6x^2 - 6x &= 0\\
+          6x(x - 1) &= 0
+\end{align}
+       $$
+       Vi lager fortegnsskjema
+      <img src="fortegnder.png" alt="..." style="width: 67%;">
+          <strong>Monotoniegenskaper</strong>: Gafen vokser når \( x < 0 \) eller \(x > 1 \), og den synker når \( 0 < x < 1 \).<br><br>
+
+          Grafen har toppunkt i \( (0, f(0)) = (0, 0) \) og bunnpunkt i \( (1, f(1)) = (1, -1) \).
+        </div>
+      </div>
+
+
+
+</section>
+
+
+<section>
+<h2>Optimering</h2>
+
+        <div class="example">
+        <h3>Eksempel</h3>
+        <img src="optimeringsku.png" alt="..." style="width: 42%;">
+        Gregersen har 100 meter med gjerde han skal bruke for å gjerde inn kuene sine. Inngjerdingen skal være rektangulær. <br><br>
+
+        Hvor bred \(x\) og hvor lang \(y\) må inngjerdingen være hvis arealet skal bli størst mulig?
+
+        <div class="solution">
+       Arealet er \(A = x \cdot y \).<br><br>
+
+       Sammenhengen mellom \(x\) og \(y\) er gitt av omkretsen,
+       \[  2x + 2y = 100 \;\; \rightarrow \;\; y = 50 - x \]
+       Dermed kan arealet uttrykkes ved 
+       \[  A(x) = x \cdot y = x(50 - x) = 50x - x^2 \]
+       Toppunktet er gitt ved 
+       \[  A'(x) = 50 - 2x = 0 \;\; \rightarrow\;\; x = 25  \]
+       Dermed må både bredden og lengden være \(25 \text{ meter} \).
+        </div>
+      </div>
+
+
+              <div class="example">
+        <h3>Eksempel</h3>
+        Bruk programmering for å løse eksempelet over.
+
+        <div class="solution">
+       Arealet er \(A = x \cdot y \).<br><br>
+
+       Sammenhengen mellom \(x\) og \(y\) er gitt av omkretsen,
+       \[  2x + 2y = 100 \;\; \rightarrow \;\; y = 50 - x \]
+      
+<pre class="codebox"><code>for x in range(1, 50):
+  y = 50 - x
+  A = x*y 
+  print(x, y, A)
+      </code></pre>
+  <pre class="outputbox"><code>1 49 49
+2 48 96
+3 47 141
+4 46 184
+...
+22 28 616
+23 27 621
+24 26 624
+25 25 625
+26 24 624
+27 23 621
+...
+47 3 141
+48 2 96
+49 1 49</code></pre>
+Fra utskriften ser vi at både bredden og lengden må være \(25 \text{ meter} \) for å få størst mulig arel (\(625 \text{ m}^2\))
+        </div>
+      </div>
+
+
+<div class="example">
+        <h3>Eksempel</h3>
+        <img src="optgraf.png" alt="..." style="width: 42%;">
+    Et raktangel ligger under grafen til \(f(x)\). Rektangelet har hjørner i \((0, 0)\), \((x, 0)\), \((x, f(x))\) og \((0, f(x))\).<br><br>
+
+    Bestem \(x\) slik at arealet blir størst mulig.
+
+        <div class="solution">
+       Arealet er \(A = x \cdot f(x) \).
+      
+<pre class="codebox"><code>def f(x):
+    return 1/(x**2 + 1)
+  
+def A(x):
+  return x*f(x)
+
+x = 0 # Startverdi for x
+while A(x + 0.1) > A(x): # Så lenge arealet vokser
+  x = x + 0.1 # x-verdien øker 
+print(x, A(x))
+      </code></pre>
+  <pre class="outputbox"><code>0.9999999999999999 0.5</code></pre>
+Arealet er størst når \(x = 1\).
+        </div>
+      </div>
+
+</section>
+
+
+
+<section>
+<h2>Rasjonale funksjoner</h2>
+Rasjonale funksjoner har uttrykk med \(x\) i nevneren.<br><br>
+
+De enkeleste rasjonale funksjonene er på formen 
+\[  f(x) = \frac{ax + b}{cx + d} \]
+hvor grafen har følgende egenskaper:
+    <ul>
+      <li>nullpunkt når teller er null; \(ax + b = 0\)</li>
+      <li>vertikal asymptote når nevner er null; \(cx + d = 0\)</li>
+      <li>horisontal asymptote når \(x\rightarrow \infty\), \(y = \frac{a\cdot \infty + b}{c \cdot \infty + d} = \frac{a}{c}\)</li>
+      <li>skjæring med \(y\)-aksen når \(x=0\),  \(y=f(0)=\frac{b}{d}\)</li>
+    </ul>
+
+         <div class="example">
+        <h3>Eksempel</h3>
+<img src="rasj.png" alt="..." style="width: 47%;">
+         </div>
+
+         <div class="example">
+        <h3>Eksempel</h3>
+        <img src="rasj2.png" alt="..." style="width: 52%;">
+        Bestem funksjonsuttrykket.
+
+        <div class="solution">
+        Den horisontale asymptoten gir
+        \[  f(x) = \frac{2x + b}{x + d} \]
+        Den vertikale asymptoten gir
+        \[  f(x) = \frac{2x + b}{x + 1} \]
+        Skjæringen med \(y\)-aksen gir 
+        \[  f(x) = \frac{2x + 1}{x + 1} \]
+        </div>
+      </div>
+
+
+               <div class="example">
+        <h3>Eksempel</h3>
+        En rasjonal funksjon har følgende egenskaper:
+            <ul>
+      <li>vertikale asymtoter når \(x = 2\) og når \(x = 3\)</li>
+      <li>nullpunkt når \(x  = -1\)</li>
+    </ul>
+        Bestem funksjonsuttrykket.
+
+        <div class="solution">
+        De vertikale asymptoten gir
+        \[  f(x) = \frac{ax + b}{(x-2)(x-3)} \]
+        Nullpunktet gir 
+        \[  f(x) = \frac{x + 1}{(x-2)(x-3)} \]
+        </div>
+      </div>
+
+                  <div class="note">
+<strong>Merk:</strong> Det er flere løsninger på eksempelet over, f.eks. 
+        \[  f(x) = \frac{42x + 42}{(x-2)(x-3)} \]
+      </div>
+
+</section>
+<h2>Potensfunksjoner</h2>
+Potensfunksjoner er på formen \(f(x)=ax^n\), hvor \(n\) kan være en brøk eller desimaltall.<br><br>
+
+               <div class="example">
+        <h3>Eksempel</h3>
+Sammenhengen mellom rundetiden \(T\) og avstanden \(d\) til sola for en planet er
+\[  T = d^{\frac{3}{2}} \]
+hvor \(T\) måles i år og \(d\) måles i AU (astronomisk enhet, hvor 1 AU er avstanden mellom jorda og sola).<br><br>
+
+Avstanden mellom Jupiter og sola er omtrent 5 AU. <br><br> 
+
+Bestem rundetiden til Jupiter.
+        <div class="solution">
+          \[ T = 5^{\frac{3}{2}} = \left(5^3\right)^{\frac{1}{2}} = 125^{\frac{1}{2}} \approx 121^{\frac{1}{2}} = 11 \text{ år} \]
+          Med kalkulator får vi \(11\text{,}2 \text{ år}\).
+        </div>
+      </div>
+
+
+<div class="example">
+        <h3>Eksempel</h3>
+Sammenhengen mellom rundetiden \(T\) og avstanden \(d\) til sola for en planet er
+\[  T = d^{\frac{3}{2}} \]
+hvor \(T\) måles i år og \(d\) måles i AU (astronomisk enhet, hvor 1 AU er avstanden mellom jorda og sola).<br><br>
+
+Saturn bruker omtrent 30 år på et omløp rundt sola. <br><br> 
+
+Bestem avstanden mellom Saturn og sola.
+        <div class="solution">
+          Vi må snu om på formelen 
+          \[ T = d^{\frac{3}{2}} \;\; \rightarrow \;\; T^{2} = d^3 \;\; \rightarrow \;\; T^{\frac{2}{3}} = d \]
+          Avstanden blir dermed
+          \[ d = 30^{\frac{2}{3}} = \left( 30^2 \right)^{\frac{1}{3}} = 900^{\frac{1}{3}} \approx 1000^{\frac{1}{3}} = 10 \text{ AU} \]
+          Med kalkulator får vi \(9\text{,}7 \text{ AU}\).
+        </div>
+      </div>
+
+
+<section>
+<h2>Eksponentialfunksjoner</h2>
+
+Eksponentialfunksjoner er på formen \(f(x)=a \cdot k^x\).<br><br>
+
+Eksponentialfunksjoner har følgende egenskaper 
+    <ul>
+      <li>skjæringen med \(y\)-aksen ("startverdien") er \(y=f(0)=a\)</li>
+      <li>vekstfaktoren er \(k\)</li>
+    </ul>
+
+<strong>Vekstfaktor:</strong> Når noe øker med \(p\) % er vekstfaktoren \(k=1 + p %\).<br>
+Når noe synker med \(p\) % er vekstfaktoren \(k=1 - p %\).
+
+<div class="example">
+<h3>Eksempel</h3>
+Folketallet i verden øker med 1,6 % per år.<br><br>
+
+I begynnelsen av år 2000 var folketallet i verden omtrent 6,1 milliarder.<br><br>
+
+Bestem folketallet i begynnelsen av år 2030.
+
+        <div class="solution">
+\[  6\text{,}1 \cdot 1\text{,}016^{30} = 9\text{,}8 \text{ milliarder} \] 
+        </div>
+      </div>
+
+
+<div class="example">
+<h3>Eksempel</h3>
+Ole kjøper en ny bil til 500 000 kr.<br><br>
+
+Verdien av bilen faller med 10 % hvert år.<br><br>
+
+Bestem verdien etter 10 år.
+
+        <div class="solution">
+\[  500\,000 \cdot 0\text{,}90^{10} = 174\,339 \text{ kr} \] 
+        </div>
+      </div>
+
+
+<div class="example">
+<h3>Eksempel</h3>
+I år 2000 hadde Ole en årslønn på 500 000 kr. Hvert år har årslønna hans økt med 5 %.<br><br>
+
+Skriv et program som beregner hvor mye han tilsammen tjente fra år 2000 til år 2025.
+
+        <div class="solution">
+<pre class="codebox"><code>
+L = 500000 # Startverdi lønn
+S = L # Summen av lønna
+k = 1.05 # Vekstfaktor
+
+for år in range(2000, 2026):
+  print(år, round(L), round(S))
+  L = L*k # Lønna øker med 5 %
+  S = S + L # Summen øker med den nye årslønna
+      </code></pre>
+  <pre class="outputbox"><code>
+2000 	 500000 	 500000
+2001 	 525000 	 1025000
+2002 	 551250 	 1576250
+...
+2020 	 1326649 	 17859626
+2021 	 1392981 	 19252607
+2022 	 1462630 	 20715238
+2023 	 1535762 	 22250999
+2024 	 1612550 	 23863549
+2025 	 1693177 	 25556727
+  </code></pre>
+Altså har han tilsammen tjent ca. 25,6 millioner kroner.
+        </div>
+      </div>
+
+                        <div class="note">
+<strong>Merk:</strong> Kommandoen "round(...)" i eksempelet over runder av tallene (tar bort desimalene). Dette er ikke nødvendig, men det blir litt ryddigere/penere utskrift. 
+      </div>
+
+
+<div class="example">
+<h3>Eksempel</h3>
+
+
+I en vanntank renner det hver minutt inn 20 liter vann. Samtidig renner 5 % av vannet i tanken ut hvert minutt gjennom et lite hull i bunnen av tanken.
+     <img src="vannInnUt.png" alt="..." style="width: 42%;">
+Ved \(t=0 \text{ min.}\) er det 1000 liter vann i tanken.<br><br>
+
+Hvor lang tid tar det før det er 500 liter vann i tanken?
+
+        <div class="solution">
+<pre class="codebox"><code>
+V = 1000 # Startverdi
+t = 0 # Starttid
+
+while V > 500: # Så lenge det er mer enn 500 liter vann i tanken 
+  t = t + 1 # Tiden øker 
+  V = V*0.95 + 20 # Vannmengden minker med 5 % og øker med 20 liter
+  print(t, V)
+      </code></pre>
+  <pre class="outputbox"><code>
+1 970
+2 942
+3 914
+4 889
+...
+32 516
+33 510
+34 505
+35 500
+  </code></pre>
+Altså tar det 35 minutter før det er 500 liter i tanken.
+        </div>
+      </div>
+
+
+</section>
+
+  </main>
+</body>
+</html>

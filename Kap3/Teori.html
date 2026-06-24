@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Funksjoner</title>
+
+  <!-- MathJax -->
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      max-width: 900px;
+      margin: auto;
+      line-height: 1.6;
+      background-color: #fafafa;
+    }
+
+    h1, h2, h3 {
+      margin-top: 2em;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+      margin: 1em auto;
+    }
+
+    /* ---------- BOKSER ---------- */
+
+    /* Definisjon */
+    .definition {
+      background-color: #ecfeff;
+      border-left: 6px solid #0891b2;
+      padding: 1.2em 1.5em;
+      margin: 2em 0;
+      border-radius: 8px;
+    }
+
+    .definition h3::before {
+      content: "📘 ";
+    }
+
+    /* Eksempel */
+    .example {
+      background-color: #ecfdf5;
+      border: 2px solid #10b981;
+      border-left-width: 6px;
+      padding: 1.2em 1.5em;
+      margin: 2em 0;
+      border-radius: 10px;
+    }
+
+    .example h3 {
+      margin-top: 0;
+      color: #065f46;
+    }
+
+    .example h3::before {
+      content: "📌 ";
+    }
+
+    .solution {
+      background-color: #ffffff;
+      border: 1px dashed #34d399;
+      padding: 1em;
+      margin-top: 1em;
+      border-radius: 6px;
+    }
+
+    /* Merk */
+    .note {
+      background-color: #fff7ed;
+      border-left: 6px solid #f59e0b;
+      padding: 1.2em 1.5em;
+      margin: 2em 0;
+      border-radius: 8px;
+    }
+
+    .note strong::before {
+      content: "⚠️ ";
+    }
+
+    /* Programkode */
+    .codebox {
+      background-color: #0f172a;
+      color: #e5e7eb;
+      padding: 1.5em;
+      border-radius: 10px;
+      margin: 2em 0;
+      overflow-x: auto;
+      font-family: Consolas, Monaco, monospace;
+    }
+
+    .codebox::before {
+      content: "💻 Programkode";
+      display: block;
+      color: #34d399;
+      margin-bottom: 0.8em;
+      font-weight: bold;
+    }
+
+    .outputbox {
+  background-color: #f8fafc;
+  color: #0f172a;
+  border: 1px solid #cbd5e1;
+  border-left: 6px solid #64748b;
+  padding: 1em 1.2em;
+  margin: -1em 0 2em 0;
+  border-radius: 8px;
+  font-family: Consolas, Monaco, monospace;
+  white-space: pre-wrap;
+}
+
+.outputbox::before {
+  content: "🖨️ Utskrift";
+  display: block;
+  font-weight: bold;
+  color: #475569;
+  margin-bottom: 0.5em;
+}
+
+
+.formel-tabell table {
+    border-collapse: collapse;
+    margin: 1rem auto;
+}
+.formel-tabell td {
+    border: 1px solid #999;
+    padding: 18px 28px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.kode-tabell {
+    margin: 1rem 0;
+    overflow-x: auto;
+}
+
+.kode-tabell table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.kode-tabell td {
+    border: 1px solid #999;
+    padding: 12px 16px;
+    vertical-align: top;
+}
+
+.kode-tabell td:first-child {
+    font-weight: bold;
+    white-space: nowrap;
+    width: 22%;
+    background-color: #f8f8f8;
+}
+
+.kode-tabell code {
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 0.95em;
+}
+
+.kode-tabell pre {
+    margin: 0;
+    white-space: pre;
+    overflow-x: auto;
+}
+
+
+    /* ===========================
+   Mobiltilpasning
+   =========================== */
+
+@media (max-width: 700px) {
+    .kode-tabell td {
+        padding: 8px 10px;
+    }
+
+    .kode-tabell code,
+    .kode-tabell pre {
+        font-size: 0.85em;
+    }
+  body {
+    padding: 1em;
+    font-size: 1rem;
+  }
+
+  h1 {
+    font-size: 1.7rem;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+  }
+
+  /* Bokser: mindre padding på mobil */
+  .example,
+  .definition,
+  .note,
+  .codebox {
+    padding: 1em;
+    margin: 1.5em 0;
+  }
+  .outputbox {
+  padding: 1em;
+  margin: 1.5em 0;
+}
+
+  /* Bilder: litt større på mobil */
+  img {
+    width: 100% !important;
+    max-width: 100%;
+  }
+
+  /* Programkode: lettere å lese */
+  .codebox {
+    font-size: 0.9rem;
+  }
+
+}
+
+/* ===== Skriv til PDF-knapp ===== */
+
+.print-button {
+  display: block;
+  margin: 1.5em auto;
+  padding: 0.6em 1.4em;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #10b981;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.print-button:hover {
+  background-color: #059669;
+}
+
+/* Skjul knappen på mobil */
+@media (max-width: 700px) {
+  .print-button {
+    display: none;
+  }
+}
+
+@media print {
+  .print-button {
+    display: none;
+  }
+}
+
+
+/* ===========================
+   PDF / Utskrift
+   =========================== */
+
+@media print {
+
+  /* Generelle marger for A4 */
+  body {
+    margin: 1.5cm;
+    background: white;
+  }
+
+  /* Overskrifter starter på ny side */
+  h1,
+  h2 {
+    page-break-before: always;
+  }
+
+  /* Aldri del disse boksene over sider */
+  .definition,
+  .example,
+  .note,
+  .codebox {
+    page-break-inside: avoid;
+  }
+  .outputbox {
+  page-break-inside: avoid;
+}
+
+  /* Tillat at løsninger deles om nødvendig */
+  .solution {
+    page-break-inside: auto;
+  }
+
+  /* Bilder bør heller flyttes enn å deles */
+  img {
+    page-break-inside: avoid;
+  }
+
+  /* PDF skal ikke vise knappen */
+  .print-button {
+    display: none !important;
+  }
+}
+@media print {
+  .no-print {
+    display: none;
+  }
+}
+  </style>
+</head>
+
+<body>
+<a href="../index.html" class="no-print">← Tilbake til hovedsiden</a>
+<button class="print-button" onclick="window.print()">
+  🖨️ Skriv til PDF
+</button>
+
+<main>
+    <h1>Polynomfunksjoner</h1>
+
+    <p>Du skal ha kompetanse om</p>
+    <ul>
+      <li>funksjonsbegrepet</li>
+      <li>lineære funksjoner</li>
+      <li>andregradsfunksjoner</li>
+      <li>polynomfunksjoner</li>
+      <li>polynomdivisjon</li>
+    </ul>
+
+    <section>
+      <h2>Funksjonsbegrepet</h2>
+      
+         <div class="example">
+        <h3>Eksempel</h3>
+        <img src="funksjon.png" alt="..." style="width: 52%;">
+
+        Bestem funksjonsverdien \(f(4)\) og løs likningen \(f(x) = 1\).
+
+        <div class="solution">
+         Vi leser av at \(f(4) = 3\).<br><br>
+
+         Vi leser av at \(f(x) = 1\) når \(x = 2\) og når \(x=3\).
+        </div>
+      </div>
+
+         <div class="example">
+        <h3>Eksempel</h3>
+        \[  f(x) = 2^x - 2x \]
+
+        Bestem funksjonsverdien \(f(0)\) og løs likningen \(f(x) = 0\).
+
+        <div class="solution">
+         Vi regner ut: \(f(0) = 2^0 - 2\cdot 0 = 1 - 0 = 1\). <br><br>
+
+         Vi løser likningen med prøving-og-feiling:
+         $$
+          \begin{align}
+          f(0) &=  2^0 - 2\cdot 0 = 1 - 0 = 1 \\
+          f(1) &=  2^1 - 2\cdot 1 = 2 -2 = 0 \\
+          f(2) &=   2^2 - 2\cdot 2 = 4 - 4 = 0  \\
+           f(3) &=   2^3 - 2\cdot 3 = 8 - 6 = 2  \\
+             f(4) &=   2^4 - 2\cdot 4 = 16 - 8 = 8  \\
+          \end{align}
+          $$
+         Altså er \(f(x)=0\) når \(x=1\) eller \(x=2\).
+        </div>
+      </div>
+
+
+       <div class="example">
+        <h3>Eksempel</h3>
+        \[  f(x) = 2^x - x \]
+
+        Tegn grafen til \(f(x)\).
+
+        <div class="solution">
+        Vi lager en verditabell.
+        <div class="kode-tabell">
+<table>
+<tr>
+<td>\(x\)</td>
+<td>\(-2\)</td>
+<td>\(-1\)</td>
+<td>\(0\)</td>
+</tr>
+<tr>
+<td>\(y\)</td>
+<td>\(2^{-2}-(-2)=\frac{1}{4}+2\)</td>
+<td>\(2^{-1}-(-1)=\frac{1}{2}+1\)</td>
+<td>\(2^{0}-0=1\)</td>
+</tr>
+</table>
+</div>
+        <div class="kode-tabell">
+<table>
+<tr>
+<td>\(x\)</td>
+<td>\(1\)</td>
+<td>\(2\)</td>
+<td>\(3\)</td>
+</tr>
+<tr>
+<td>\(y\)</td>
+<td>\(2^{1}-1=1\)</td>
+<td>\(2^{2}-2=2\)</td>
+<td>\(2^{3}-3=5\)</td>
+</tr>
+</table>
+</div>
+Vi plasserer punktene og skisserer en graf:
+<img src="verditabell.png" alt="..." style="width: 52%;">
+        </div>
+      </div>
+
+
+
+      <h2>Lineære funksjoner</h2>
+
+      En lineær funksjon er en rett linje som er gitt ved
+      \[  f(x) = ax +b \]
+      hvor \(a\) er stigningstallet og \(b\) er skjæringen med \(y\)-aksen.
+
+      <img src="rett.png" alt="..." style="width: 52%;">
+   
+      <div class="note">
+<strong>Merk:</strong>  Vi skriver ofte \(y=ax +b\) for lineære funksjoner, istedenfor \(f(x)=ax +b\). Når vi bruker \(y\) istedenfor \(f(x)\) sier vi "likningen til linja". 
+      </div>
+
+      <strong>Ett-punktsformelen:</strong> Likningen til en linje kan skrives som
+      \[  y - y_1 = a(x - x_1) \]
+      hvor \(a\) er stigningstallet og \((x_1, y_1)\) er et punkt på linja.
+
+         <div class="example">
+        <h3>Eksempel</h3>
+        En linje går gjennom punktene \((1, 2)\) og \((5, 3)\).<br><br>
+
+        Bestem likningen til linja.
+
+        <div class="solution">
+         Signingstallet er
+         \[  a = \frac{\Delta y}{\Delta x} = \frac{3 - 2}{5 - 1} = \frac{1}{4}  \]
+          Ett-punktsformelen med utgangspunkt i \((1, 2)\) gir da
+         $$
+          \begin{align} 
+          y - 2 &= \frac{1}{4}(x - 1) \\
+          y - 2 &= \frac{x}{4} - \frac{1}{4} \\ 
+          y &= \frac{x}{4} - \frac{1}{4} + 2 \\
+          y &= \frac{x}{4} +\frac{7}{4}
+          \end{align}
+         $$
+        </div>
+      </div>
+
+
+               <div class="example">
+        <h3>Eksempel</h3>
+        Lag en programkode som beregner likningen for ei linje. På de første linjene i programmet skal du kunne legge inn koordinatene til to punkter på linja. <br><br>
+
+        Test programmet for ei linje som går gjennom punktene \((1, 2)\) og \((5, 3)\).
+
+        <div class="solution">
+         Ett-punktsformelen kan skrives om til
+         \[  y = a \cdot x - a \cdot x_1 + y_1  \]
+        altså er konstantleddet gitt ved \(b= - a \cdot x_1 + y_1 \).
+
+ <pre class="codebox"><code>x1, y1 = 1, 2
+x2, y2 = 5, 3
+
+a = (y2 - y1)/(x2 - x1)
+b = -a*x1 + y1
+
+print('y = ', a, 'x + ', b)</code></pre>
+<pre class="outputbox"><code>y =  0.25 x +  1.75</code></pre>
+        </div>
+      </div>
+
+
+
+
+      <h2>Andregradsfunksjoner</h2>
+      En andregradsfuksjon er gitt ved
+      \[   f(x) = ax^2 + bx + c \]
+      Grafen til en andregradsfunksjon kalles en <em>parabel</em>, og er enten "blid" 😊 eller "sur" 😒.
+<img src="blisurand.png" alt="..." style="width: 96%;">
+      Vi kan bestemme funksjonsuttrykket fra grafen ved hjelp av nullpunktene og skjæringen med \(y\)-aksen.
+      <img src="andrefunk.png" alt="..." style="width: 67%;">
+
+                   <div class="note">
+      <strong>Merk:</strong> Andregradsfunksjoner er speilsymmetriske. Dermed er topp-/bunnpunktet midt mellom nullpunktene.
+      </div>
+
+               <div class="example">
+        <h3>Eksempel</h3>
+        <img src="andrefunkeks.png" alt="..." style="width: 52%;">
+                Bestem funksjonsuttrykket, og bestem toppunktet til funksjonen.
+        <div class="solution">
+          Nullpunktene gir
+          \[  f(x) = a(x - (-2))(x - 4) = a(x^2 - 2x - 8) = ax^2 - 2ax - 8a  \]
+          Skjæringen med \(y\)-aksen gir
+          \[ -8a = 8 \;\; \rightarrow \;\; a = -1 \]
+          Dermed er funksjonen \( f(x) = -x^2 + 2x + 8 \).<br><br>
+          Symmetri gir at funksjonen har toppunkt midt mellom nullpunktene;
+          \( (1, f(1)) = (1, 9) \).
+        </div>
+      </div>
+
+                           <div class="example">
+        <h3>Eksempel</h3>
+        <img src="defver.png" alt="..." style="width: 52%;">
+                Bestem funksjonsuttrykket.
+        <div class="solution">
+          Hvis funksjonsverdiene hadde vært 2 mindre, ville funksjonen hatt nullpunkter i \(-1\) og \(3\), som ville gitt 
+          \[ f(x) = a(x + 1)(x - 3) \]
+          Bunnpunktet ville da vært \((1, -1)\), som gir 
+          \[ -1 = a \cdot 2 \cdot (-2) = -4a \;\; \rightarrow \;\; a = \frac{1}{4} \]
+          Dermed er funksjonsuttrykket
+        \[ f(x) = \frac{1}{4}(x+1)(x-3) + 2 = \frac{1}{4}x^2 - \frac{1}{4} \cdot 2x - \frac{1}{4}\cdot 3 + 2 = \frac{1}{4}x^2 - \frac{1}{2}x + \frac{5}{8}  \]
+        </div>
+      </div>
+
+      Nullpunktene til en andregradsfunksjon er gitt ved <em>abc</em>-formelen,
+      \[f(x) = 0 \;\; \text{ når } \;\; x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}\]
+      Andregradsfunksjoner kan ha to, ett eller ingen nullpunkter.
+      <img src="antløsninger.png"..." style="width: 85%;">
+      \[ \text{To: }b^2 + 4ac > 0 \hphantom{\text{To: }b^2 + 4ac > 0} \text{Ett: }b^2 + 4ac = 0 \hphantom{\text{To: }b^2 + 4ac > 0}\text{Ingen: }b^2 + 4ac < 0 \]
+      
+         <div class="example">
+        <h3>Eksempel</h3>
+        <img src="c.png" alt="..." style="width: 52%;">
+                Bestem \(c\) slik at \(f\) har nøyaktig ett nullpunkt.
+        <div class="solution">
+          \[ x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} = \frac{-2 \pm \sqrt{4 - 4c}}{2} \]
+          Vi ser at kvadratroten blir null, slik at det blir ett nullpunkt, dersom \(c = 1\).
+        </div>
+      </div>
+
+            <div class="note">
+<strong>Merk:</strong> En andregradsfunksjon har nøyaktig ett nullpunkt når funksjonsuttrykket kan skrives som et fullstendig kvadrat, \(f(x) = a(x-x_0)^2\).<br><br>
+
+Dermed kan eksempelet over også løses ved å se hva \(c\) må være hvis \(f\) skal kunne skrives som et fullstendig kvadrat.
+      </div>
+
+               <div class="example">
+        <h3>Eksempel</h3>
+        <img src="b9.png" alt="..." style="width: 52%;">
+                Bestem \(b\) slik at \(f\) har nøyaktig ett nullpunkt.
+        <div class="solution">
+          Vi kan bruke <em>abc</em>-formelen, eller vi kan skrive \(f(x)\) som et fullstendig kvadrat, og deretter gange ut parentesene for å se hva \(b\) kan være.
+          \[ f(x) = \left(  x + 3 \right)^2 = x^2 + 6x + 9  \]
+          \[  f(x) = \left(  x - 3 \right)^2 = x^2 - 6x + 9 \]
+          Altså er \(b = 6 \) eller \(b = -6\).
+        </div>
+      </div>
+
+
+
+
+    </section>
+
+
+
+
+
+
+    <section>
+ <h2>Polynomfunksjoner</h2>
+      Polynomfunksjoner er gitt ved
+      $$
+\begin{align} 
+      P(x) &= ax + b \;\;\; \text{(førstegradsfunksjon)} \\
+            P(x) &= ax^2 + bx + c \;\;\; \text{(andregradsfunksjon)} \\
+                  P(x) &= ax^3 + bx^2 + cx + d \;\;\; \text{(tredjegradsfunksjon)} \\
+                  &\vdots \\
+                        P(x) &= ax^{6} + bx^5 + cx^4 + dx^3 +ex^2 + fx + h \;\;\; \text{(sjettegradsfunksjon)} \\
+                        &\vdots 
+\end{align}
+      $$
+      Vi kan bestemme funksjonsuttrykket fra grafen ved hjelp av nullpunktene og skjæringen med \(y\)-aksen.
+      <img src="tredjegenerell.png" alt="..." style="width: 67%;">
+
+
+               <div class="example">
+        <h3>Eksempel</h3>
+        <img src="tredjeeks.png" alt="..." style="width: 67%;">
+                Bestem funksjonsuttrykket.
+        <div class="solution">
+          Nullpunktene gir
+          $$
+          \begin{align}
+          f(x) &= a(x - (-2))(x - 2)(x-4) \\
+                &= a(x^2 - 4)(x - 4) \\
+                &= a(x^3 - 4x^2 - 4x + 16) 
+          \end{align}
+          $$
+          Skjæringen med \(y\)-aksen gir
+          \[ 16a = -4 \;\; \rightarrow \;\; a = -\frac{1}{4} \]
+          Dermed er funksjonen \( f(x) = -\frac{1}{4}x^3 + x^2 + x - 4 \).
+        </div>
+      </div>
+
+
+<h3>Polynomdivisjon</h3>
+Vi har ikke en enkel formel for å finne nullpunktene til tredjegradsfunksjoner, slik som vi har <em>abc</em>-formelen for andregradsfuksjoner,
+men vi kan bruke noe som kalles <em>polynomdivisjon</em> for å faktorisere funksjonen dersom vi vet hva ett av nullpunktene er.<br><br>
+
+
+
+
+               <div class="example">
+        <h3>Eksempel</h3>
+        \[  P(x) =  x^3 - 2x^2 - 5x + 6 \]
+          Faktoriser uttrykket og bestem alle nullpunktene.
+        <div class="solution">
+          Med prøving-og-feiling ser vi at \(x=1\) er et nullpunkt:
+          \[P(1) = 1^3 - 2\cdot 1^2 - 5 \cdot 1 + 6 = 1 - 2 - 5 + 6 = 0\]
+          Dermed kan funksjonen faktoriseres til
+          \[ P(x) = (x - 1)(ax^2 + bx + c)  \]
+          For å bestemme uttrykket i den siste parentesen deler vi på \((x-1)\), slik:
+          $$
+\begin{align}
+          &\hphantom{-(}(x^3 - 2x^2 - 5x + 6) : (x - 1) = x^2 - x - 6\\
+          &\underline{\;-(x^3 - x^2)}\\
+          &\hphantom{-(x^3}-x^2 - 5x + 6\\
+          &\hphantom{x^3}\underline{\;-(-x^2 + x)}\\
+          &\hphantom{-(x^3-x^2)}-6x + 6\\
+          &\hphantom{(x^3-x^2}\underline{\;-(-6x + 6)}\\
+          &\hphantom{-(x^3-x^2-6xxx)}0 \text{ i rest}
+\end{align}
+          $$
+          Dermed kan funksjonen faktoriseres til
+          \[ P(x) = (x - 1)(x^2 - x - 6) = (x-1)(x-3)(x+2)  \]
+          og nullpunktene er \(x=1\), \(x=3\) og \(x=-2\).
+        </div>
+      </div>
+<p>
+      <strong>Gjennomgang av polynomdivisjon:</strong>
+        <a href="https://www.youtube.com/watch?v=B6YYWCx9I0g&list=PLePZGSLWjC10U6WnoXQfT_FRaEpzEYbvu&index=35&t=1s" target="_blank" rel="noopener noreferrer">
+            YouTube-film med polynomdivisjon. 
+        </a>
+    </p>
+
+
+  <strong>Resten i en polynomdivisjon:</strong> Divisjonen \(P(x):(x - a)\) har resten \(P(a)\).
+
+                 <div class="example">
+        <h3>Eksempel</h3>
+        \[  P(x) =  x^3 - 2x^2 - 5x + 8 \]
+          Bestem resten til divisjonen \(P(x):(x-1)\) på to måter.
+        <div class="solution">
+          Metode 1: \(P(1) = 1^3 - 2\cdot 1^2 - 5 \cdot 1 + 8 = 2\)<br><br>
+          Metode 2:
+          $$
+\begin{align}
+          &\hphantom{-(}(x^3 - 2x^2 - 5x + 8) : (x - 1) = x^2 - x - 6 + \frac{2}{x-1}\\
+          &\underline{\;-(x^3 - x^2)}\\
+          &\hphantom{-(x^3}-x^2 - 5x + 8\\
+          &\hphantom{x^3}\underline{\;-(-x^2 + x)}\\
+          &\hphantom{-(x^3-x^2)}-6x + 8\\
+          &\hphantom{(x^3-x^2}\underline{\;-(-6x + 6)}\\
+          &\hphantom{-(x^3-x^2-6xxx)}2 \text{ i rest}
+\end{align}
+          $$
+        </div>
+      </div>
+
+                <div class="note">
+<strong>Merk:</strong> Resten legges til som en brøk bakerst på svaret når vi gjennomfører polynomdivisjonen over.
+      </div>
+
+</section>
+  </main>
+
+</body>
+</html>

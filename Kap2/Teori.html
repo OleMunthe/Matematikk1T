@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Logaritmer</title>
+
+  <!-- MathJax -->
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      max-width: 900px;
+      margin: auto;
+      line-height: 1.6;
+      background-color: #fafafa;
+    }
+
+    h1, h2, h3 {
+      margin-top: 2em;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+      margin: 1em auto;
+    }
+
+    /* ---------- BOKSER ---------- */
+
+    /* Definisjon */
+    .definition {
+      background-color: #ecfeff;
+      border-left: 6px solid #0891b2;
+      padding: 1.2em 1.5em;
+      margin: 2em 0;
+      border-radius: 8px;
+    }
+
+    .definition h3::before {
+      content: "📘 ";
+    }
+
+    /* Eksempel */
+    .example {
+      background-color: #ecfdf5;
+      border: 2px solid #10b981;
+      border-left-width: 6px;
+      padding: 1.2em 1.5em;
+      margin: 2em 0;
+      border-radius: 10px;
+    }
+
+    .example h3 {
+      margin-top: 0;
+      color: #065f46;
+    }
+
+    .example h3::before {
+      content: "📌 ";
+    }
+
+    .solution {
+      background-color: #ffffff;
+      border: 1px dashed #34d399;
+      padding: 1em;
+      margin-top: 1em;
+      border-radius: 6px;
+    }
+
+    /* Merk */
+    .note {
+      background-color: #fff7ed;
+      border-left: 6px solid #f59e0b;
+      padding: 1.2em 1.5em;
+      margin: 2em 0;
+      border-radius: 8px;
+    }
+
+    .note strong::before {
+      content: "⚠️ ";
+    }
+
+    /* Programkode */
+    .codebox {
+      background-color: #0f172a;
+      color: #e5e7eb;
+      padding: 1.5em;
+      border-radius: 10px;
+      margin: 2em 0;
+      overflow-x: auto;
+      font-family: Consolas, Monaco, monospace;
+    }
+
+    .codebox::before {
+      content: "💻 Programkode";
+      display: block;
+      color: #34d399;
+      margin-bottom: 0.8em;
+      font-weight: bold;
+    }
+
+    .outputbox {
+  background-color: #f8fafc;
+  color: #0f172a;
+  border: 1px solid #cbd5e1;
+  border-left: 6px solid #64748b;
+  padding: 1em 1.2em;
+  margin: -1em 0 2em 0;
+  border-radius: 8px;
+  font-family: Consolas, Monaco, monospace;
+  white-space: pre-wrap;
+}
+
+.outputbox::before {
+  content: "🖨️ Utskrift";
+  display: block;
+  font-weight: bold;
+  color: #475569;
+  margin-bottom: 0.5em;
+}
+
+
+.formel-tabell table {
+    border-collapse: collapse;
+    margin: 1rem auto;
+}
+.formel-tabell td {
+    border: 1px solid #999;
+    padding: 18px 28px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.kode-tabell {
+    margin: 1rem 0;
+    overflow-x: auto;
+}
+
+.kode-tabell table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.kode-tabell td {
+    border: 1px solid #999;
+    padding: 12px 16px;
+    vertical-align: top;
+}
+
+.kode-tabell td:first-child {
+    font-weight: bold;
+    white-space: nowrap;
+    width: 22%;
+    background-color: #f8f8f8;
+}
+
+.kode-tabell code {
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 0.95em;
+}
+
+.kode-tabell pre {
+    margin: 0;
+    white-space: pre;
+    overflow-x: auto;
+}
+
+
+    /* ===========================
+   Mobiltilpasning
+   =========================== */
+
+@media (max-width: 700px) {
+    .kode-tabell td {
+        padding: 8px 10px;
+    }
+
+    .kode-tabell code,
+    .kode-tabell pre {
+        font-size: 0.85em;
+    }
+  body {
+    padding: 1em;
+    font-size: 1rem;
+  }
+
+  h1 {
+    font-size: 1.7rem;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+  }
+
+  /* Bokser: mindre padding på mobil */
+  .example,
+  .definition,
+  .note,
+  .codebox {
+    padding: 1em;
+    margin: 1.5em 0;
+  }
+  .outputbox {
+  padding: 1em;
+  margin: 1.5em 0;
+}
+
+  /* Bilder: litt større på mobil */
+  img {
+    width: 100% !important;
+    max-width: 100%;
+  }
+
+  /* Programkode: lettere å lese */
+  .codebox {
+    font-size: 0.9rem;
+  }
+
+}
+
+/* ===== Skriv til PDF-knapp ===== */
+
+.print-button {
+  display: block;
+  margin: 1.5em auto;
+  padding: 0.6em 1.4em;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #10b981;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.print-button:hover {
+  background-color: #059669;
+}
+
+/* Skjul knappen på mobil */
+@media (max-width: 700px) {
+  .print-button {
+    display: none;
+  }
+}
+
+@media print {
+  .print-button {
+    display: none;
+  }
+}
+
+
+/* ===========================
+   PDF / Utskrift
+   =========================== */
+
+@media print {
+
+  /* Generelle marger for A4 */
+  body {
+    margin: 1.5cm;
+    background: white;
+  }
+
+  /* Overskrifter starter på ny side */
+  h1,
+  h2 {
+    page-break-before: always;
+  }
+
+  /* Aldri del disse boksene over sider */
+  .definition,
+  .example,
+  .note,
+  .codebox {
+    page-break-inside: avoid;
+  }
+  .outputbox {
+  page-break-inside: avoid;
+}
+
+  /* Tillat at løsninger deles om nødvendig */
+  .solution {
+    page-break-inside: auto;
+  }
+
+  /* Bilder bør heller flyttes enn å deles */
+  img {
+    page-break-inside: avoid;
+  }
+
+  /* PDF skal ikke vise knappen */
+  .print-button {
+    display: none !important;
+  }
+}
+@media print {
+  .no-print {
+    display: none;
+  }
+}
+  </style>
+</head>
+
+<body>
+<a href="../index.html" class="no-print">← Tilbake til hovedsiden</a>
+<button class="print-button" onclick="window.print()">
+  🖨️ Skriv til PDF
+</button>
+
+<main>
+    <h1>Faktorisering, likninger og identiteter</h1>
+
+    <p>Du skal ha kompetanse om</p>
+    <ul>
+      <li>faktorisering og forkorting</li>
+      <ul>
+      <li>multiplikasjon av parenteser</li>
+      <li>faktorisering ved å trekke ut fellesfaktorer</li>
+      <li>kvadratsetningene</li>
+      <li>faktorisering av andregradsuttrykk</li>
+       <li><em>abc</em>-formelen</li>
+      <li>forkorting av brøkuttrykk</li>
+      </ul>
+      <li>identiteter</li>
+      <li>andregradslikninger</li>
+    </ul>
+
+    <section>
+      <h2>Faktorisering og forkorting</h2>
+      <h3>Multiplikasjon av parenteser</h3>
+
+ <img src="parenteser.png" alt="..." style="width: 67%;">
+
+
+     <h3>Faktorisering ved å trekke ut fellesfaktorer</h3>
+
+            <div class="example">
+        <h3>Eksempel</h3>
+        <p>Faktoriser uttrykket \(  2x + 6 \).</p>
+
+        <div class="solution">
+         Vi ser at \(2\) er en fellesfaktor i begge leddene.
+         \[ 2x + 6 = 2\cdot x + 2 \cdot 3 = 2(x + 3) \]
+        </div>
+      </div>
+
+<div class="example">
+        <h3>Eksempel</h3>
+        <p>Faktoriser uttrykket \(  2x^2 + 6x \).</p>
+        <div class="solution">
+         Vi ser at \(2x\) er en fellesfaktor i begge leddene.
+         \[ 2x^2 + 6x = 2x\cdot x + 2x \cdot 3 = 2x(x + 3) \]
+        </div>
+      </div>
+
+
+
+
+
+<h3>Kvadratsetningene</h3>
+
+$$
+\begin{aligned}
+\left(  x + y \right)^2 &= x^2 + 2xy + y^2 \\
+\left(  x - y \right)^2 &= x^2 - 2xy + y^2 \\
+\left(  x + y \right)\left(  x - y \right) &= x^2 - y^2
+\end{aligned}
+$$
+
+<strong>Fullstendig kvadrat:</strong> Andregradsuttrykk som kan faktoriseres til \(\left(x \pm y\right)^2\).
+
+            <div class="note">
+<strong>Merk:</strong> Begrepet "andregradsuttrykk" kommer av at \(x\)'en er opphøyd i 2.
+      </div>
+
+            <div class="example">
+        <h3>Eksempel</h3>
+        
+
+        <p>Bestem \(b\) slik at uttrykket \(  x^2 + bx + 16 \) blir et fullstendig kvadrat.</p>
+
+        <div class="solution">
+          Det første leddet \(x^2\) og det siste leddet \(16 = 4^2\) gir
+         \[  \left(  x + 4 \right)^2 = x^2 + 8x + 16 \text{ eller }  \left(  x - 4 \right)^2 = x^2 - 8x + 16 \]
+          Altså er \(b=8\) eller \(b = -8\).
+        </div>
+      </div>
+
+      
+            <div class="note">
+<strong>Merk:</strong> Oppgaver med andregradsuttrykk har ofte, men ikke alltid, to løsninger, slik som i eksempelet over.
+      </div>
+
+
+                  <div class="example">
+        <h3>Eksempel</h3>
+        
+        <p>Bestem \(c\) slik at uttrykket \(  x^2 + 6x + c \) blir et fullstendig kvadrat.</p>
+
+        <div class="solution">
+          Det første leddet \(x^2\) og det midterste leddet \(6 = 2\cdot 3\) gir
+         \[  \left(  x + 3 \right)^2 = x^2 + 6x + 9 \]
+          Altså er \(c = 9\).
+        </div>
+      </div>
+
+
+
+<h3>Faktorisering av andregradsuttrykk</h3>
+
+Hvis et andregradsuttrykk er et <em>fullstendig kvadrat</em> kan vi faktorisere det ved hjelp av kvadratsetningene.
+
+<div class="example">
+        <h3>Eksempel</h3>
+        
+        <p>Faktoriser \(x^2 - 25\).</p>
+
+        <div class="solution">
+        Fra kvadratsetningene ser vi at
+        \[ x^2 - 25 = (x + 5)(x - 5) \]
+        </div>
+      </div>
+
+      <div class="example">
+        <h3>Eksempel</h3>
+        
+        <p>Faktoriser \(x^2 - 5\).</p>
+
+        <div class="solution">
+        Fra kvadratsetningene ser vi at
+        \[ x^2 - 5 = (x + \sqrt{5})(x - \sqrt{5}) \]
+        </div>
+      </div>
+
+<div class="example">
+        <h3>Eksempel</h3>
+        
+        <p>Faktoriser \(x^2 + 10x + 25\).</p>
+
+        <div class="solution">
+        Fra kvadratsetningene ser vi at
+        \[ x^2 + 10x + 25 = (x + 5)(x + 5) \]
+        </div>
+      </div>
+
+<div class="example">
+        <h3>Eksempel</h3>
+        
+        <p>Faktoriser \(x^2 - 10x + 25\).</p>
+
+        <div class="solution">
+        Fra kvadratsetningene ser vi at
+        \[ x^2 - 10x + 25 = (x - 5)(x - 5) \]
+        </div>
+      </div>
+
+<strong>Heltallsmetoden:</strong> Et andregradsuttrykk kan faktoriseres slik:
+\[  x^2 + bx + c = \left(x + m\right)\left(x + n\right)  \]
+hvor  \(m \cdot n = c\) og \(m + n = b\).
+
+<div class="example">
+        <h3>Eksempel</h3>
+        
+        <p>Faktoriser \(x^2 + 5x + 6\) og sett prøve på svaret.</p>
+
+        <div class="solution">
+        Vi ser at \(2 \cdot 3 = 6\) og \(2 + 3 = 6\), altså er
+        \[ x^2 + 5x + 6 = (x + 2)(x + 3) \]
+        Prøve på svaret (ganger ut parentesene):
+        \[ (x + 2)(x + 3) = x \cdot x + x \cdot 3 + 2 \cdot x + 2 \cdot 3 = x^2 + 5x + 6 \]
+        </div>
+      </div>
+
+      <div class="example">
+        <h3>Eksempel</h3>
+        
+        <p>Faktoriser \(x^2 + x - 6\).</p>
+
+        <div class="solution">
+        Vi ser at \(-2 \cdot 3 = -6\) og \(-2 + 3 = 1\), altså er
+        \[ x^2 + x - 6 = (x - 2)(x + 3) \]
+        </div>
+      </div>
+
+            <div class="example">
+        <h3>Eksempel</h3>
+        
+        <p>Faktoriser \(x^2 - x - 6\).</p>
+
+        <div class="solution">
+        Vi ser at \(2 \cdot (-3) = -6\) og \(2 + (-3) = -1\), altså er
+        \[ x^2 - x - 6 = (x + 2)(x - 3) \]
+        </div>
+      </div>
+
+<strong><em>abc</em>-formelen:</strong> Et andregradsuttrykk kan faktoriseres slik:
+\[  ax^2 + bx + c = a\left(x - x_1\right)\left(x - x_2\right)  \]
+hvor  \(x_1\) og \(x_2\) er to tall som er gitt ved 
+\[
+x_1 = \frac{-b + \sqrt{b^2 - 4ac}}{2a} \; \text{ og } \;
+x_2 = \frac{-b - \sqrt{b^2 - 4ac}}{2a} 
+\]
+
+
+            <div class="example">
+        <h3>Eksempel</h3>
+        
+        <p>Faktoriser \(x^2 - x - 6\).</p>
+
+        <div class="solution">
+        Vi bruker \(a = 1\), \(b= -1\) og \(c = -6\). Det gir
+        $$
+\begin{align} 
+x_1 &= \frac{-(-1) + \sqrt{(-1)^2 - 4\cdot 1 \cdot (-6)}}{2} = \frac{1 + 5}{2} = 3\\
+x_2 &= \frac{-(-1) - \sqrt{(-1)^2 - 4\cdot 1 \cdot (-6)}}{2} = \frac{1 - 5}{2} = -2
+\end{align}
+$$
+Dermed kan vi faktorisere uttrykket slik:
+\[ x^2 - x - 6 = (x - 3)(x + 2) \]
+        </div>
+      </div>
+
+
+            <div class="note">
+<strong>Merk:</strong> Det mye jobb å bruke <em>abc</em>-formelen, og det er ofte unødvendig (som i eksempelet over; her kan vi enkelt bruke heltallsmetoden).
+Men noen ganger må vi bruke <em>abc</em>-formelen, og det er en rett-fram-metode, som alltid fungerer.
+      </div>
+
+  
+            <div class="example">
+        <h3>Eksempel</h3>
+        
+        <p>Faktoriser \(x^2 - 3x - 5\).</p>
+
+        <div class="solution">
+        Vi bruker \(a = 1\), \(b= -3\) og \(c = -5\). Det gir
+        $$
+\begin{align} 
+x_1 &= \frac{-(-3) + \sqrt{(-3)^2 - 4\cdot 1 \cdot (-5)}}{2} = \frac{3 + \sqrt{29}}{2}\\
+x_2 &= \frac{-(-3) - \sqrt{(-3)^2 - 4\cdot 1 \cdot (-5)}}{2} = \frac{3 - \sqrt{29}}{2}
+\end{align}
+$$
+Dermed kan vi faktorisere uttrykket slik:
+\[ x^2 - 3x - 5 = \left(x - \frac{3 + \sqrt{29}}{2}\right)\left(x - \frac{3 - \sqrt{29}}{2}\right) \]
+        </div>
+      </div>
+
+           <div class="note">
+<strong>Merk:</strong> Når vi løser oppgaver uten hjelpemidler er det meningen å svare uten desimaltall, sånn som i eksempelet over.
+Svaret er litt "stygt"/komplisert, men hvis man kan metoden med <em>abc</em>-formelen er det like enkelt å løse det forrige eksempelet som eksempelet foran (som hadde et penere svar).
+      </div>
+
+
+
+<h3>Forkorting av brøkuttrykk</h3>
+
+Når vi skal forkorte brøker, må vi først faktorisere, før vi forkorter fellesfaktorer (som kan være en hel parentes).
+
+            <div class="example">
+        <h3>Eksempel</h3>
+        
+        \[  \frac{x^2 + 5x + 6}{x + 2} \]
+
+        <p>Skriv uttrykket så pent som mulig.</p>
+
+        <div class="solution">
+       \[  \frac{x^2 + 5x + 6}{x+2} = \frac{(x+3)(x+2)}{x+2} = x+3 \]
+        </div>
+      </div>
+
+                  <div class="example">
+        <h3>Eksempel</h3>
+        
+        \[  \frac{x + 2}{x^2 + 5x + 6} \]
+
+        <p>Skriv uttrykket så pent som mulig.</p>
+
+        <div class="solution">
+       \[  \frac{x+2}{x^2 + 5x + 6} = \frac{x+2}{(x+3)(x+2)} = \frac{1}{x+3} \]
+        </div>
+      </div>
+
+Hvis et uttrykk består av flere ledd, må vi først få fellesfaktor og samle alt på en brøk, før vi evt. forkorter.
+
+                  <div class="example">
+        <h3>Eksempel</h3>
+        
+        \[  \frac{3}{x^2 + x - 2} + \frac{1}{x + 2} \]
+
+        <p>Skriv uttrykket så pent som mulig.</p>
+
+        <div class="solution">
+       $$
+        \begin{align} 
+          \frac{3}{x^2 + x - 2} + \frac{1}{x + 2} &= \frac{3}{(x-1)(x+2)} + \frac{1}{x + 2}\\
+                                                                          &= \frac{3}{(x-1)(x+2)} + \frac{1 \cdot (x - 1)}{(x-1)(x+2)} \\
+                                                                          &= \frac{3 + x - 1}{(x-1)(x+2)} \\
+                                                                          &= \frac{x + 2}{(x-1)(x+2)}\\
+                                                                          &= \frac{1}{x-1}
+        \end{align}
+       $$
+        </div>
+      </div>
+
+
+                  <div class="example">
+        <h3>Eksempel</h3>
+        
+        \[  \frac{3x-12}{x^2 - 5x + 6} - \frac{6}{x-2} \]
+
+        <p>Skriv uttrykket så pent som mulig.</p>
+
+        <div class="solution">
+       $$
+        \begin{align} 
+          \frac{3x-12}{x^2 - 5x + 6} - \frac{6}{x-2} &= \frac{3x - 12}{(x - 2)(x-3)} - \frac{6}{x-2}\\
+                                                                          &= \frac{3x - 12}{(x - 2)(x-3)} - \frac{6x-18}{(x-2)(x-3)} \\
+                                                                          &= \frac{3x - 12 - (6x - 18)}{(x - 2)(x-3)}\\
+                                                                          &= \frac{-3x + 6}{(x - 2)(x-3)}\\
+                                                                          &= \frac{-3(x - 2)}{(x - 2)(x-3)} \\
+                                                                          &= \frac{-3}{x - 3}
+        \end{align}
+       $$
+        </div>
+      </div>
+
+
+
+<h2>Identiteter</h2>
+
+<strong>Identitet:</strong> Likning hvor høyre og venstre side er identiske.
+
+                  <div class="example">
+        <h3>Eksempel</h3>
+        
+        \[  x^2 + 5x + 6 = (x + 2)(x + 3) \]
+
+        <p>Er likningen en identitet?</p>
+
+        <div class="solution">
+          Ja, for hvis vi ganger ut høyre side får vi venstre side.
+        </div>
+      </div>
+
+<div class="example">
+        <h3>Eksempel</h3>
+        
+        \[  x^2 + 6x + 7 = (x + 2)(x + 3) \]
+
+        <p>Er likningen en identitet?</p>
+
+        <div class="solution">
+          Nei, for hvis vi ganger ut høyre side får vi
+          \[ (x+2)(x+3) = x^2 + 5x + 6 \]
+          som ikke er identisk med venstre side.
+        </div>
+      </div>
+
+          <div class="example">
+        <h3>Eksempel</h3>
+        
+    Bestem \(b\) slik at  
+    \[  x^2 + bx + 16 = (x + 4)^2 \]
+    blir en identitet.
+
+        <div class="solution">
+        Vi ganger ut høyre side av likningen:
+        \[ (x+4)^2 = x^2 + 8x + 16 \]
+        Dermed ser vi at \(b=8\) hvis likningen er en identitet.
+        </div>
+      </div>
+
+
+                  <div class="example">
+        <h3>Eksempel</h3>
+        Bestem \(b\) og \(c\) slik at  
+    \[ x^2 + 6x + c = (x + b)^2 \]
+    blir en identitet.
+
+        <div class="solution">
+          Fra det midterste leddet på venstre side, \(6x\), ser vi at \(b=3\).<br>
+          Det gir \(c = b^2 = 9\).
+        </div>
+      </div>
+
+</section>
+
+
+
+
+
+
+<section>
+<h2>Andregradslikninger</h2>
+      <div class="note">
+<strong>Merk:</strong> Det er mange ulike strategier vi kan bruke for å løse andregradslikninger, men det finnes en metode som ALLTID kan brukes. Denne er vist helt nederst. <br><br>
+
+MEN! Alle strategiene er viktig å beherske, både for å løse andregradslikningene mest mulig effektivt, og fordi strategiene er viktig for å løse andre type likninger
+(f.eks. femtegradslikninger, som ikke har én metode som vi alltid kan bruke).
+      </div>
+
+
+En likning på formen 
+\[ a(x - x_1)(x - x_2) = 0 \]
+har løsningene \(x = x_1\) og \(x = x_2\).
+
+                  <div class="example">
+        <h3>Eksempel</h3>
+        Løs likningen
+        \[  2(x + 2)(x - 3) = 0 \]
+        og sett prøve på svaret.
+
+        <div class="solution">
+         Løsningene er \(x = - 2 \) og \(x = 3\). <br><br>
+
+         Prøve på svarene:
+         $$
+         \begin{align}
+          2(-2 + 2)(-2 - 3) &= 2 \cdot 0 \cdot (-5) = 0 \\
+          2(3 + 2)(3 - 3) &= 2 \cdot 5 \cdot 0 = 0
+          \end{align}
+         $$
+        </div>
+      </div>
+
+<em>Standardmetoden</em> å løse andregradslikninger på er:
+    <ul>
+      <li>få alt på venstre side av likhetstegnet</li>
+      <li>faktoriser</li>
+      <li>les av løsningene</li>
+    </ul>
+
+
+                  <div class="example">
+        <h3>Eksempel</h3>
+        Løs likningen
+        \[  x^2 + 7x + 5 = 2x - 1 \]
+
+        <div class="solution">
+         $$
+         \begin{align}
+             x^2 + 7x + 5 &= 2x - 1 \\
+             x^2 + 5x + 6 &= 0 \\
+             (x + 2)(x + 3) &= 0
+            \end{align}
+         $$
+         Dermed er løsningene \(x = -2\) og \(x = - 3\).
+        </div>
+      </div>
+
+<strong><em>abc</em>-formelen:</strong> En likning på formen 
+\[  ax^2 + bx + c = 0 \]
+har løsningene 
+\[
+x = \frac{-b + \sqrt{b^2 - 4ac}}{2a} \; \text{ og } \;
+x = \frac{-b - \sqrt{b^2 - 4ac}}{2a} 
+\]
+
+                  <div class="example">
+        <h3>Eksempel</h3>
+        Løs likningen
+        \[  x^2 + 7x + 5 = 2x - 1 \]
+
+        <div class="solution">
+         $$
+         \begin{align}
+             x^2 + 7x + 5 &= 2x - 1 \\
+             x^2 + 5x + 6 &= 0
+          \end{align}
+         $$
+         Altså er \(a = 1\), \(b=5\) og \(c=6\), som gir løsningene 
+                 $$
+\begin{align} 
+x &= \frac{-5 + \sqrt{5^2 - 4\cdot 1 \cdot 6}}{2} = \frac{-5 + 1}{2} = -2\\
+x &= \frac{-5 - \sqrt{5^2 - 4\cdot 1 \cdot 6}}{2} = \frac{-5 - 1}{2} = -3
+\end{align}
+$$
+        </div>
+      </div>
+
+
+                  <div class="example">
+        <h3>Eksempel</h3>
+        Løs likningen
+        \[  3x^2 - x - 2 = 0 \]
+
+        <div class="solution">
+         Her er \(a = 3\), \(b=-1\) og \(c=-2\), som gir løsningene 
+                 $$
+\begin{align} 
+x &= \frac{-(-1) + \sqrt{(-1)^2 - 4\cdot 3 \cdot (-2)}}{2 \cdot 3} = \frac{1 + 5}{6} = 1\\
+x &= \frac{-(-1) - \sqrt{(-1)^2 - 4\cdot 3 \cdot (-2)}}{2 \cdot 3} = \frac{1 - 5}{6} = -\frac{2}{3}
+\end{align}
+$$
+        </div>
+      </div>
+
+
+
+
+                  <div class="example">
+        <h3>Eksempel</h3>
+        Løs likningen uten og med <em>abc</em>-formelen.
+        \[  x^2 - 5 = 0 \]
+
+        <div class="solution">
+        Uten <em>abc</em>-formelen:
+        $$
+          \begin{align} 
+            x^2 - 5 &= 0 \\
+            x^2 &= 5 \\
+            x &= \pm \sqrt{5}
+          \end{align}
+        $$
+        Uten <em>abc</em>-formelen: Vi bruker \(a = 1\), \(b=0\) og \(c=5\), som gir løsningene 
+                 $$
+\begin{align} 
+x &= \frac{-0 + \sqrt{0^2 - 4\cdot 1 \cdot (-5)}}{2 \cdot 1} = \frac{\sqrt{20}}{2} = \frac{2\sqrt{5}}{2} = \sqrt{5}\\
+x &= \frac{-0 - \sqrt{0^2 - 4\cdot1  \cdot (-5)}}{2 \cdot 1} = \frac{-\sqrt{20}}{2} = \frac{-2\sqrt{5}}{2} =-\sqrt{5}
+\end{align}
+$$
+        </div>
+      </div>
+      
+      <div class="note">
+<strong>Merk:</strong> Vi kan alltid bruke <em>abc</em>-formelen, men det er noen ganger unødvendig tungvint. 
+      </div>
+
+
+
+<h3>Andregradslikninger har to, én eller ingen løsning</h3>
+
+<em>abc</em>-formelen gir at \(ax^2 + bx + c = 0 \) har løsningene 
+\[
+x = \frac{-b + \sqrt{b^2 - 4ac}}{2a} \; \text{ og } \;
+x = \frac{-b - \sqrt{b^2 - 4ac}}{2a} 
+\]
+Vi ser da at en andregradslikningen har 
+    <ul>
+      <li>to løsninger hvis \(b^2 - 4ac > 0\)</li>
+      <li>én løsninger hvis \(b^2 - 4ac = 0\)</li>
+      <li>ingen løsninger hvis \(b^2 - 4ac < 0\)</li>
+    </ul>
+
+<div class="example">
+        <h3>Eksempel</h3>
+        For hvilke verdier av \(c\) har likningen
+        \[  x^2 + 6x + c = 0 \]
+        to løsninger, én løsning og ingen løsning.
+
+        <div class="solution">
+        To løsninger når
+          $$
+          \begin{align} 
+            b^2 - 4ac &> 0 \\
+            36 - 4c &> 0 \\
+            -4c &> -36 \\
+            c &< 9
+          \end{align}
+        $$
+        Én løsning når
+          $$
+          \begin{align} 
+            b^2 - 4ac &= 0 \\
+            36 - 4c &= 0 \\
+            c &= 9
+          \end{align}
+        $$
+        Ingen løsning når
+          $$
+          \begin{align} 
+            b^2 - 4ac &< 0 \\
+            36 - 4c &< 0 \\
+            c &> 9
+          \end{align}
+        $$
+        </div>
+      </div>
+
+
+For å skjønne eksempelet over bedre kan vi tegne grafen til likningen for ulike verdier av \(c\):
+ <img src="løsninger.png" alt="..." style="width: 67%;">
+ Løsningen av likningen er skjæringen med \(x\)-aksen.
+
+</section>
+
+
+<section>
+<h3>Andregradslikninger med programmering</h3>
+
+Med <em>abc</em>-formelen egner det seg veldig å bruke programmering for å løse andregradslikninger.<br><br>
+
+En likning på formen 
+\[ ax^2 + bx+ c = 0 \]
+kan alltid løses med dette programmet:
+
+        <pre class="codebox"><code>    
+a = ... # Legg inn a-verdien  
+b = ... # Legg inn b-verdien  
+c = ... # Legg inn c-verdien  
+d = b**2 - 4*a*c 
+
+if d < 0:
+          print('Likningen har ingen løsning')
+if d == 0:
+          x = -b/(2*a)
+          print(x)
+if d > 0:
+          x = (-b + d**0.5)/(2*a)
+          print(x)
+          x = (-b - d**0.5)/(2*a)
+          print(x)
+      </code></pre>
+
+      <div class="note">
+<strong>Merk:</strong> Algoritmen i programkoden er enkel å følge uten hjelpmidler også. 
+      </div>
+
+
+<div class="example">
+        <h3>Eksempel</h3>
+        \[  3x^2 + 4x + 1 = 0 \]
+      Bruk algoritmen i programmet for å løse likningen.
+        <div class="solution">
+          \(a = 3 \)<br>
+          \(b = 4 \)<br>
+          \(c = 1 \)<br>
+          \(d = 4^2 - 4\cdot 3 \cdot 1 = 16 - 12 = 4\)<br><br>
+          Siden \(d > 0\) er det to løsninger:<br>
+          \[x = \frac{-4 + \sqrt{4}}{2\cdot 3} = \frac{-2}{6} = -\frac{1}{3} \; \text{ og } \;x = \frac{-4 - \sqrt{4}}{2\cdot 3} = \frac{-6}{6} = -1\]
+        </div>
+      </div>
+    
+</section>
+
+
+  </main>
+
+</body>
+</html>

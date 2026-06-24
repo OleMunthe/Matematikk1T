@@ -37,27 +37,29 @@ img {
 
 <div class="container">
     <div class="box">
-        <p><strong>Hva funksjonsuttrykket til grafen?</strong></p>
+        <p>Gitt grafen til \(f\) i grafikkfeltet.</p>
+
+        <p><strong>Hva er løsningen av \( f(x) > -1 \)?</strong></p>
 
         <form id="quiz">
             <label class="svar" tabindex="0">
+                <input type="radio" name="svar" value="feil">
+                <span>\(  x < -1 \;\;\; \vee \;\;\; x > 2 \)</span>
+            </label>
+
+            <label class="svar" tabindex="0">
                 <input type="radio" name="svar" value="riktig">
-                <span>\( f(x) = \frac{(x + 1)(x - 2)}{2} \)</span>
+                <span>\(  x < 0 \;\;\; \vee \;\;\; x > 1 \)</span>
             </label>
 
             <label class="svar" tabindex="0">
                 <input type="radio" name="svar" value="feil">
-                <span>\( f(x) = \frac{(x - 1)(x + 2) }{2}\)</span>
+                <span>\(  -1 < x < 2 \)</span>
             </label>
 
             <label class="svar" tabindex="0">
                 <input type="radio" name="svar" value="feil">
-                <span>\( f(x) = (x + 1)(x - 2) \)</span>
-            </label>
-
-            <label class="svar" tabindex="0">
-                <input type="radio" name="svar" value="feil">
-                <span>\( f(x) = (x - 1)(x + 2) \)</span>
+                <span>\(  0 < x < 1 \)</span>
             </label>
         </form>
 

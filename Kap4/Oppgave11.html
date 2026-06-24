@@ -32,34 +32,31 @@
 <div class="container">
     <div class="box">
         $$
-                f(x) = (x + 2)(x - 7)
+                (x - 1)(x + 2) \geq 0
         $$
 
-        <p><strong>Hva er \( f(0)\)?</strong></p>
+        <p><strong>Hva er løsningen av ulikheten?</strong></p>
 
         <form id="quiz">
             <label class="svar" tabindex="0">
-                <input type="radio" name="svar" value="feil">
-                <span>\( 2 \vee 7 \)</span>
-            </label>
-
-            <label class="svar" tabindex="0">
-                <input type="radio" name="svar" value="feil">
-                <span>\( -2 \vee 7 \)</span>
-            </label>
-
-            <label class="svar" tabindex="0">
                 <input type="radio" name="svar" value="riktig">
-                <span>\( -14 \)</span>
+                <span>\(  x \leq - 2 \;\; \vee \;\; x \geq 1 \)</span>
             </label>
 
-            
-                            <label class="svar" tabindex="0">
+            <label class="svar" tabindex="0">
                 <input type="radio" name="svar" value="feil">
-                <span>\( 14 \)</span>
-                </label>
+                <span>\(  x \leq - 1 \;\; \vee \;\; x \geq 2 \)</span>
+            </label>
 
-      
+            <label class="svar" tabindex="0">
+                <input type="radio" name="svar" value="feil">
+                <span>\(  -2 \leq x \leq 1 \)</span>
+            </label>
+
+            <label class="svar" tabindex="0">
+                <input type="radio" name="svar" value="feil">
+                <span>\(  -1 \leq x \leq 2 \)</span>
+            </label>
         </form>
 
         <button id="neste" onclick="nesteSporsmal()">Neste spørsmål</button>

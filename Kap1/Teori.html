@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Logaritmer</title>
+
+  <!-- MathJax -->
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      max-width: 900px;
+      margin: auto;
+      line-height: 1.6;
+      background-color: #fafafa;
+    }
+
+    h1, h2, h3 {
+      margin-top: 2em;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+      margin: 1em auto;
+    }
+
+    /* ---------- BOKSER ---------- */
+
+    /* Definisjon */
+    .definition {
+      background-color: #ecfeff;
+      border-left: 6px solid #0891b2;
+      padding: 1.2em 1.5em;
+      margin: 2em 0;
+      border-radius: 8px;
+    }
+
+    .definition h3::before {
+      content: "📘 ";
+    }
+
+    /* Eksempel */
+    .example {
+      background-color: #ecfdf5;
+      border: 2px solid #10b981;
+      border-left-width: 6px;
+      padding: 1.2em 1.5em;
+      margin: 2em 0;
+      border-radius: 10px;
+    }
+
+    .example h3 {
+      margin-top: 0;
+      color: #065f46;
+    }
+
+    .example h3::before {
+      content: "📌 ";
+    }
+
+    .solution {
+      background-color: #ffffff;
+      border: 1px dashed #34d399;
+      padding: 1em;
+      margin-top: 1em;
+      border-radius: 6px;
+    }
+
+    /* Merk */
+    .note {
+      background-color: #fff7ed;
+      border-left: 6px solid #f59e0b;
+      padding: 1.2em 1.5em;
+      margin: 2em 0;
+      border-radius: 8px;
+    }
+
+    .note strong::before {
+      content: "⚠️ ";
+    }
+
+    /* Programkode */
+    .codebox {
+      background-color: #0f172a;
+      color: #e5e7eb;
+      padding: 1.5em;
+      border-radius: 10px;
+      margin: 2em 0;
+      overflow-x: auto;
+      font-family: Consolas, Monaco, monospace;
+    }
+
+    .codebox::before {
+      content: "💻 Programkode";
+      display: block;
+      color: #34d399;
+      margin-bottom: 0.8em;
+      font-weight: bold;
+    }
+
+    .outputbox {
+  background-color: #f8fafc;
+  color: #0f172a;
+  border: 1px solid #cbd5e1;
+  border-left: 6px solid #64748b;
+  padding: 1em 1.2em;
+  margin: -1em 0 2em 0;
+  border-radius: 8px;
+  font-family: Consolas, Monaco, monospace;
+  white-space: pre-wrap;
+}
+
+.outputbox::before {
+  content: "🖨️ Utskrift";
+  display: block;
+  font-weight: bold;
+  color: #475569;
+  margin-bottom: 0.5em;
+}
+
+
+.formel-tabell table {
+    border-collapse: collapse;
+    margin: 1rem auto;
+}
+.formel-tabell td {
+    border: 1px solid #999;
+    padding: 18px 28px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.kode-tabell {
+    margin: 1rem 0;
+    overflow-x: auto;
+}
+
+.kode-tabell table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.kode-tabell td {
+    border: 1px solid #999;
+    padding: 12px 16px;
+    vertical-align: top;
+}
+
+.kode-tabell td:first-child {
+    font-weight: bold;
+    white-space: nowrap;
+    width: 22%;
+    background-color: #f8f8f8;
+}
+
+.kode-tabell code {
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 0.95em;
+}
+
+.kode-tabell pre {
+    margin: 0;
+    white-space: pre;
+    overflow-x: auto;
+}
+
+
+    /* ===========================
+   Mobiltilpasning
+   =========================== */
+
+@media (max-width: 700px) {
+    .kode-tabell td {
+        padding: 8px 10px;
+    }
+
+    .kode-tabell code,
+    .kode-tabell pre {
+        font-size: 0.85em;
+    }
+  body {
+    padding: 1em;
+    font-size: 1rem;
+  }
+
+  h1 {
+    font-size: 1.7rem;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+  }
+
+  /* Bokser: mindre padding på mobil */
+  .example,
+  .definition,
+  .note,
+  .codebox {
+    padding: 1em;
+    margin: 1.5em 0;
+  }
+  .outputbox {
+  padding: 1em;
+  margin: 1.5em 0;
+}
+
+  /* Bilder: litt større på mobil */
+  img {
+    width: 100% !important;
+    max-width: 100%;
+  }
+
+  /* Programkode: lettere å lese */
+  .codebox {
+    font-size: 0.9rem;
+  }
+
+}
+
+/* ===== Skriv til PDF-knapp ===== */
+
+.print-button {
+  display: block;
+  margin: 1.5em auto;
+  padding: 0.6em 1.4em;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #10b981;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.print-button:hover {
+  background-color: #059669;
+}
+
+/* Skjul knappen på mobil */
+@media (max-width: 700px) {
+  .print-button {
+    display: none;
+  }
+}
+
+@media print {
+  .print-button {
+    display: none;
+  }
+}
+
+
+/* ===========================
+   PDF / Utskrift
+   =========================== */
+
+@media print {
+
+  /* Generelle marger for A4 */
+  body {
+    margin: 1.5cm;
+    background: white;
+  }
+
+  /* Overskrifter starter på ny side */
+  h1,
+  h2 {
+    page-break-before: always;
+  }
+
+  /* Aldri del disse boksene over sider */
+  .definition,
+  .example,
+  .note,
+  .codebox {
+    page-break-inside: avoid;
+  }
+  .outputbox {
+  page-break-inside: avoid;
+}
+
+  /* Tillat at løsninger deles om nødvendig */
+  .solution {
+    page-break-inside: auto;
+  }
+
+  /* Bilder bør heller flyttes enn å deles */
+  img {
+    page-break-inside: avoid;
+  }
+
+  /* PDF skal ikke vise knappen */
+  .print-button {
+    display: none !important;
+  }
+}
+@media print {
+  .no-print {
+    display: none;
+  }
+}
+  </style>
+</head>
+
+<body>
+<a href="../index.html" class="no-print">← Tilbake til hovedsiden</a>
+<button class="print-button" onclick="window.print()">
+  🖨️ Skriv til PDF
+</button>
+
+<main>
+    <h1>Regneregler</h1>
+
+    <p>Du skal ha kompetanse om</p>
+    <ul>
+      <li>grunnleggende regning</li>
+      <ul>
+        <li>regning med potenser og røtter</li>
+        <li>regnerekkefølge</li>
+        <li>brøkregning</li>
+      </ul>
+      <li>grunnleggende Python-programmering</li>
+            <ul>
+        <li>utregninger</li>
+        <li>variabler</li>
+        <li>for- og while-løkker</li>
+        <li>funksjoner</li>
+        <li>if-betingelser</li>
+      </ul>
+    </ul>
+
+    <section>
+      <h2>Grunnleggende regning</h2>
+
+      <h3>Definisjon av potenser og røtter</h3>
+      <ul>
+      <li>Potens: Eksponenten forteller hvor mange ganger grunntallet skal multipliseres med seg selv.</li>
+    </ul>
+    \[5^3 = 5 \cdot 5 \cdot 5 \]
+     <ul>
+      <li>Kvadratrot: Det samme som opphøyde i en halv, som blir det positive tallet som ganger seg selv blir tallet i kvadratrota.</li>
+    </ul>
+    \[ \sqrt{9} = 9^{\frac{1}{2}} = 3  \]
+       <ul>
+      <li>\(n\)'te rot: Det samme som opphøyd i \(1/n\), som blir det tallet som ganger seg selv \(n\) ganger blir grunntallet.</li>
+    </ul>
+      \[ \sqrt[3]{27} = 27^{\frac{1}{3}} = 3 \]
+
+<h3>Potensregneregler</h3>
+Fra definisjonen over kan vi utlede følgende regler:
+<div class="formel-tabell">
+<table>
+<tr>
+<td>\(a^m \cdot a^n = a^{m+n}\)</td>
+<td>\(a^0 = 1\)</td>
+<td>\((a \cdot b)^n = a^n \cdot b^n\)</td>
+<td>\((a^m)^n = a^{m \cdot n}\)</td>
+</tr>
+<tr>
+<td>\(\dfrac{a^m}{a^n} = a^{m-n}\)</td>
+<td>\(\dfrac{1}{a^n} = a^{-n}\)</td>
+<td>\(\left(\dfrac{a}{b}\right)^n = \dfrac{a^n}{b^n}\)</td>
+<td>\(\sqrt[n]{a} = a^{\frac{1}{n}}\)</td>
+</tr>
+</table>
+</div>
+        
+
+         <div class="example">
+        <h3>Eksempel</h3>
+<div class="formel-tabell">
+<table>
+<tr>
+<td>\(3^2 \cdot 3^3 = 3^5\)</td>
+<td>\(42^0 = 1\)</td>
+<td>\((3 \cdot 2)^2 = 9 \cdot 4 = 36\)</td>
+<td>\((3^2)^3 = 3^6\)</td>
+</tr>
+<tr>
+<td>\(\dfrac{3^7}{3^2} = 3^5\)</td>
+<td>\(3^{-2} = \dfrac{1}{9}\)</td>
+<td>\(\left(\dfrac{2}{3}\right)^2 = \dfrac{4}{9}\)</td>
+<td>\(\sqrt[3]{8} = 8^{\frac{1}{3}} = 2\)</td>
+</tr>
+</table>
+</div>
+</div>
+
+
+
+
+
+
+<h3>Regnerekkefølge</h3>
+<ul>
+      <li>potenser</li>
+      <li>multiplikasjon og divisjon (gange og dele)</li>
+      <li>addisjon og subtraksjon (pluss og minus)</li>
+    </ul>
+
+For å holde orden på utregningene er det lurt å dele opp utregninger i ledd (uttrykk med pluss eller minus mellom); <br>
+<em><strong>Hvert ledd skal regnes ut hver for seg, før de legges sammen.</strong></em>
+
+
+<div class="example">
+        <h3>Eksempel</h3>
+        \[  5 - 2 \cdot 3^2 + 2 \cdot \left( 1 - 2^2 \right)^2 \]
+
+        <p>Regn ut uttrukket.</p>
+
+        <div class="solution">
+         <img src="rekkefølge.png" alt="..." style="width: 24%;">
+        </div>
+      </div>
+
+
+I uttrykk med parenteser er det lurt å regne ut det som står inni parentesen først (som det er gjort over), 
+men hvis parentesen inneholder bokstavuttrykk må vi gange inn i parentesen, slik:
+<img src="parenteser.png" alt="..." style="width: 67%;">
+
+
+       <div class="example">
+        <h3>Eksempel</h3>
+        \[  2 \cdot \left(  2^2 - 15 \right) \]
+
+        <p>Regn ut uttrukket på to ulike måter.</p>
+
+        <div class="solution">
+         Vi kan regne ut det i parentesen først:
+          \[  2 \cdot \left(  2^2 - 15 \right) = 2 \cdot \left( 4 - 15 \right) = 2 \cdot \left( -11 \right) = -22 \]
+          Vi kan gange inn i parentesen:
+          \[  2 \cdot \left(  2^2 - 15 \right) = 2 \cdot 4 - 2 \cdot 15 = 8 - 30 = -22 \]
+        </div>
+      </div>
+      
+      <div class="note">
+<strong>Merk:</strong> Du må beherske begge metodene i eksempelet over. 
+      </div>
+
+<div class="example">
+        <h3>Eksempel</h3>
+
+        <p>Skriv \(\sqrt{75} + \sqrt{3}\) penere.</p>
+
+        <div class="solution">
+        $$
+        \begin{align} 
+          \sqrt{75} + \sqrt{3} &= \sqrt{25 \cdot 3} + \sqrt{3}\\
+                      &= \sqrt{25}\sqrt{3} + \sqrt{3} \\
+                      &= 5\sqrt{3} + \sqrt{3}\\
+                      &= 6\sqrt{3}
+        \end{align}
+        $$
+        </div>
+      </div>
+
+
+
+<h3>Brøkregler</h3>
+Her er brøkreglene fra barneskolen:
+      <div class="formel-tabell">
+<table>
+<tr>
+<td>\(\dfrac{a}{b} \cdot \dfrac{c}{d} = \dfrac{ac}{bd}\)</td>
+<td>\(\dfrac{a}{b} : \dfrac{c}{d} = \dfrac{a}{b} \cdot \dfrac{d}{c}\)</td>
+<td>\(\dfrac{a}{b} + \dfrac{c}{b} = \dfrac{a+c}{b}\)</td>
+<td>\(\dfrac{a}{b} - \dfrac{c}{b} = \dfrac{a-c}{b}\)</td>
+</tr>
+<tr>
+<td>\(\dfrac{a}{b} = \dfrac{ka}{kb}\)</td>
+<td>\(\dfrac{ab}{ac} = \dfrac{b}{c}\)</td>
+<td>\(\dfrac{a}{1} = a\)</td>
+<td>\(\dfrac{0}{a} = 0\)</td>
+</tr>
+</table>
+</div>
+
+         <div class="example">
+        <h3>Eksempel</h3>
+<div class="formel-tabell">
+<table>
+<tr>
+<td>\(\dfrac{2}{3}\cdot\dfrac{4}{5}=\dfrac{8}{15}\)</td>
+<td>\(\dfrac{2}{3}:\dfrac{4}{5}=\dfrac{2}{3}\cdot\dfrac{5}{4}=\dfrac{5}{6}\)</td>
+<td>\(\dfrac{3}{7}+\dfrac{2}{7}=\dfrac{5}{7}\)</td>
+<td>\(\dfrac{6}{11}-\dfrac{2}{11}=\dfrac{4}{11}\)</td>
+</tr>
+<tr>
+<td>\(\dfrac{2}{3}=\dfrac{4}{6}\)</td>
+<td>\(\dfrac{12}{18}=\dfrac{2}{3}\)</td>
+<td>\(\dfrac{5}{1}=5\)</td>
+<td>\(\dfrac{0}{8}=0\)</td>
+</tr>
+</table>
+</div>
+</div>
+
+      <div class="note">
+<strong>Merk:</strong> Når vi legger sammen brøker må brøkene ha lik nevner (altså; tallet under brøkstreken må være det samme i begge brøkene). 
+      </div>
+
+      <div class="example">
+        <h3>Eksempel</h3>
+        \[  \frac{2}{3} + \frac{3}{5} = \frac{2 \cdot 5}{3 \cdot 5} + \frac{3 \cdot 3}{5 \cdot 3} = \frac{10}{15} + \frac{9}{15} = \frac{19}{15}\]
+      </div>
+
+            <div class="note">
+<strong>Merk:</strong> I brøkregning er det ofte nyttig å se på \(a\) som \(\frac{a}{1}\). 
+      </div>
+
+            <div class="example">
+        <h3>Eksempel</h3>
+        \[  \frac{2}{3} + 5 =  \frac{2}{3} + \frac{5}{1}  =\frac{2}{3} + \frac{15}{3} = \frac{17}{3}\]
+      </div>
+
+                 <div class="example">
+        <h3>Eksempel</h3>
+        \[  \frac{2}{3} \cdot 5 =  \frac{2}{3} \cdot \frac{5}{1}  =\frac{2\cdot 5}{3 \cdot 1} = \frac{10}{3}\]
+      </div>
+
+
+      <div class="example">
+        <h3>Eksempel</h3>
+
+        <p>Skriv \(\frac{6 \cdot 10^3 - 6 \cdot 10^2}{2\cdot 10^{-1}}\) penere.</p>
+
+        <div class="solution">
+        $$
+        \begin{align} 
+          \frac{6 \cdot 10^3 - 6 \cdot 10^2}{2\cdot 10^{-1}} &= \frac{6000 - 600}{0,2}\\
+                      &= \frac{5400}{0,2} \\
+                      &= \frac{54000}{2}\\
+                      &= 27000
+        \end{align}
+        $$
+        </div>
+      </div>
+
+                  <div class="note">
+<strong>Merk:</strong> Det er mange måter å regne ut uttrykket i eksempelet over på. Det er lurt å beherske flere måter å regne det ut på. 
+      </div>
+
+
+            <div class="example">
+        <h3>Eksempel</h3>
+
+        <p>Skriv \(\frac{6 \cdot 10^3 - 6 \cdot 10^2}{2\cdot 10^{-1}}\) penere.</p>
+
+        <p>Bruk en annen fremgangsmåte enn i eksempelet over.</p>
+
+        <div class="solution">
+        $$
+        \begin{align} 
+          \frac{6 \cdot 10^3 - 6 \cdot 10^2}{2\cdot 10^{-1}} &= \frac{6 \cdot 10^4 - 6 \cdot 10^3}{2} \\
+                      &= \frac{6\cdot 10^3 \left( 10 - 1\right)}{2} \\
+                      &= 3 \cdot 10^3 \cdot 9\\
+                      &= 27 \cdot 10^3 \\
+                      &= 27000
+        \end{align}
+        $$
+        </div>
+      </div>
+
+
+    </section>
+
+
+
+
+
+    <section>
+            <h2>Grunnleggende Python-programmering</h2>
+
+      <p>Python er et av de mest brukte programmeringsspråkene. I tillegg ligner det på de fleste andre vanlige programmeringsspråkene,
+        så ved å lære deg Python, blir det enkelt å lære de andre språkene senere.
+        Python brukes blant annet i deler av applikasjonene Instagram og Spotify. I tillegg er det veldig mye brukt på matematikk- og fysikkstudier ved universiteter. 
+      </p>
+
+      <p>
+        Det finnes ekstremt mange muligheter, og ekstremt mange kommandoer og kompliserte ting vi kan gjøre med Python. 
+        Vi ser her bare på de aller viktigste, og enkleste tingene, som er det vi bruker på videregående (i 1P, 1T, R1, R2, Fysikk 1 og Fysikk 2, og litt i 2P). 
+        </p>
+
+      <h3>Utregninger</h3>
+
+      <pre class="codebox"><code>
+print(2*3)
+print(2**3)
+print(2/3)
+      </code></pre>
+      <pre class="outputbox"><code>6, 8, 0,6666666</code></pre>
+      
+
+      <div class="note">
+<strong>Merk:</strong> 2**3 betyr \(2^3\).
+      </div>
+
+      <h3>Definere variabler</h3>
+      Vi kan definere variabler, som kan endre verdi:
+
+       <pre class="codebox"><code>
+a = 2 # Startverdi for a
+b = 3
+a = a + b # Ny verdi for a 
+print(a)
+      </code></pre>
+<pre class="outputbox"><code>5</code></pre>
+
+           <div class="note">
+<strong>Merk:</strong> Likhetstegnet (=) har en annen betydning i programmering enn i vanlig matematikk.<br><br>
+
+I vanlig matematikk leser vi likhetstegnet som "er lik" ("er det samme som").<br>
+I programmeting leser vi likhetstegnet som "får verdien".<br><br>
+
+<strong>Matematikk:</strong> a = a + b betyr at b = 0<br>
+<strong>Python:</strong> a = a + b betyr at a får ny verdi: gammel a-verdi + b-verdien
+
+      </div>
+
+
+<h3>for- og while-løkker</h3>
+
+      Vi kan bruke løkker i Python; Dette får programmet til å gjenta linjer flere ganger:
+       <pre class="codebox"><code>
+a = 2 # Startverdi for a
+for n in range(1, 5): # for n-verdier fra og med 1 til 5 (til og med 4)
+  a = a + n # Ny verdi for a 
+  print(a) # Skriver ut a-verdien
+      </code></pre>
+<pre class="outputbox"><code>3, 5, 8, 12</code></pre>
+
+             <pre class="codebox"><code>
+a = 2 # Startverdi for a
+n = 1 # Startverdi for n
+while n < 5: # så lenge n er mindre enn 5
+  a = a + n # Ny verdi for a 
+  print(a) # Skriver ut a-verdien
+  n = n + 1 # n øker med 1
+      </code></pre>
+<pre class="outputbox"><code>3, 5, 8, 12</code></pre>
+
+
+
+      <div class="note">
+<strong>Merk:</strong> Det er ikke meningen av det er selve programmeringen som skal være utfordringen i oppgavene dere får.
+Derfor spør ofte oppgaver om å lage en "algoritme" (oppskrift) istedenfor, eller i tillegg, til å lage en programkode.
+      </div>
+
+
+  <div class="example">
+        <h3>Eksempel</h3>
+        
+        Figuren illustrerer de fem første trekanttallene; 1, 3, 6, 10, og 15.
+
+        <img src="trekanttall.png" alt="..." style="width: 42%;">
+
+        <p>Lag en algoritme du kan bruke for å finne summen av de 20 første trekanttallene.<br>
+        Lag et program basert på algoritmen.</p>
+
+        <div class="solution">
+         <p>Den viktigste delen av løsningen er å finne et mønster vi kan bruke til algoritmen:<br>
+          Hvert trekanttall er lik det forrige + figurnummeret:
+          <br> <br>
+          \(T_1 = 1 \) <br>
+          \(T_2 = T_1 + 2 \) <br>
+          \(T_3 = T_2 + 3 \) <br>
+          \(T_4 = T_3 + 4 \) <br>
+          \( \vdots \) <br><br>
+          I algoritemen må vi ta summen av disse tallene:
+              <ul>
+                <li>definere det første trekanttallet \(T_1 = 1\)</li>
+                 <li>definere summen \(S_1 = 1\)</li>
+                 <li>gjenta følgende for n-verdier fra 2 til og med 20:</li>
+                 <li>øke \(T_n\) med \(n\)</li>
+                 <li>øke \(S_n\) med \(T_n\)</li>
+              </ul>
+         </p>
+
+      <pre class="codebox"><code>
+T = 1 # Startverdi trekanttall
+S = 1 # Startverdi for summen
+for n in range(2, 21): # for n-verdier fra 2 til og med 20
+  T = T + n
+  S = S + T
+print(S)
+      </code></pre>
+<pre class="outputbox"><code> 1771</code></pre>
+
+
+        </div>
+      </div>
+
+
+      Istedenfor å bruke en for-løkke i eksempelet over, kan vi bruke en while-løkke, slik:
+
+       <pre class="codebox"><code>
+n = 1 # Startverdi for trekanttallnummeret
+T = 1 # Startverdi trekanttall
+S = 1 # Startverdi for summen
+while n < 21: # så lenge trekantallnummeret er mindre enn 21
+  n = n + 1
+  T = T + n
+  S = S + T
+print(S)
+      </code></pre>
+
+            <div class="note">
+<strong>Merk:</strong> Du må beherske både while- og for-løkker. 
+Som regel kan vi velge hva vi skal bruke, men noen ganger MÅ man bruke for-løkke, og andre ganger MÅ man bruke while-løkke.
+      </div>
+
+
+        <div class="example">
+        <h3>Eksempel</h3>
+        Fibonacci-tallene er gitt ved 
+        \[ 1, 1, 2, 3, 5, 8, 13, 21, ... \]
+        Beskriv mønsteret og lag et program som regner ut forholdet mellom et tall og det neste tallet i følgen. Gjør dette for de 20 første tallene.
+
+        <div class="solution">
+        Følgen starter med 1 og 1. Deretter er et tall summen av de to foregående tallene.
+
+        <pre class="codebox"><code>    
+a = 1 # Det første tallet
+b = 1 # Det neste tallet
+for n in range(20): # Gjentar følgende 20 ganger:
+  print(a/b)
+  a = a + b # a får verdien etter b i følgen 
+  b = a + b # b får verdien etter a i følgen
+      </code></pre>
+      <pre class="outputbox"><code>1.0
+0.6666666666666666
+0.625
+0.6190476190476191
+0.6181818181818182
+0.6180555555555556
+0.6180371352785146
+...
+0.6180339887499086
+0.6180339887498969
+0.6180339887498951
+0.6180339887498949</code></pre>
+        </div>
+      </div>
+
+            <div class="note">
+<strong>Merk:</strong> Eksempelet over er et "kroneksempel" på at rekkefølgen utregninger blir gjort i er viktig når vi programmerer:
+De to nederste linjene gir tilsynelatende like verdier til a og b, men siden a endrer seg på linja over b = a + b, blir ikke verdien til b det samme som a...!
+      </div>
+
+
+
+<h3>Funksjoner</h3>
+
+<pre class="codebox"><code>
+def f(x):
+  return ... # Funksjonsuttrykket
+      </code></pre>
+
+Hvis vi f.eks. skal definere \(f(x) = x^2\) og regne ut funksjonsverdiene for \(x=1\), \(x=2\) og \(x=3\) kan vi skrive følgende program:
+<pre class="codebox"><code>
+def f(x):
+  return x**2
+        
+print(f(1), f(2), f(3))
+      </code></pre>
+  <pre class="outputbox"><code> 1, 4, 9</code></pre>
+      
+
+
+<h3>if-betingelse</h3>
+<p>Vi kan lage programer med "if" (hvis), "elif" (ellers hvis) og "else" (ellers).</p>
+
+  <div class="example">
+        <h3>Eksempel</h3>
+        <pre class="codebox"><code>
+alder = 16 # skriv inn alderen din
+if alder < 12:
+  print('Du er et barn')
+elif alder > 18:
+  print('Du er voksen')
+elif alder > 12:
+  print('Du er tenåring')
+else:
+  print('Du har skrevet en ugyldig verdi for alder')
+      </code></pre>
+
+      Forklar hva programmet skriver ut.
+
+        <div class="solution">
+        Variabelen "alder" får verdien 16.<br><br>
+        Programmet sjekker om "alder" er mindre enn 12.<br>
+        ("alder" er ikke mindre enn 12, så programmet går videre)<br><br>
+        Programmet sjekker om "alder" er mer enn 18.<br>
+         ("alder" er ikke mer enn 18, så programmet går videre)<br><br>
+         Programmet sjekker om "alder" er mer enn 12.<br>
+         Siden "alder" er mer enn 12, skriver programmet ut <em>Du er tenåring</em>.
+        </div>
+      </div>
+
+      
+<div class="note">
+<strong>Merk:</strong> Programkoden over illustrerer hvordan vi kan bruke if-test, men eksempelet innholder veldig lite matematikk.
+Derfor er IKKE dette et typisk eksempel på oppgave du får på prøve. Eksempelet nedenfor er et bedre eksempel på en oppgave du kan få på prøve.
+      </div>
+
+
+        <div class="example">
+        <h3>Eksempel</h3>
+        <pre class="codebox"><code>    
+for x in range(-8, 9): # for x-verdier mellom -8 og 8
+  if 2*x + 4 == 0:
+    print(x) 
+      </code></pre>
+
+      Forklar hva programmet skriver ut.
+
+        <div class="solution">
+        Programmet går gjennom heltallsverdier for \(x\) fra \(-8\) til \(8\).<br>
+        Hvis \(2x+4=0\) skriver programmet ut \(x\)-verdien.<br>
+        Siden \(2\cdot (-2) + 4 = 0\), skriver programmet ut \(-2\).
+        </div>
+      </div>
+
+
+<div class="note">
+<strong>Merk:</strong> I programkoden over bruker vi dobbelt likhetstegn "==". Det er fordi "=" i Python betyr "får verdien", men i programmet over vil vi ikke definere uttrykket \(2x + 4\) til å bli 0, vi vil undersøke om uttrykket \(2x + 4\) er lik 0.
+      </div>
+
+
+
+
+
+
+
+<h3>Sammendrag av Python-programmering</h3>
+
+<div class="kode-tabell">
+<table>
+<tr>
+<td>Definere variabler</td>
+<td><code>a = 2 &nbsp; &nbsp; &nbsp; # a får verdien 2<br>
+b = a + 3 &nbsp; # b får verdien 5</code></td>
+</tr>
+
+  <tr>
+<td>Regneoperatorer</td>
+<td><code>+ &nbsp; - &nbsp; * &nbsp; ** &nbsp; / </code></td>
+</tr>
+
+<tr>
+<td>Sammenligne og logikk</td>
+<td><code>== &nbsp; != &nbsp; &lt; &nbsp; &gt; &nbsp; &lt;= &nbsp; &gt;= &nbsp; and &nbsp; or </code></td>
+</tr>
+
+<tr>
+<td>if-test</td>
+<td>
+<pre><code>if betingelse:
+   hva som skal skje
+elif betingelse:
+    hva som skal skje
+else:
+    hva som skal skje</code></pre>
+</td>
+</tr>
+
+
+<tr>
+<td>Definere funksjon</td>
+<td>
+<pre><code>def f(x):
+    return funksjonsuttrykket</code></pre>
+</td>
+</tr>
+
+<tr>
+<td>for-løkke</td>
+<td>
+<pre><code>for n in range(fra, til):
+    hva som skal skje</code></pre>
+</td>
+</tr>
+
+<tr>
+<td>while-løkke</td>
+<td>
+<pre><code>while betingelse:
+    hva som skal skje</code></pre>
+</td>
+</tr>
+
+</table>
+</div>
+</section>
+  </main>
+
+</body>
+</html>

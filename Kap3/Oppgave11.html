@@ -32,22 +32,34 @@
 <div class="container">
     <div class="box">
         $$
-                (x + 2)(x + 1) = x^2 + 3x + 2
+                f(x) = (x + 2)(x - 7)
         $$
 
-        <p><strong>Er likningen en identitet?</strong></p>
+        <p><strong>Hva er \( f(0)\)?</strong></p>
 
         <form id="quiz">
             <label class="svar" tabindex="0">
-                <input type="radio" name="svar" value="riktig">
-                <span>Ja</span>
+                <input type="radio" name="svar" value="feil">
+                <span>\( 2 \vee 7 \)</span>
             </label>
 
             <label class="svar" tabindex="0">
                 <input type="radio" name="svar" value="feil">
-                <span>Nei</span>
+                <span>\( -2 \vee 7 \)</span>
             </label>
 
+            <label class="svar" tabindex="0">
+                <input type="radio" name="svar" value="riktig">
+                <span>\( -14 \)</span>
+            </label>
+
+            
+                            <label class="svar" tabindex="0">
+                <input type="radio" name="svar" value="feil">
+                <span>\( 14 \)</span>
+                </label>
+
+      
         </form>
 
         <button id="neste" onclick="nesteSporsmal()">Neste spørsmål</button>

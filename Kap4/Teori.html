@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Likninger og ulikheter</title>
+
+  <!-- MathJax -->
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      max-width: 900px;
+      margin: auto;
+      line-height: 1.6;
+      background-color: #fafafa;
+    }
+
+    h1, h2, h3 {
+      margin-top: 2em;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+      margin: 1em auto;
+    }
+
+    /* ---------- BOKSER ---------- */
+
+    /* Definisjon */
+    .definition {
+      background-color: #ecfeff;
+      border-left: 6px solid #0891b2;
+      padding: 1.2em 1.5em;
+      margin: 2em 0;
+      border-radius: 8px;
+    }
+
+    .definition h3::before {
+      content: "📘 ";
+    }
+
+    /* Eksempel */
+    .example {
+      background-color: #ecfdf5;
+      border: 2px solid #10b981;
+      border-left-width: 6px;
+      padding: 1.2em 1.5em;
+      margin: 2em 0;
+      border-radius: 10px;
+    }
+
+    .example h3 {
+      margin-top: 0;
+      color: #065f46;
+    }
+
+    .example h3::before {
+      content: "📌 ";
+    }
+
+    .solution {
+      background-color: #ffffff;
+      border: 1px dashed #34d399;
+      padding: 1em;
+      margin-top: 1em;
+      border-radius: 6px;
+    }
+
+    /* Merk */
+    .note {
+      background-color: #fff7ed;
+      border-left: 6px solid #f59e0b;
+      padding: 1.2em 1.5em;
+      margin: 2em 0;
+      border-radius: 8px;
+    }
+
+    .note strong::before {
+      content: "⚠️ ";
+    }
+
+    /* Programkode */
+    .codebox {
+      background-color: #0f172a;
+      color: #e5e7eb;
+      padding: 1.5em;
+      border-radius: 10px;
+      margin: 2em 0;
+      overflow-x: auto;
+      font-family: Consolas, Monaco, monospace;
+    }
+
+    .codebox::before {
+      content: "💻 Programkode";
+      display: block;
+      color: #34d399;
+      margin-bottom: 0.8em;
+      font-weight: bold;
+    }
+
+    .outputbox {
+  background-color: #f8fafc;
+  color: #0f172a;
+  border: 1px solid #cbd5e1;
+  border-left: 6px solid #64748b;
+  padding: 1em 1.2em;
+  margin: -1em 0 2em 0;
+  border-radius: 8px;
+  font-family: Consolas, Monaco, monospace;
+  white-space: pre-wrap;
+}
+
+.outputbox::before {
+  content: "🖨️ Utskrift";
+  display: block;
+  font-weight: bold;
+  color: #475569;
+  margin-bottom: 0.5em;
+}
+
+
+.formel-tabell table {
+    border-collapse: collapse;
+    margin: 1rem auto;
+}
+.formel-tabell td {
+    border: 1px solid #999;
+    padding: 18px 28px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.kode-tabell {
+    margin: 1rem 0;
+    overflow-x: auto;
+}
+
+.kode-tabell table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.kode-tabell td {
+    border: 1px solid #999;
+    padding: 12px 16px;
+    vertical-align: top;
+}
+
+.kode-tabell td:first-child {
+    font-weight: bold;
+    white-space: nowrap;
+    width: 22%;
+    background-color: #f8f8f8;
+}
+
+.kode-tabell code {
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 0.95em;
+}
+
+.kode-tabell pre {
+    margin: 0;
+    white-space: pre;
+    overflow-x: auto;
+}
+
+
+    /* ===========================
+   Mobiltilpasning
+   =========================== */
+
+@media (max-width: 700px) {
+    .kode-tabell td {
+        padding: 8px 10px;
+    }
+
+    .kode-tabell code,
+    .kode-tabell pre {
+        font-size: 0.85em;
+    }
+  body {
+    padding: 1em;
+    font-size: 1rem;
+  }
+
+  h1 {
+    font-size: 1.7rem;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+  }
+
+  /* Bokser: mindre padding på mobil */
+  .example,
+  .definition,
+  .note,
+  .codebox {
+    padding: 1em;
+    margin: 1.5em 0;
+  }
+  .outputbox {
+  padding: 1em;
+  margin: 1.5em 0;
+}
+
+  /* Bilder: litt større på mobil */
+  img {
+    width: 100% !important;
+    max-width: 100%;
+  }
+
+  /* Programkode: lettere å lese */
+  .codebox {
+    font-size: 0.9rem;
+  }
+
+}
+
+/* ===== Skriv til PDF-knapp ===== */
+
+.print-button {
+  display: block;
+  margin: 1.5em auto;
+  padding: 0.6em 1.4em;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #10b981;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.print-button:hover {
+  background-color: #059669;
+}
+
+/* Skjul knappen på mobil */
+@media (max-width: 700px) {
+  .print-button {
+    display: none;
+  }
+}
+
+@media print {
+  .print-button {
+    display: none;
+  }
+}
+
+
+/* ===========================
+   PDF / Utskrift
+   =========================== */
+
+@media print {
+
+  /* Generelle marger for A4 */
+  body {
+    margin: 1.5cm;
+    background: white;
+  }
+
+  /* Overskrifter starter på ny side */
+  h1,
+  h2 {
+    page-break-before: always;
+  }
+
+  /* Aldri del disse boksene over sider */
+  .definition,
+  .example,
+  .note,
+  .codebox {
+    page-break-inside: avoid;
+  }
+  .outputbox {
+  page-break-inside: avoid;
+}
+
+  /* Tillat at løsninger deles om nødvendig */
+  .solution {
+    page-break-inside: auto;
+  }
+
+  /* Bilder bør heller flyttes enn å deles */
+  img {
+    page-break-inside: avoid;
+  }
+
+  /* PDF skal ikke vise knappen */
+  .print-button {
+    display: none !important;
+  }
+}
+@media print {
+  .no-print {
+    display: none;
+  }
+}
+  </style>
+</head>
+
+<body>
+<a href="../index.html" class="no-print">← Tilbake til hovedsiden</a>
+<button class="print-button" onclick="window.print()">
+  🖨️ Skriv til PDF
+</button>
+
+<main>
+    <h1>Likningssystemer og ulikheter</h1>
+
+    <p>Du skal ha kompetanse om</p>
+    <ul>
+      <li>likningssystemer</li>
+      <ul>
+        <li>addisjonsmetoden</li>
+        <li>innsettingsmetoden</li>
+        <li>grafisk løsning</li>
+      </ul>
+      <li>ulikheter</li>
+      <ul>
+      <li>løsninger med regning og fortegnsskjema</li>
+      <li>grafiske løsninger</li>
+      </ul>
+    </ul>
+
+    <section>
+      <h2>Likningssystemer</h2>
+
+      <h3>Addisjonsmetoden</h3>      
+
+         <div class="example">
+        <h3>Eksempel</h3>
+        $$
+        \begin{align}
+            2x + 3y &= 5 \\
+            x - 3y &=  4
+        \end{align}
+        $$
+        Løs likningssystemet.
+
+        <div class="solution">
+   Vi legger sammen likningene og får  
+        $$
+            \begin{align}
+            3x + 0y &= 9 \\
+           x &=  3
+        \end{align}
+        $$
+        Setter vi dette inn i den nederste likningen, får vi
+        \[  3 - 3y = 4 \;\; \rightarrow \;\; 3 - 4 = 3y \;\; \rightarrow \;\; -\frac{1}{3} = y  \]
+        Dermed er løsningen \(x = 3\) og \(y=-\frac{1}{3}\).
+        </div>
+      </div>
+
+
+      <h3>Innsettingsmetoden</h3>      
+
+         <div class="example">
+        <h3>Eksempel</h3>
+        $$
+        \begin{align}
+            2x + 3y &= 5 \\
+            x - 3y &=  4
+        \end{align}
+        $$
+        Løs likningssystemet.
+
+        <div class="solution">
+        Den nederste likningen kan skrives om til 
+        \[  x = 4 + 3y \]
+        Setter vi dette inn i den øverste likningen, får vi
+        $$
+        \begin{align}
+            2(4+3y) + 3y &= 5 \\
+            8 + 6y + 3y &=  5 \\
+            9y &= - 3\\
+            y &= -\frac{1}{3}
+        \end{align}
+        $$
+        Setter vi dette inn i uttrykket for \(x\) får vi 
+        \[ x = 4 + 3\cdot\left( -\frac{1}{3} \right) = 4 - 1 = 3  \]
+        Dermed er løsningen \(x = 3\) og \(y=-\frac{1}{3}\).
+        </div>
+      </div>
+
+
+               <div class="example">
+        <h3>Eksempel</h3>
+        $$
+        \begin{align}
+            x + y^2 &= 4 \\
+            x  &= y  + 2
+        \end{align}
+        $$
+        Løs likningssystemet.
+
+        <div class="solution">
+        Den nederste likningen gir et uttrykk for \(x\), som vi kan sette inn i den øverste likningen, 
+        $$
+        \begin{align}
+            y+2 + y^2 &= 4\\
+            y^2 + y - 2 &= 0 \\
+            (y + 2)(y - 1) &= 0 \\
+            y &= -2 \;\;\; \vee \;\;\; y = 1
+        \end{align}
+        $$
+        Vi setter disse verdiene inn i uttrykket for \(x\),
+        \[  x = -2 + 2 = 0 \;\;\; \vee \;\;\; x = 1 + 2 = 3 \]
+        Dermed er løsningen \(x=0\) og \(y=-2\), eller \(x=3\) og \(y=1\).
+        </div>
+      </div>
+
+
+      <div class="note">
+<strong>Merk:</strong>  Når det er andregradslikninger kan det bli to sett med løsninger.<br><br>
+
+I eksempelet over hører \(x=0\) og \(y=-2\) sammen. Og \(x=3\) og \(y=1\) hører sammen. Dette kan vi skjønne ved å sette prøve på svaret;
+Vi kan sette inn \(x=0\) og \(y=-2\) og se at begge likningene stemmer:
+$$
+\begin{align}
+ x + y^2 &= 4 \\
+            x  &= y  + 2 \\
+            &\,\\
+          0 + (-2)^2 &= 4 \\
+            0  &= -2  + 2 
+            \end{align}
+$$
+Eller vi kan sette inn \(x=3\) og \(y=1\) og se at begge likningene stemmer:
+$$
+\begin{align}
+ x + y^2 &= 4 \\
+            x  &= y  + 2 \\
+            &\text{ }\\
+          3 + 1^2 &= 4 \\
+            3  &= 1  + 2 
+            \end{align}
+$$
+      </div>
+
+
+ <h3>Grafisk løsning av likningssystemer</h3>
+
+<div class="example">
+        <h3>Eksempel</h3>
+        $$
+        \begin{align}
+            x + y^2 &= 4 \\
+            x  &= y  + 2
+        \end{align}
+        $$
+        Løs likningssystemet grafisk.
+
+        <div class="solution">
+        Vi tegner grafen til begge likningene ved å sette opp en verditabell, eller ved å bruke en digital graftegner.
+        <img src="likningssett.png" alt="..." style="width: 50%;"> 
+        Skjæringspunktene gir at løsningene \(x=0\) og \(y=-2\), eller \(x=3\) og \(y=1\).
+        </div>
+      </div>
+
+    </section>
+    <section>
+
+<h2>Ulikheter</h2>
+
+Ulikhetstegnene er definert ved 
+<ul>
+<li>\(<\) "er mindre enn"</li>
+<li>\(>\) "er større enn"</li>
+<li>\(\leq\) "er mindre eller lik"</li>
+<li>\(\geq\) "er større eller lik"</li>
+<ul>
+<img src="kroko.png" alt="..." style="width: 50%;"> 
+
+<div class="example">
+        <h3>Eksempel</h3>
+        \[
+        5-x \leq 3
+        \]
+        Løs ulikheten.
+
+        <div class="solution">
+        Vi ser at \(5-x \leq 3\) når \(x\geq 2\).
+        </div>
+      </div>
+
+                <div class="note">
+<strong>Merk:</strong> Det er mange måter å løse ulikheter på. <br><br>
+
+Ulikheten i eksempelet over kan løses som en likning, grafisk eller ved å bare se løsningen (med prøving-og-feiling).
+      </div>
+
+  <div class="example">
+        <h3>Eksempel</h3>
+        \[
+        5-x \leq 3
+        \]
+        Løs ulikheten grafisk.
+
+        <div class="solution">
+        Vi tegner linja \(y=5-x\) og linja \(y=3\).
+        <img src="enkelgrafisk.png" alt="..." style="width: 50%;"> 
+        Vi ser at \(5-x\leq 3\) når \(x\geq 2\).
+        </div>
+      </div>
+
+
+        <div class="example">
+        <h3>Eksempel</h3>
+        <img src="avansertgrafisk.png" alt="..." style="width: 67%;"> 
+        Bestem løsningen av ulikheten \(g(x) < f(x)\).
+
+        <div class="solution">
+        Vi ser at verdiene til \(g\) er mindre enn verdiene til \(f\) når \(-4 < x < 3\).
+        </div>
+      </div>
+
+              <div class="example">
+        <h3>Eksempel</h3>
+        <img src="avansertgrafisk.png" alt="..." style="width: 67%;"> 
+        Bestem løsningen av ulikheten \(g(x) > f(x)\).
+
+        <div class="solution">
+        Vi ser at verdiene til \(g\) er større enn verdiene til \(f\) når \(x < - 4\) eller \(x > 3\).
+        </div>
+      </div>
+
+
+<h3>Andregradsulikheter</h3>
+
+<div class="example">
+        <h3>Eksempel</h3>
+        \[  x^2 - x - 6 > 0  \] 
+        Løs ulikheten.
+
+        <div class="solution">
+        Vi tegner grafen til \(f(x) = x^2 - x - 6 = (x+2)(x-3)\).
+        <img src="andreu.png" alt="..." style="width: 67%;"> 
+        Vi leser av at \(f(x)>0\) når \(x<-2\) eller \(x > 3\).
+        </div>
+      </div>
+
+      
+                <div class="note">
+<strong>Merk:</strong> Det er flere måter å løse andregradsulikheter på. I tillegg til å løse dem grafisk, kan vi bruke <em>fortegnsskjema</em>.
+</div>
+
+
+      <div class="example">
+        <h3>Eksempel</h3>
+        \[  x^2 - x - 6 > 0  \] 
+        Løs ulikheten.
+
+        <div class="solution">
+        Vi lager fortegnsskjema til funksjonen \(f(x) = x^2 - x - 6 = (x+2)(x-3)\).<br>
+        Stiplet strek sier at faktoren er negativ, og heltrukken strek at den er posistiv.
+        <img src="fortegnandre.png" alt="..." style="width: 67%;"> 
+        Vi leser av at \(f(x)>0\) når \(x<-2\) eller \(x > 3\).
+        </div>
+      </div>
+
+
+      <h3>Tredjegradsulikheter</h3>
+
+       <div class="example">
+        <h3>Eksempel</h3>
+        \[  x^3 - 2x^2 - 5x + 6 \geq 0 \]
+         Løs ulikheten grafisk.
+        <div class="solution">
+          Med prøving-og-feiling ser vi at \(x=1\) er et nullpunkt:
+          \[1^3 - 2\cdot 1^2 - 5 \cdot 1 + 6 = 1 - 2 - 5 + 6 = 0\]
+          Dermed kan uttrykket faktoriseres til
+          \[ (x - 1)(ax^2 + bx + c)  \]
+          For å bestemme uttrykket i den siste parentesen deler vi på \((x-1)\),
+          $$
+\begin{align}
+          &\hphantom{-(}(x^3 - 2x^2 - 5x + 6) : (x - 1) = x^2 - x - 6\\
+          &\underline{\;-(x^3 - x^2)}\\
+          &\hphantom{-(x^3}-x^2 - 5x + 6\\
+          &\hphantom{x^3}\underline{\;-(-x^2 + x)}\\
+          &\hphantom{-(x^3-x^2)}-6x + 6\\
+          &\hphantom{(x^3-x^2}\underline{\;-(-6x + 6)}\\
+          &\hphantom{-(x^3-x^2-6xxx)}0 \text{ i rest}
+\end{align}
+          $$
+          Dermed kan uttrykket faktoriseres til
+          \[ (x - 1)(x^2 - x - 6) = (x-1)(x-3)(x+2)  \]
+      Vi tegner en skisse av grafen til \(f(x) = (x-1)(x-3)(x+2) \)
+      <img src="tredjeulikhet2.png" alt="..." style="width: 67%;"> 
+        Vi leser av at \(f(x)\geq 0 \) når \(-2 \leq x \leq 1\) eller \(x \geq 3\).
+        </div>
+      </div>
+
+
+       <div class="example">
+        <h3>Eksempel</h3>
+        \[  x^3 - 2x^2 - 5x + 6 \geq 0 \]
+         Løs ulikheten med fortegnsskjema.
+        <div class="solution">
+          Vi faktoriserer uttrykket (se eksempelet over).
+          \[ x^3 - 2x^2 - 5x + 6 = (x-1)(x-3)(x+2)  \]
+      Vi lager fortegnsskjema.
+      <img src="skjematredje.png" alt="..." style="width: 67%;"> 
+        Vi leser av at \(f(x)\geq 0 \) når \(-2 \leq x \leq -1\) eller \(x \geq 3\).
+        </div>
+      </div>
+
+
+
+</section>
+  </main>
+
+</body>
+</html>
