@@ -305,28 +305,11 @@
   .no-print {
     display: none;
   }
-@page {
-  size: A4;
-  margin: 1.5cm;
-}
-
-@media print {
-  html, body {
-    margin: 0;
-    padding: 0;
-  }
-
-  .print-scale {
-    width: 900px;
-    transform: scale(1);
-    transform-origin: top left;
-  }
 }
   </style>
 </head>
 
 <body>
-<div class="print-scale">
 <a href="../index.html" class="no-print">← Tilbake til hovedsiden</a>
 <button class="print-button" onclick="window.print()">
   🖨️ Skriv til PDF
@@ -917,6 +900,6 @@ else:
 </div>
 </section>
   </main>
-</div>
+
 </body>
 </html>
