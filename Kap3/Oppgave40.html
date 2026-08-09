@@ -12,6 +12,12 @@
 <link rel="stylesheet" href="../FlervalgsStyle.css">
 <script src="../FlervalgScript.js" defer></script>
 
+<style>
+img {
+    max-height: 300px;
+    max-width: 450px;
+}
+</style>
 </head>
 
 <body>
@@ -31,33 +37,38 @@
 
 <div class="container">
     <div class="box">
-        $$
-                f(x) = x^2 + kx + 4 
-        $$
+        <p>Bildet viser en polynomdivisjon.</p>
 
-        <p><strong>For hvilke verdier har \(f\) to nullpunkter?</strong></p>
+        <p><strong>Hva skal stå bak det røde feltet?</strong></p>
 
         <form id="quiz">
             <label class="svar" tabindex="0">
-                <input type="radio" name="svar" value="feil">
-                <span>\( k = \pm 4 \)</span>
-            </label>
-
-            <label class="svar" tabindex="0">
-                <input type="radio" name="svar" value="feil">
-                <span>\( -4 < k < 4 \) (mellom \(-4\) og \(4\))</span>
-            </label>
-
-            <label class="svar" tabindex="0">
                 <input type="radio" name="svar" value="riktig">
-                <span>\(  k < -4 \;\;\; \vee \;\;\; k > 4 \) (mindre enn \(-4\) eller mer enn \(4\))</span>
+                <span>\(x + 2 \)</span>
             </label>
 
+            <label class="svar" tabindex="0">
+                <input type="radio" name="svar" value="feil">
+                <span>\(x - 2 \)</span>
+            </label>
+
+            <label class="svar" tabindex="0">
+                <input type="radio" name="svar" value="feil">
+                <span>\(x - 1 \)</span>
+            </label>
+
+            <label class="svar" tabindex="0">
+                <input type="radio" name="svar" value="feil">
+                <span>\(x + 1 \)</span>
+            </label>
         </form>
 
         <button id="neste" onclick="nesteSporsmal()">Neste spørsmål</button>
     </div>
 
+    <div class="box" style="display: grid; place-items: center;">
+        <img src="polydiv3.png" alt="">
+    </div>
 </div>
 
 </body>

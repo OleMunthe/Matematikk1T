@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0877ab">
 
-<title>Flervalgsoppgaver R2</title>
+<title>Flervalgsoppgaver 1T</title>
 
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
@@ -31,28 +31,34 @@
 
 <div class="container">
     <div class="box">
+        <p>Gitt polynomfunksjonen</p>
+
         $$
-                f(x) = x^2 + kx + 4 
+            P(x) = x^3 + x + 10
         $$
 
-        <p><strong>For hvilke verdier har \(f\) to nullpunkter?</strong></p>
+        <p><strong>Hvilken av divisjonene går opp? (har null i rest)</strong></p>
 
         <form id="quiz">
             <label class="svar" tabindex="0">
-                <input type="radio" name="svar" value="feil">
-                <span>\( k = \pm 4 \)</span>
-            </label>
-
-            <label class="svar" tabindex="0">
-                <input type="radio" name="svar" value="feil">
-                <span>\( -4 < k < 4 \) (mellom \(-4\) og \(4\))</span>
-            </label>
-
-            <label class="svar" tabindex="0">
                 <input type="radio" name="svar" value="riktig">
-                <span>\(  k < -4 \;\;\; \vee \;\;\; k > 4 \) (mindre enn \(-4\) eller mer enn \(4\))</span>
+                <span>\(P(x) : (x + 2) \)</span>
             </label>
 
+            <label class="svar" tabindex="0">
+                <input type="radio" name="svar" value="feil">
+                <span>\(P(x) : (x - 2) \)</span>
+            </label>
+
+            <label class="svar" tabindex="0">
+                <input type="radio" name="svar" value="feil">
+                <span>\(P(x) : (x - 1) \)</span>
+            </label>
+
+            <label class="svar" tabindex="0">
+                <input type="radio" name="svar" value="feil">
+                <span>\(P(x) : (x + 1) \)</span>
+            </label>
         </form>
 
         <button id="neste" onclick="nesteSporsmal()">Neste spørsmål</button>
