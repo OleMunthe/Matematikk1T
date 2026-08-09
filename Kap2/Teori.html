@@ -3,7 +3,7 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="UTF-8">
-  <title>Logaritmer</title>
+  <title>Faktorisering</title>
 
   <!-- MathJax -->
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -82,24 +82,40 @@
       content: "⚠️ ";
     }
 
-    /* Programkode */
-    .codebox {
-      background-color: #0f172a;
-      color: #e5e7eb;
-      padding: 1.5em;
-      border-radius: 10px;
-      margin: 2em 0;
-      overflow-x: auto;
-      font-family: Consolas, Monaco, monospace;
-    }
+ /* Programkode */
+.codebox {
+  background-color: #0f172a;
+  color: #e5e7eb;
+  padding: 0.8em 1em;
+  border-radius: 10px;
+  margin: 1em 0;
+  overflow-x: auto;
+  font-family: Consolas, Monaco, monospace;
+}
 
-    .codebox::before {
-      content: "💻 Programkode";
-      display: block;
-      color: #34d399;
-      margin-bottom: 0.8em;
-      font-weight: bold;
-    }
+.codebox::before {
+  content: "💻 Programkode";
+  display: block;
+  color: #34d399;
+  margin-bottom: 0.25em;
+  font-weight: bold;
+}
+
+/* Fjern standardluft rundt pre-elementet */
+.codebox pre {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  white-space: pre;
+}
+
+/* Fjern eventuell standardluft rundt code */
+.codebox code {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
 
     .outputbox {
   background-color: #f8fafc;
@@ -684,27 +700,24 @@ Hvis et uttrykk består av flere ledd, må vi først få fellesfaktor og samle a
           <div class="example">
         <h3>Eksempel</h3>
         
-    Bestem \(b\) slik at  
-    \[  x^2 + bx + 16 = (x + 4)^2 \]
-    blir en identitet.
+    Bestem \(b\) slik at  likningen \(  x^2 + bx + 16 = (x + 4)^2 \) blir en identitet.
+    
+    
 
         <div class="solution">
-        Vi ganger ut høyre side av likningen:
-        \[ (x+4)^2 = x^2 + 8x + 16 \]
-        Dermed ser vi at \(b=8\) hvis likningen er en identitet.
+        \[ (x+4)^2 = x^2 + 8x + 16 \;\;\; \Rightarrow \;\;\; b = 8\]
         </div>
       </div>
 
 
                   <div class="example">
         <h3>Eksempel</h3>
-        Bestem \(b\) og \(c\) slik at  
-    \[ x^2 + 6x + c = (x + b)^2 \]
-    blir en identitet.
+        Bestem \(b\) og \(c\) slik at  likningen  \( x^2 + 6x + c = (x + b)^2 \)   blir en identitet.
+   
+ 
 
         <div class="solution">
-          Fra det midterste leddet på venstre side, \(6x\), ser vi at \(b=3\).<br>
-          Det gir \(c = b^2 = 9\).
+          Fra det midterste leddet på venstre side, \(6x\), ser vi at \(b=3\), som gir \(c = b^2 = 9\).
         </div>
       </div>
 
@@ -754,7 +767,13 @@ har løsningene \(x = x_1\) og \(x = x_2\).
       <li>faktoriser</li>
       <li>les av løsningene</li>
     </ul>
-
+Eller vi kan bruke <strong><em>abc</em>-formelen:</strong> En likning på formen 
+\[  ax^2 + bx + c = 0 \]
+har løsningene 
+\[
+x = \frac{-b + \sqrt{b^2 - 4ac}}{2a} \; \text{ og } \;
+x = \frac{-b - \sqrt{b^2 - 4ac}}{2a} 
+\]
 
                   <div class="example">
         <h3>Eksempel</h3>
@@ -773,13 +792,7 @@ har løsningene \(x = x_1\) og \(x = x_2\).
         </div>
       </div>
 
-<strong><em>abc</em>-formelen:</strong> En likning på formen 
-\[  ax^2 + bx + c = 0 \]
-har løsningene 
-\[
-x = \frac{-b + \sqrt{b^2 - 4ac}}{2a} \; \text{ og } \;
-x = \frac{-b - \sqrt{b^2 - 4ac}}{2a} 
-\]
+
 
                   <div class="example">
         <h3>Eksempel</h3>
@@ -866,6 +879,12 @@ Vi ser da at en andregradslikningen har
       <li>én løsninger hvis \(b^2 - 4ac = 0\)</li>
       <li>ingen løsninger hvis \(b^2 - 4ac < 0\)</li>
     </ul>
+
+
+          <div class="note">
+<strong>Merk:</strong> Uttrykket  \(b^2 - 4ac \) kalles <em>diskriminanten</em>. For å få bedre oversikt når vi løser andregradslikninger med <em>abc</em>-formelen, kan det 
+være lurt å regne ut <em>diskriminanten</em> først (og deretter sette inn tallet man får i kvadratrota i formelen).
+      </div>
 
 <div class="example">
         <h3>Eksempel</h3>

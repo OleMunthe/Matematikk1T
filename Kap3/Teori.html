@@ -3,7 +3,7 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="UTF-8">
-  <title>Logaritmer</title>
+  <title>Polynomfunksjoner</title>
 
   <!-- MathJax -->
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -82,24 +82,40 @@
       content: "⚠️ ";
     }
 
-    /* Programkode */
-    .codebox {
-      background-color: #0f172a;
-      color: #e5e7eb;
-      padding: 1.5em;
-      border-radius: 10px;
-      margin: 2em 0;
-      overflow-x: auto;
-      font-family: Consolas, Monaco, monospace;
-    }
+   /* Programkode */
+.codebox {
+  background-color: #0f172a;
+  color: #e5e7eb;
+  padding: 0.8em 1em;
+  border-radius: 10px;
+  margin: 1em 0;
+  overflow-x: auto;
+  font-family: Consolas, Monaco, monospace;
+}
 
-    .codebox::before {
-      content: "💻 Programkode";
-      display: block;
-      color: #34d399;
-      margin-bottom: 0.8em;
-      font-weight: bold;
-    }
+.codebox::before {
+  content: "💻 Programkode";
+  display: block;
+  color: #34d399;
+  margin-bottom: 0.25em;
+  font-weight: bold;
+}
+
+/* Fjern standardluft rundt pre-elementet */
+.codebox pre {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  white-space: pre;
+}
+
+/* Fjern eventuell standardluft rundt code */
+.codebox code {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
 
     .outputbox {
   background-color: #f8fafc;
@@ -616,6 +632,7 @@ Dermed kan eksempelet over også løses ved å se hva \(c\) må være hvis \(f\)
       </div>
 
 
+<h2></h2>
 <h3>Polynomdivisjon</h3>
 Vi har ikke en enkel formel for å finne nullpunktene til tredjegradsfunksjoner, slik som vi har <em>abc</em>-formelen for andregradsfuksjoner,
 men vi kan bruke noe som kalles <em>polynomdivisjon</em> for å faktorisere funksjonen dersom vi vet hva ett av nullpunktene er.<br><br>

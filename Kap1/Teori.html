@@ -82,24 +82,40 @@
       content: "⚠️ ";
     }
 
-    /* Programkode */
-    .codebox {
-      background-color: #0f172a;
-      color: #e5e7eb;
-      padding: 1.5em;
-      border-radius: 10px;
-      margin: 2em 0;
-      overflow-x: auto;
-      font-family: Consolas, Monaco, monospace;
-    }
+/* Programkode */
+.codebox {
+  background-color: #0f172a;
+  color: #e5e7eb;
+  padding: 0.8em 1em;
+  border-radius: 10px;
+  margin: 1em 0;
+  overflow-x: auto;
+  font-family: Consolas, Monaco, monospace;
+}
 
-    .codebox::before {
-      content: "💻 Programkode";
-      display: block;
-      color: #34d399;
-      margin-bottom: 0.8em;
-      font-weight: bold;
-    }
+.codebox::before {
+  content: "💻 Programkode";
+  display: block;
+  color: #34d399;
+  margin-bottom: 0.25em;
+  font-weight: bold;
+}
+
+/* Fjern standardluft rundt pre-elementet */
+.codebox pre {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  white-space: pre;
+}
+
+/* Fjern eventuell standardluft rundt code */
+.codebox code {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
 
     .outputbox {
   background-color: #f8fafc;
@@ -321,7 +337,7 @@
     transform: scale(1);
     transform-origin: top left;
   }
-}
+}}
   </style>
 </head>
 
@@ -414,7 +430,6 @@ Fra definisjonen over kan vi utlede følgende regler:
 
 
 
-
 <h3>Regnerekkefølge</h3>
 <ul>
       <li>potenser</li>
@@ -457,9 +472,7 @@ men hvis parentesen inneholder bokstavuttrykk må vi gange inn i parentesen, sli
         </div>
       </div>
       
-      <div class="note">
-<strong>Merk:</strong> Du må beherske begge metodene i eksempelet over. 
-      </div>
+
 
 <div class="example">
         <h3>Eksempel</h3>
@@ -468,18 +481,18 @@ men hvis parentesen inneholder bokstavuttrykk må vi gange inn i parentesen, sli
 
         <div class="solution">
         $$
-        \begin{align} 
-          \sqrt{75} + \sqrt{3} &= \sqrt{25 \cdot 3} + \sqrt{3}\\
-                      &= \sqrt{25}\sqrt{3} + \sqrt{3} \\
-                      &= 5\sqrt{3} + \sqrt{3}\\
-                      &= 6\sqrt{3}
-        \end{align}
+ 
+          \sqrt{75} + \sqrt{3} = \sqrt{25 \cdot 3} + \sqrt{3}
+                      = \sqrt{25}\sqrt{3} + \sqrt{3} 
+                      = 5\sqrt{3} + \sqrt{3}
+                      = 6\sqrt{3}
+
         $$
         </div>
       </div>
 
 
-
+<h2></h2>
 <h3>Brøkregler</h3>
 Her er brøkreglene fra barneskolen:
       <div class="formel-tabell">
@@ -561,7 +574,7 @@ Her er brøkreglene fra barneskolen:
       </div>
 
                   <div class="note">
-<strong>Merk:</strong> Det er mange måter å regne ut uttrykket i eksempelet over på. Det er lurt å beherske flere måter å regne det ut på. 
+<strong>Merk:</strong> Det er mange måter å regne ut uttrykket i eksempelet over på. <br> Det er lurt å beherske flere måter å regne det ut på. 
       </div>
 
 
@@ -714,7 +727,7 @@ print(S)
         </div>
       </div>
 
-
+<h2></h2>
       Istedenfor å bruke en for-løkke i eksempelet over, kan vi bruke en while-løkke, slik:
 
        <pre class="codebox"><code>
@@ -728,21 +741,14 @@ while n < 21: # så lenge trekantallnummeret er mindre enn 21
 print(S)
       </code></pre>
 
-            <div class="note">
-<strong>Merk:</strong> Du må beherske både while- og for-løkker. 
-Som regel kan vi velge hva vi skal bruke, men noen ganger MÅ man bruke for-løkke, og andre ganger MÅ man bruke while-løkke.
-      </div>
 
 
         <div class="example">
         <h3>Eksempel</h3>
-        Fibonacci-tallene er gitt ved 
-        \[ 1, 1, 2, 3, 5, 8, 13, 21, ... \]
+        Fibonacci-tallene er gitt ved \( 1, 1, 2, 3, 5, 8, 13, 21, ... \) <br>
         Beskriv mønsteret og lag et program som regner ut forholdet mellom et tall og det neste tallet i følgen. Gjør dette for de 20 første tallene.
-
         <div class="solution">
         Følgen starter med 1 og 1. Deretter er et tall summen av de to foregående tallene.
-
         <pre class="codebox"><code>    
 a = 1 # Det første tallet
 b = 1 # Det neste tallet
@@ -755,24 +761,16 @@ for n in range(20): # Gjentar følgende 20 ganger:
 0.6666666666666666
 0.625
 0.6190476190476191
-0.6181818181818182
-0.6180555555555556
-0.6180371352785146
 ...
-0.6180339887499086
-0.6180339887498969
 0.6180339887498951
 0.6180339887498949</code></pre>
         </div>
       </div>
 
-            <div class="note">
-<strong>Merk:</strong> Eksempelet over er et "kroneksempel" på at rekkefølgen utregninger blir gjort i er viktig når vi programmerer:
-De to nederste linjene gir tilsynelatende like verdier til a og b, men siden a endrer seg på linja over b = a + b, blir ikke verdien til b det samme som a...!
-      </div>
 
 
 
+<h2></h2>
 <h3>Funksjoner</h3>
 
 <pre class="codebox"><code>
@@ -790,7 +788,7 @@ print(f(1), f(2), f(3))
   <pre class="outputbox"><code> 1, 4, 9</code></pre>
       
 
-
+<h2></h2>
 <h3>if-betingelse</h3>
 <p>Vi kan lage programer med "if" (hvis), "elif" (ellers hvis) og "else" (ellers).</p>
 
