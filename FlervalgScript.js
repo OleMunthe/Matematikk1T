@@ -214,7 +214,7 @@ function nesteSporsmal() {
     }
 
     // Finn oppgaver som ennå ikke er besvart riktig
-    const gjenstaar = aktivtSett.filter(
+    const gjenstaar = aktivtSett.filter( 
         id => !data.riktige.includes(id)
     );
 
