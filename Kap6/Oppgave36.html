@@ -22,7 +22,7 @@ img {
 
 <body>
 
-<a href="../index.html">? Tilbake til hovedsiden</a>
+<a href="../index.html">← Tilbake til hovedsiden</a>
 
 <div class="status">
     <div class="progress-bar">
@@ -37,35 +37,33 @@ img {
 
 <div class="container">
     <div class="box">
-        <p><strong>Hva skriver programkoden ut?</strong></p>
+        <p>Gitt trekanten i figuren. Vinkelen øverst i trekanten er \(x\).</p>
+
+        <p><strong>Hva er riktig?</strong></p>
 
         <form id="quiz">
             <label class="svar" tabindex="0">
                 <input type="radio" name="svar" value="riktig">
-                <span>\( 36\)</span>
+                <span>\(x < 90^{\text{o}}\)</span>
             </label>
 
             <label class="svar" tabindex="0">
                 <input type="radio" name="svar" value="feil">
-                <span>\(-36\)</span>
+                <span>\(x = 90^{\text{o}}\)</span>
             </label>
 
             <label class="svar" tabindex="0">
                 <input type="radio" name="svar" value="feil">
-                <span>\(-18\)</span>
+                <span>\(x > 90^{\text{o}}\)</span>
             </label>
 
-            <label class="svar" tabindex="0">
-                <input type="radio" name="svar" value="feil">
-                <span>\(18\)</span>
-            </label>
         </form>
 
-        <button id="neste" onclick="nesteSporsmal()">Neste sp�rsm�l</button>
+        <button id="neste" onclick="nesteSporsmal()">Neste spørsmål</button>
     </div>
 
     <div class="box" style="display: grid; place-items: center;">
-        <img src="p9.png" alt="">
+        <img src="ikkerett.png" alt="">
     </div>
 </div>
 
