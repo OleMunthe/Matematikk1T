@@ -41,6 +41,46 @@ a {
 
 /* LAYOUT */
 
+#pointPopup {
+  position: absolute;
+  margin-top: -12px;
+  padding: 7px 12px;
+  font-size: 22px;
+  font-weight: 800;
+  color: #168a46;
+  background: #eafaf1;
+  border: 2px solid #2ecc71;
+  border-radius: 999px;
+  box-shadow: 0 4px 12px rgba(46, 204, 113, 0.28);
+  opacity: 0;
+  transform: translateY(0) scale(0.85);
+  pointer-events: none;
+  z-index: 20;
+}
+
+#pointPopup.show {
+  animation: floatUp 1.25s ease-out forwards;
+}
+
+@keyframes floatUp {
+  0% {
+    opacity: 0;
+    transform: translateY(4px) scale(0.85);
+  }
+  18% {
+    opacity: 1;
+    transform: translateY(-4px) scale(1.08);
+  }
+  55% {
+    opacity: 1;
+    transform: translateY(-14px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-38px) scale(0.96);
+  }
+}
+
 .container {
     display: flex;
     gap: 20px;

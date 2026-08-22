@@ -130,24 +130,7 @@
         <h1>Matematikk 1T</h1>
 
         <p><strong>Nedenfor 👇 er flervalgsoppgaver til ulike emner i Matematikk 1T. </strong></p>
-
-        <div class="antall-velger">
-  <strong>Før du starter; Velg hvor mange oppgaver du vil ha:</strong><br><br>
-  <label>
-    <input type="radio" name="antallOppgaver" value="10">
-    10
-  </label>
-  <label>
-    <input type="radio" name="antallOppgaver" value="20">
-    20
-  </label>
-  <label>
-    <input type="radio" name="antallOppgaver" value="30">
-    30
-  </label>
-        </div>
-        <p></p>
-        <p><strong>Hver gang du går inn på en av lenkene får du trukket ut ulike tilfeldige oppgaver fra det aktuelle emnet.</strong></p>
+        <p><strong>Oppgavene kommer i rekkefølge fra Oppgave1 og videre til alle oppgavene i emnet er gjennomført.</strong></p>
        
 <ul class="app-link-list">
 
@@ -195,64 +178,26 @@
 </div>
 
 <script>
-    
-function shuffle(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-}
-
-
 function velgKategori(kategori) {
-
     const TOTAL = {
-        Kap1: 73, Kap2: 47, Kap3: 54, Kap4: 42, Kap5: 42, Kap6: 38
+        Kap1: 73, Kap2: 47, Kap3: 54, Kap4: 42, Kap5: 42, Kap6: 36
     };
 
-    // ✅ Nullstill ALT for ny kategori
+    // Nullstill resultatene når et nytt emne startes.
     const storageKey = `quizData_${kategori}`;
     localStorage.removeItem(storageKey);
     sessionStorage.removeItem("harStartet");
 
-    const alle = [];
+    // Bruk ALLE oppgavene i kronologisk rekkefølge:
+    // Oppgave1.html, Oppgave2.html, Oppgave3.html, ...
+    const alleOppgaver = [];
     for (let i = 1; i <= (TOTAL[kategori] || 1); i++) {
-        alle.push(i);
+        alleOppgaver.push(i);
     }
-
-    // Stokk oppgavene
-    shuffle(alle);
-
-    const antall = Math.min(
-        parseInt(sessionStorage.getItem("antallOppgaver") || "10"),
-        alle.length
-    );
-
-    const tilfeldig = alle.slice(0, antall);
 
     sessionStorage.setItem("valgtKategori", kategori);
-    sessionStorage.setItem("aktivtOppgavesett", JSON.stringify(tilfeldig));
+    sessionStorage.setItem("aktivtOppgavesett", JSON.stringify(alleOppgaver));
 }
-
-
-
-  // Sett default hvis ikke valgt tidligere
-  if (!sessionStorage.getItem("antallOppgaver")) {
-    sessionStorage.setItem("antallOppgaver", "10");
-  }
-
-  // Sett riktig radio som valgt ved lasting
-  document.querySelectorAll("input[name='antallOppgaver']").forEach(radio => {
-    if (radio.value === sessionStorage.getItem("antallOppgaver")) {
-      radio.checked = true;
-    }
-
-    radio.addEventListener("change", () => {
-      sessionStorage.setItem("antallOppgaver", radio.value);
-    });
-  });
-
-
 </script>
 </body>
 </html>
