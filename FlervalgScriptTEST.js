@@ -53,7 +53,7 @@ function playQuizSound(type) {
 
 
 // =========================================================
-// +1 POENG
+// Riktig
 // =========================================================
 
 function showPointPopup() {
@@ -62,7 +62,7 @@ function showPointPopup() {
     if (!popup) {
         popup = document.createElement("div");
         popup.id = "pointPopup";
-        popup.textContent = "+1 poeng";
+        popup.textContent = "Riktig!";
 
         const box = document.querySelector(".box");
 
