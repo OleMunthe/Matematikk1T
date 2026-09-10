@@ -37,30 +37,27 @@ img {
 
 <div class="container">
     <div class="box">
-        <p>Gitt trekanten i figuren.</p>
+        <p>Trekanten i figuren har grunnlinje 7 og høyde \(h\).</p>
 
         <p><strong>Hva er riktig uttrykk?</strong></p>
 
         <form id="quiz">
             <label class="svar" tabindex="0">
                 <input type="radio" name="svar" value="riktig">
-                <span>\(  \frac{\sin \angle C}{7} = \frac{\sin 60^{\text{o}}}{8} \)</span>
+                <span>\( h < 7 \cdot \sin 60^{\text{o}} \)</span>
             </label>
 
             <label class="svar" tabindex="0">
                 <input type="radio" name="svar" value="feil">
-                <span>\(  \frac{\sin \angle C}{8} = \frac{\sin 60^{\text{o}}}{7}  \)</span>
+                <span>\( h > 7 \cdot \sin 60^{\text{o}} \)</span>
             </label>
 
             <label class="svar" tabindex="0">
                 <input type="radio" name="svar" value="feil">
-                <span>\(  \sin \angle C = \frac{7}{8} \)</span>
+                <span>\( h = 7 \cdot \sin 60^{\text{o}} \)</span>
             </label>
 
-            <label class="svar" tabindex="0">
-                <input type="radio" name="svar" value="feil">
-                <span>\(  \sin \angle C = \frac{8}{7} \)</span>
-            </label>
+
         </form>
 
         <button id="neste" onclick="nesteSporsmal()">Neste spørsmål</button>
