@@ -1,385 +1,59 @@
-<!DOCTYPE html>
-<html lang="no">
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="UTF-8">
-  <title>Funksjonsdrøfting</title>
+  <title>Regneregler</title>
 
   <!-- MathJax -->
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
-  <style>
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      max-width: 900px;
-      margin: auto;
-      line-height: 1.6;
-      background-color: #fafafa;
-    }
-
-    h1, h2, h3 {
-      margin-top: 2em;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-      margin: 1em auto;
-    }
-
-    /* ---------- BOKSER ---------- */
-
-    /* Definisjon */
-    .definition {
-      background-color: #ecfeff;
-      border-left: 6px solid #0891b2;
-      padding: 1.2em 1.5em;
-      margin: 2em 0;
-      border-radius: 8px;
-    }
-
-    .definition h3::before {
-      content: "📘 ";
-    }
-
-    /* Eksempel */
-    .example {
-      background-color: #ecfdf5;
-      border: 2px solid #10b981;
-      border-left-width: 6px;
-      padding: 1.2em 1.5em;
-      margin: 2em 0;
-      border-radius: 10px;
-    }
-
-    .example h3 {
-      margin-top: 0;
-      color: #065f46;
-    }
-
-    .example h3::before {
-      content: "📌 ";
-    }
-
-    .solution {
-      background-color: #ffffff;
-      border: 1px dashed #34d399;
-      padding: 1em;
-      margin-top: 1em;
-      border-radius: 6px;
-    }
-
-    /* Merk */
-    .note {
-      background-color: #fff7ed;
-      border-left: 6px solid #f59e0b;
-      padding: 1.2em 1.5em;
-      margin: 2em 0;
-      border-radius: 8px;
-    }
-
-    .note strong::before {
-      content: "⚠️ ";
-    }
-
-   /* Programkode */
-.codebox {
-  background-color: #0f172a;
-  color: #e5e7eb;
-  padding: 0.8em 1em;
-  border-radius: 10px;
-  margin: 1em 0;
-  overflow-x: auto;
-  font-family: Consolas, Monaco, monospace;
-}
-
-.codebox::before {
-  content: "💻 Programkode";
-  display: block;
-  color: #34d399;
-  margin-bottom: 0.25em;
-  font-weight: bold;
-}
-
-/* Fjern standardluft rundt pre-elementet */
-.codebox pre {
-  margin: 0;
-  padding: 0;
-  font: inherit;
-  color: inherit;
-  white-space: pre;
-}
-
-/* Fjern eventuell standardluft rundt code */
-.codebox code {
-  margin: 0;
-  padding: 0;
-  font: inherit;
-}
-
-    .outputbox {
-  background-color: #f8fafc;
-  color: #0f172a;
-  border: 1px solid #cbd5e1;
-  border-left: 6px solid #64748b;
-  padding: 1em 1.2em;
-  margin: -1em 0 2em 0;
-  border-radius: 8px;
-  font-family: Consolas, Monaco, monospace;
-  white-space: pre-wrap;
-}
-
-.outputbox::before {
-  content: "🖨️ Utskrift";
-  display: block;
-  font-weight: bold;
-  color: #475569;
-  margin-bottom: 0.5em;
-}
-
-
-.formel-tabell table {
-    border-collapse: collapse;
-    margin: 1rem auto;
-}
-.formel-tabell td {
-    border: 1px solid #999;
-    padding: 18px 28px;
-    text-align: center;
-    vertical-align: middle;
-}
-
-.kode-tabell {
-    margin: 1rem 0;
-    overflow-x: auto;
-}
-
-.kode-tabell table {
-    border-collapse: collapse;
-    width: 100%;
-}
-
-.kode-tabell td {
-    border: 1px solid #999;
-    padding: 12px 16px;
-    vertical-align: top;
-}
-
-.kode-tabell td:first-child {
-    font-weight: bold;
-    white-space: nowrap;
-    width: 22%;
-    background-color: #f8f8f8;
-}
-
-.kode-tabell code {
-    font-family: Consolas, Monaco, "Courier New", monospace;
-    font-size: 0.95em;
-}
-
-.kode-tabell pre {
-    margin: 0;
-    white-space: pre;
-    overflow-x: auto;
-}
-
-
-    /* ===========================
-   Mobiltilpasning
-   =========================== */
-
-@media (max-width: 700px) {
-    .kode-tabell td {
-        padding: 8px 10px;
-    }
-
-    .kode-tabell code,
-    .kode-tabell pre {
-        font-size: 0.85em;
-    }
-  body {
-    padding: 1em;
-    font-size: 1rem;
-  }
-
-  h1 {
-    font-size: 1.7rem;
-  }
-
-  h2 {
-    font-size: 1.4rem;
-  }
-
-  h3 {
-    font-size: 1.2rem;
-  }
-
-  /* Bokser: mindre padding på mobil */
-  .example,
-  .definition,
-  .note,
-  .codebox {
-    padding: 1em;
-    margin: 1.5em 0;
-  }
-  .outputbox {
-  padding: 1em;
-  margin: 1.5em 0;
-}
-
-  /* Bilder: litt større på mobil */
-  img {
-    width: 100% !important;
-    max-width: 100%;
-  }
-
-  /* Programkode: lettere å lese */
-  .codebox {
-    font-size: 0.9rem;
-  }
-
-}
-
-/* ===== Skriv til PDF-knapp ===== */
-
-.print-button {
-  display: block;
-  margin: 1.5em auto;
-  padding: 0.6em 1.4em;
-  font-size: 1rem;
-  font-weight: bold;
-  background-color: #10b981;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.print-button:hover {
-  background-color: #059669;
-}
-
-/* Skjul knappen på mobil */
-@media (max-width: 700px) {
-  .print-button {
-    display: none;
-  }
-}
-
-@media print {
-  .print-button {
-    display: none;
-  }
-}
-
-
-/* ===========================
-   PDF / Utskrift
-   =========================== */
-
-@media print {
-
-  /* Generelle marger for A4 */
-  body {
-    margin: 1.5cm;
-    background: white;
-  }
-
-  /* Overskrifter starter på ny side */
-  h1,
-  h2 {
-    page-break-before: always;
-  }
-
-  /* Aldri del disse boksene over sider */
-  .definition,
-  .example,
-  .note,
-  .codebox {
-    page-break-inside: avoid;
-  }
-  .outputbox {
-  page-break-inside: avoid;
-}
-
-  /* Tillat at løsninger deles om nødvendig */
-  .solution {
-    page-break-inside: auto;
-  }
-
-  /* Bilder bør heller flyttes enn å deles */
-  img {
-    page-break-inside: avoid;
-  }
-
-  /* PDF skal ikke vise knappen */
-  .print-button {
-    display: none !important;
-  }
-}
-@media print {
-  .no-print {
-    display: none;
-  }
-@page {
-  size: A4;
-  margin: 1.5cm;
-}
-
-@media print {
-  html, body {
-    margin: 0;
-    padding: 0;
-  }
-
-  .print-scale {
-    width: 900px;
-    transform: scale(1);
-    transform-origin: top left;
-  }
-}
-  </style>
+<link rel="stylesheet" href="styleTeori.css">
 </head>
 
 <body>
+<nav class="side-menu" aria-label="Innholdsfortegnelse">
+<a href="../index.html" class="back-link">👈 Tilbake til hovedsiden</a>
+<br>
+<strong>Innhold</strong>
+<a href="#del-1">Vekstfart</a>
+<a href="#del-2">Derivasjon</a>
+<a href="#del-3">Tangenter</a>
+<a href="#del-4">Ekstremalpunkter</a>
+<a href="#del-5">Optimering</a>
+<a href="#del-6">Rasjonale funksjoner</a>
+<a href="#del-7">Potensfunksjoner</a>
+<a href="#del-8">Eksponentialfunksjoner</a>
+</nav>
+
+
 <div class="print-scale">
-<a href="../index.html" class="no-print">← Tilbake til hovedsiden</a>
-<button class="print-button" onclick="window.print()">
-  🖨️ Skriv til PDF
-</button>
+
+<button class="print-button" onclick="window.print()">🖨️ Skriv til PDF</button>
 
 <main>
     <h1>Funksjonsdrøfting</h1>
 
     <p>Du skal ha kompetanse om</p>
     <ul>
-      <li>vekstfart og derivasjon</li>
-      <ul>
-        <li>gjennomsnittlig vekstfart</li>
-        <li>momentan vekstfart</li>
-        <li>derivasjonsregler</li>
-        <li>tangenter</li>
-        <li>ekstremalpunkter</li>
-        <li>monotoniegenskaper</li>
-        </ul>
-      <li>optimering</li>
-      <ul>
-          <li>bruk av derivasjon for å optimere</li>
-          <li>bruk av programmering for å derivere</li>
-      </ul>
+      <li>gjennomsnittlig vekstfart </li>
+      \[ \frac{\Delta y}{\Delta x} = \frac{f(x_2) - f(x_1)}{x_2 - x_1} \]
+      <li>momentan vekstfart (derivasjon)</li>
+      \[ \lim_{h \rightarrow 0} = \frac{f(x+h) - f(x)}{h} \]
+      <li>derivasjonsregler</li>
+      \[  \left( a \cdot x^n + b \right)' = a\cdot nx^{n-1} \]
+      <li>tangenter: \( y = ax +b \), hvor \(a = f'(x_0)\)</li>
+      <br>
+      <li>ekstremalpunkter: \((x_0, y_0)\), hvor \(f'(x_0)=0\) og \(y_0=f(x_0)\)</li>
+      <br>
+      <li>optimering: Bruk av derivasjon for å få størst/minst verdi </li>
+      <br>
       <li>rasjonale funksjoner</li>
-      <li>potensfunksjoner</li>
-      <li>eksponentialfunksjoner</li>
-            <ul>
-        <li>vekstfaktor</li>
-        <li>programmering med prosentvis endring</li>
-        </ul>
-    </ul>
+      \[  f(x) = \frac{ax +b}{cx + d} \]
+      <li>potensfunksjoner: \(f(x) = a \cdot x^n\)</li>
+      <br>
+      <li>eksponentialfunksjoner: \(f(x) = a\cdot k^x\)</li>
 
-    <section>
-      <h2>Vekstfart og derivasjon</h2>
 
-      <h3>Vekstfart</h3>
+    <section id="del-1">
+      <h2>Vekstfart</h2>
 <strong>Gjennomsnittlig vekstfart:</strong> Hvor mye \(y\) endrer seg i forhold til \(x\) mellom to punkter, \(\frac{\Delta y}{\Delta x}\).
 <img src="gjvek.png" alt="..." style="width: 67%;">
 
@@ -418,10 +92,13 @@
 
         </div>
       </div>
+</section>
 
 
-<h2></h2>
-<h3>Derivasjon</h3>
+
+
+<section id="del-2">
+<h2>Derivasjon (= momentan vekstfart)</h2>
 
 Den deriverte i et punkt er det samme som den momentane vekstfarten i punktet. <br><br>
 
@@ -494,39 +171,45 @@ Den deriverte til \(f(x)\) når \(x=a\) skrives som \(f'(a)\).
           \[ f'(5) = 0\text{,}40 \cdot 5 = 2\text{,}0 \]
         </div>
       </div>
+</section>
 
 
-<h2></h2>
+
+
+
+
+
+<section id="del-3">
+<h2>Tangenter</h2>
 <strong>Tangent:</strong> En rett linje \(y=ax+b\) som tangerer en graf. Stigningstallet er den deriverte i tangeringspunktet.
          <div class="example">
         <h3>Eksempel</h3>
-        <img src="tangent.png" alt="..." style="width: 67%;">
-        Bestem likningen til tangenten i punktet \((-2, f(-2))\).
+        <img src="tangent1.png" alt="..." style="width: 52%;">
+        Bestem likningen til tangenten i punktet \((1, f(1))\).
 
         <div class="solution">
-          Tangenten er gitt av ett-punktsformelen:
-          \[  y - y_1 = a(x - x_1) \]
-          \(y\)-verdien i punktet er
-          \[ y_1 = f(-2) = \frac{1}{3}\cdot (-2)^3 + \frac{1}{2}\cdot (-2)^2 - 6 \cdot (-2) = -\frac{8}{3} + 2 + 12 = \frac{34}{3}  \]
-          Derivasjonsreglene gir
-          \[  f'(x) = \frac{1}{3}\cdot 3x^2 + \frac{1}{2}\cdot 2x - 6 = x^2 + x - 6 \]
-          Dermed er stigningstallet 
-          \[  a = f'(-2) = (-2)^2 + (-2) - 6 = 4 - 2 - 6 = - 4 \]
-          Likningen til tangeten er dermed
-          $$
-          \begin{align} 
-            y - y_1 &= a(x - x_1) \\
-            y - \frac{34}{3} &= -4(x - (-2)) \\
-            y &= -4x - 8 + \frac{34}{3}  \\
-            y &= -4x + \frac{10}{3}
-          \end{align}
-          $$
-          
+          Den deriverte av funksjonen er
+          \[  f'(x) = 2x - 4 \]
+          Stigningstallet er dermed
+          \[ a = f(1) = 2\cdot 1 - 4 = 2 - 4 = -2 \]
+          Tangenten er dermed
+          \[  y = -2x + b \]
+          For å bestemme konstantleddet setter vi inn 
+          \[  x = 1  \;\;\; \text{ og } \;\;\; y = f(1) = 1^2 - 4 \cdot 1 + 6 = 3 \]
+          som gir
+          \[   y = -2x + b \;\; \Rightarrow \;\; 3 = -2\cdot 1 + b \;\; \Rightarrow \;\; b = 3 + 2 = 5 \]
+          Dermed er tangenten 
+          \[  y = -2x + 5 \]
         </div>
       </div>
+  </section>
 
-<h2></h2>
-<h3>Ekstremalpunkter og monotoniegenskaper</h3>
+
+
+
+
+<section id="del-4">
+<h2>Ekstremalpunkter og monotoniegenskaper</h2>
 
 <strong>Ekstremalpunkter:</strong> Der vekstfarten er null.
 <img src="ekstremal.png" alt="..." style="width: 42%;">
@@ -554,13 +237,16 @@ For funksjonen over gjelder \(f'(1)=f'(3)=f'(5) = 0\).<br><br>
           Grafen har toppunkt i \( (0, f(0)) = (0, 0) \) og bunnpunkt i \( (1, f(1)) = (1, -1) \).
         </div>
       </div>
-
-
-
 </section>
 
 
-<section>
+
+
+
+
+
+
+<section id="del-5">
 <h2>Optimering</h2>
 
         <div class="example">
@@ -614,7 +300,7 @@ For funksjonen over gjelder \(f'(1)=f'(3)=f'(5) = 0\).<br><br>
 47 3 141
 48 2 96
 49 1 49</code></pre>
-Fra utskriften ser vi at både bredden og lengden må være \(25 \text{ meter} \) for å få størst mulig arel (\(625 \text{ m}^2\))
+Fra utskriften ser vi at både bredden og lengden må være \(25 \text{ meter} \) for å få størst mulig areal (\(625 \text{ m}^2\))
         </div>
       </div>
 
@@ -649,7 +335,11 @@ Arealet er størst når \(x = 1\).
 
 
 
-<section>
+
+
+
+
+<section id="del-6">
 <h2>Rasjonale funksjoner</h2>
 Rasjonale funksjoner har uttrykk med \(x\) i nevneren.<br><br>
 
@@ -700,10 +390,17 @@ hvor grafen har følgende egenskaper:
         \[  f(x) = \frac{x + 1}{(x-2)(x-3)} \]
         </div>
       </div>
-
-
-
 </section>
+
+
+
+
+
+
+
+
+
+<section id="del-7">
 <h2>Potensfunksjoner</h2>
 Potensfunksjoner er på formen \(f(x)=ax^n\), hvor \(n\) kan være en brøk eller et desimaltall.<br><br>
 
@@ -740,9 +437,16 @@ Bestem avstanden mellom Saturn og sola.
           (Med kalkulator får vi \(9\text{,}7 \text{ AU}\). )
         </div>
       </div>
+</section>
 
 
-<section>
+
+
+
+
+
+
+<section id="del-8">
 <h2>Eksponentialfunksjoner</h2>
 
 Eksponentialfunksjoner er på formen \(f(x)=a \cdot k^x\).<br><br>
