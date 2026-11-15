@@ -8,11 +8,14 @@
 <link rel="stylesheet" href="styleTeori.css">
 </head>
 
+
+
 <body>
 <nav class="side-menu" aria-label="Innholdsfortegnelse">
 <a href="../index.html" class="back-link">👈 Tilbake til hovedsiden</a>
 <br>
 <strong>Innhold</strong>
+<a href="#del-0">Sammendrag</a>
 <a href="#del-1">Funksjonsbegrepet</a>
 <a href="#del-2">Lineære funksjoner</a>
 <a href="#del-3">Andregradsfunksjoner</a>
@@ -27,14 +30,24 @@
 <main>
     <h1>Polynomfunksjoner</h1>
 
+    <section id="del-0">
+      <strong>Sammendrag</strong>
     <p>Du skal ha kompetanse om</p>
     <ul>
-      <li>funksjonsbegrepet</li>
-      <li>lineære funksjoner</li>
-      <li>andregradsfunksjoner</li>
-      <li>polynomfunksjoner</li>
-      <li>polynomdivisjon</li>
+      <li>funksjonsbegrepet: \(y = f(x)\)</li>
+      <br>
+      <li>lineære funksjoner: \(y = ax + b\)</li>
+       <img src="rett.png" alt="..." style="width: 42%;">
+      <li>andregradsfunksjoner: \(f(x) = ax^2 + bx + c \)</li>
+      <img src="andrefunk.png" alt="..." style="width: 52%;">
+      <li>polynomfunksjoner: \( f(x) = ax^m + bx^n + ... \)</li>
+      <br>
+      <li>polynomdivisjon og faktorisering</li>
+      \[
+          (x^3 - 2x^2 - 5x + 6) : (x - 1) = x^2 - x - 6 \;\;\; \Rightarrow \;\; (x^3 - 2x^2 - 5x + 6) = (x-1)(x^2 - x - 6)
+\]
     </ul>
+    </section>
 
     <section id="del-1">
       <h2>Funksjonsbegrepet</h2>
@@ -83,39 +96,28 @@
         Tegn grafen til \(f(x)\).
 
         <div class="solution">
-        Vi lager en verditabell.
-        <div class="kode-tabell">
-<table>
-<tr>
-<td>\(x\)</td>
-<td>\(-2\)</td>
-<td>\(-1\)</td>
-<td>\(0\)</td>
-</tr>
-<tr>
-<td>\(y\)</td>
-<td>\(2^{-2}-(-2)=\frac{1}{4}+2\)</td>
-<td>\(2^{-1}-(-1)=\frac{1}{2}+1\)</td>
-<td>\(2^{0}-0=1\)</td>
-</tr>
-</table>
-</div>
-        <div class="kode-tabell">
-<table>
-<tr>
-<td>\(x\)</td>
-<td>\(1\)</td>
-<td>\(2\)</td>
-<td>\(3\)</td>
-</tr>
-<tr>
-<td>\(y\)</td>
-<td>\(2^{1}-1=1\)</td>
-<td>\(2^{2}-2=2\)</td>
-<td>\(2^{3}-3=5\)</td>
-</tr>
-</table>
-</div>
+        Vi regner ut noen tilhørende \(y\)-verdier til noen \(x\)-verdier, og plasserer punktene i et grafikkfelt.
+\[
+\begin{alignat}{2}
+x = -2 \;\;\;,\;\;\; y &= f(-2) = 2^{-2}-(-2)=0\text{,}25+2 = 2\text{,}25
+&\quad \rightarrow\quad & (x, y) = (-2\,,\; 2\text{,}25) \\
+
+x = -1 \;\;\;,\;\;\; y &= f(-1) = 2^{-1}-(-1)=0\text{,}5+1 = 1\text{,}5
+&\quad \rightarrow\quad & (x, y) = (-1\,,\; 1\text{,}5) \\
+
+x = 0 \;\;\;,\;\;\; y &= f(0) = 2^{0}-0=1
+&\quad \rightarrow\quad & (x, y) = (0\,,\; 1) \\
+
+x = 1 \;\;\;,\;\;\; y &= f(1) = 2^{1}-1=2-1=1
+&\quad \rightarrow\quad & (x, y) = (1\,,\; 1) \\
+
+x = 2 \;\;\;,\;\;\; y &= f(2) = 2^{2}-2=4-2=2
+&\quad \rightarrow\quad & (x, y) = (2\,,\; 2) \\
+
+x = 3 \;\;\;,\;\;\; y &= f(3) = 2^{3}-3=8-3=5
+&\quad \rightarrow\quad & (x, y) = (3\,,\; 5)
+\end{alignat}
+\]
 Vi plasserer punktene og skisserer en graf:
 <img src="verditabell.png" alt="..." style="width: 52%;">
         </div>
@@ -139,9 +141,6 @@ Vi plasserer punktene og skisserer en graf:
 <strong>Merk:</strong>  Vi skriver ofte \(y=ax +b\) for lineære funksjoner, istedenfor \(f(x)=ax +b\). Når vi bruker \(y\) istedenfor \(f(x)\) sier vi "likningen til linja". 
       </div>
 
-      <strong>Ett-punktsformelen:</strong> Likningen til en linje kan skrives som
-      \[  y - y_1 = a(x - x_1) \]
-      hvor \(a\) er stigningstallet og \((x_1, y_1)\) er et punkt på linja.
 
          <div class="example">
         <h3>Eksempel</h3>
@@ -172,15 +171,18 @@ Vi plasserer punktene og skisserer en graf:
         Test programmet for ei linje som går gjennom punktene \((1, 2)\) og \((5, 3)\).
 
         <div class="solution">
-         Ett-punktsformelen kan skrives om til
-         \[  y = a \cdot x - a \cdot x_1 + y_1  \]
-        altså er konstantleddet gitt ved \(b= - a \cdot x_1 + y_1 \).
+         Likningen til linja er
+         \[  y = a \cdot x  + b  \]
+         hvor stigningstallet er 
+         \[  a = \frac{\Delta y}{\Delta x} = \frac{y_2 - y_1}{x_2 - x_1} \]
+         og konstantleddet finner vi ved å sette inn en \(x\)- og \(y\)-verdi:
+        \[ y_1 = a \cdot x_1 + b \;\; \Rightarrow \;\; b = y_1 - a \cdot x_1\]
 
  <pre class="codebox"><code>x1, y1 = 1, 2
 x2, y2 = 5, 3
 
 a = (y2 - y1)/(x2 - x1)
-b = -a*x1 + y1
+b = y_1 - a*x1
 
 print('y = ', a, 'x + ', b)</code></pre>
 <pre class="outputbox"><code>y =  0.25 x +  1.75</code></pre>
@@ -238,6 +240,7 @@ print('y = ', a, 'x + ', b)</code></pre>
         </div>
       </div>
 
+      <h2></h2>
       Nullpunktene til en andregradsfunksjon er gitt ved <em>abc</em>-formelen,
       \[f(x) = 0 \;\; \text{ når } \;\; x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}\]
       Andregradsfunksjoner kan ha to, ett eller ingen nullpunkter.
@@ -265,9 +268,20 @@ Dermed kan eksempelet over også løses ved å se hva \(c\) må være hvis \(f\)
         <img src="b9.png" alt="..." style="width: 52%;">
                 Bestem \(b\) slik at \(f\) har nøyaktig ett nullpunkt.
         <div class="solution">
-          Vi kan bruke <em>abc</em>-formelen, eller vi kan skrive \(f(x)\) som et fullstendig kvadrat, og deretter gange ut parentesene for å se hva \(b\) kan være.
-          \[ f(x) = \left(  x + 3 \right)^2 = x^2 + 6x + 9  \]
-          \[  f(x) = \left(  x - 3 \right)^2 = x^2 - 6x + 9 \]
+          <strong>METODE 1:</strong><br>
+          Vi kan bruke <em>abc</em>-formelen: 
+          \[  x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} \]
+          Når diskriminanten \(b^2 - 4ac\) er null, har funksjonen ett nullpunkt:
+          \[  b^2 - 4ac = b^2 - 4 \cdot 1 \cdot 9 = 0 \;\;\; \Rightarrow \;\; b^2 = 36 \;\; \Rightarrow \;\; b = \pm 6 \]
+          <br><br>
+          
+          
+          <strong>METODE 2:</strong><br>
+          Vi kan skrive \(f(x)\) som et fullstendig kvadrat, og deretter gange ut parentesene for å se hva \(b\) kan være.<br><br>
+
+          Det bakerste leddet, 9, gir følgende:
+
+          \[ f(x) = \left(  x + 3 \right)^2 = x^2 + 6x + 9  \;\;\text{ eller}\;\;  f(x) = \left(  x - 3 \right)^2 = x^2 - 6x + 9 \]
           Altså er \(b = 6 \) eller \(b = -6\).
         </div>
       </div>
@@ -281,7 +295,7 @@ Dermed kan eksempelet over også løses ved å se hva \(c\) må være hvis \(f\)
     <section id="del-4">
  <h2>Polynomfunksjoner</h2>
       Polynomfunksjoner er gitt ved
-      $$
+\[
 \begin{align} 
       P(x) &= ax + b \;\;\; \text{(førstegradsfunksjon)} \\
             P(x) &= ax^2 + bx + c \;\;\; \text{(andregradsfunksjon)} \\
@@ -290,7 +304,7 @@ Dermed kan eksempelet over også løses ved å se hva \(c\) må være hvis \(f\)
                         P(x) &= ax^{6} + bx^5 + cx^4 + dx^3 +ex^2 + fx + h \;\;\; \text{(sjettegradsfunksjon)} \\
                         &\vdots 
 \end{align}
-      $$
+\]
       Vi kan bestemme funksjonsuttrykket fra grafen ved hjelp av nullpunktene og skjæringen med \(y\)-aksen.
       <img src="tredjegenerell.png" alt="..." style="width: 67%;">
 
@@ -315,11 +329,12 @@ Dermed kan eksempelet over også løses ved å se hva \(c\) må være hvis \(f\)
       </div>
 
 
-<h2></h2>
-<h3>Polynomdivisjon</h3>
-Vi har ikke en enkel formel for å finne nullpunktene til tredjegradsfunksjoner, slik som vi har <em>abc</em>-formelen for andregradsfuksjoner,
-men vi kan bruke noe som kalles <em>polynomdivisjon</em> for å faktorisere funksjonen dersom vi vet hva ett av nullpunktene er.<br><br>
 
+<h2>Polynomdivisjon</h2>
+<p>
+Vi har ikke en enkel formel for å finne nullpunktene til tredjegradsfunksjoner, slik som vi har <em>abc</em>-formelen for andregradsfuksjoner,
+men vi kan bruke noe som kalles <em>polynomdivisjon</em> for å faktorisere funksjonen dersom vi vet hva ett av nullpunktene er.
+</p>
 
 
 

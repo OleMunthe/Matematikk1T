@@ -13,6 +13,7 @@
 <a href="../index.html" class="back-link">👈 Tilbake til hovedsiden</a>
 <br>
 <strong>Innhold</strong>
+<a href="#del-0">Sammendrag</a>
 <a href="#del-1">Addisjonsmetoden</a>
 <a href="#del-2">Innsettingsmetoden</a>
 <a href="#del-3">Grafiske løsninger</a>
@@ -29,24 +30,27 @@
 <main>
     <h1>Likningssystemer og ulikheter</h1>
 
+    <section id="del-0">
+      <strong>Sammendrag</strong>
     <p>Du skal ha kompetanse om</p>
     <ul>
-      <li>likningssystemer</li>
-      <ul>
-        <li>addisjonsmetoden</li>
-        <li>innsettingsmetoden</li>
-        <li>grafisk løsning</li>
-      </ul>
-      <li>ulikheter</li>
-      <ul>
-      <li>løsninger med regning og fortegnsskjema</li>
-      <li>grafiske løsninger</li>
-      </ul>
+      <li>ulike måter å løse likningssystemer</li>
+       <img src="likninger.png" alt="..." style="width: 67%;"> 
+      <li>ulike måter å løse ulikheter</li>
+       <img src="ulikheter2.png" alt="..." style="width: 80%;"> 
     </ul>
+</section>
+
+
+
+
+
+
 
     <section id="del-1">
       <h2>Addisjonsmetoden</h2>      
-
+Med addisjonsmetoden legger vi sammen ligninger (eller trekker den ene fra den andre), slik at vi får eliminert bort \(x\) eller \(y\). 
+Når vi har bestemt \(x\)- eller \(y\)-verdien, setter vi denne inn i en av likningene, og bestemmer den andre verdien.
          <div class="example">
         <h3>Eksempel</h3>
         $$
@@ -72,9 +76,14 @@
       </div>
 
 
+
+
+
+
 <section id="del-2">
 <h2>Innsettingsmetoden</h2>      
-
+Med innsettingsmetoden finner vi et uttrykk for \(x\) eller \(y\) fra en av likningene, og setter dette uttrykket inn i den andre likningen; 
+Vi finner da en verdi for \(x\) eller \(y\), som vi kan sette inn i en av likningene for å bestemme den siste verdien.
          <div class="example">
         <h3>Eksempel</h3>
         $$
@@ -131,31 +140,7 @@
       </div>
 
 
-      <div class="note">
-<strong>Merk:</strong>  Når det er andregradslikninger kan det bli to sett med løsninger.<br><br>
-
-I eksempelet over hører \(x=0\) og \(y=-2\) sammen. Og \(x=3\) og \(y=1\) hører sammen. Dette kan vi skjønne ved å sette prøve på svaret;
-Vi kan sette inn \(x=0\) og \(y=-2\) og se at begge likningene stemmer:
-$$
-\begin{align}
- x + y^2 &= 4 \\
-            x  &= y  + 2 \\
-            &\,\\
-          0 + (-2)^2 &= 4 \\
-            0  &= -2  + 2 
-            \end{align}
-$$
-Eller vi kan sette inn \(x=3\) og \(y=1\) og se at begge likningene stemmer:
-$$
-\begin{align}
- x + y^2 &= 4 \\
-            x  &= y  + 2 \\
-            &\text{ }\\
-          3 + 1^2 &= 4 \\
-            3  &= 1  + 2 
-            \end{align}
-$$
-      </div>
+   
 </section>
 
 
@@ -165,7 +150,7 @@ $$
 
 <section id="del-3">
  <h2>Grafisk løsning av likningssystemer</h2>
-
+Når vi løser likningssystemer grafisk tegner vi kurvene til likningene (f.eks. ved hjelp av verditabell), og ser hvor de møter hverandre.
 <div class="example">
         <h3>Eksempel</h3>
         $$
@@ -177,7 +162,7 @@ $$
         Løs likningssystemet grafisk.
 
         <div class="solution">
-        Vi tegner grafen til begge likningene ved å sette opp en verditabell, eller ved å bruke en digital graftegner.
+        Vi tegner kurvene til begge likningene ved å sette opp en verditabell, eller ved å bruke en digital graftegner.
         <img src="likningssett.png" alt="..." style="width: 50%;"> 
         Skjæringspunktene gir at løsningene \(x=0\) og \(y=-2\), eller \(x=3\) og \(y=1\).
         </div>
