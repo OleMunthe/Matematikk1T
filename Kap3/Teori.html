@@ -131,11 +131,65 @@ Vi plasserer punktene og skisserer en graf:
 <section id="del-2">
       <h2>Lineære funksjoner</h2>
 
-      En lineær funksjon er en rett linje som er gitt ved
-      \[  f(x) = ax +b \]
-      hvor \(a\) er stigningstallet og \(b\) er skjæringen med \(y\)-aksen.
+      <link rel="stylesheet" href="lineaer-funksjon.css">
 
-      <img src="rett.png" alt="..." style="width: 52%;">
+<div id="lineaer-funksjon">
+
+    <div class="lf-kontroller">
+
+              <div id="lfFunksjonsuttrykk">
+            y = x + 1
+        </div>
+
+        <label for="lfA">
+            Stigningstall:
+            <strong>
+                \(a =\) <span id="lfAVerdi">0,5</span>
+            </strong>
+        </label>
+
+        <input
+            type="range"
+            id="lfA"
+            min="-2"
+            max="2"
+            step="0.1"
+            value="0.5"
+        >
+
+        <label for="lfB">
+            Konstantledd:
+            <strong>
+                \(b =\) <span id="lfBVerdi">1</span>
+            </strong>
+        </label>
+
+        <input
+            type="range"
+            id="lfB"
+            min="-2"
+            max="3"
+            step="0.1"
+            value="1"
+        >
+
+
+
+    </div>
+
+    <div class="lf-grafikk">
+
+        <canvas
+            id="lfCanvas"
+            width="1000"
+            height="600"
+        ></canvas>
+
+    </div>
+
+</div>
+
+<script src="lineaer-funksjon.js" defer></script>
    
       <div class="note">
 <strong>Merk:</strong>  Vi skriver ofte \(y=ax +b\) for lineære funksjoner, istedenfor \(f(x)=ax +b\). Når vi bruker \(y\) istedenfor \(f(x)\) sier vi "likningen til linja". 
@@ -200,8 +254,80 @@ print('y = ', a, 'x + ', b)</code></pre>
 
 <section id="del-3">
       <h2>Andregradsfunksjoner</h2>
-      En andregradsfuksjon er gitt ved
-      \[   f(x) = ax^2 + bx + c \]
+
+      <p>Andregradsfunksjoner er på formen \(f(x) = ax^2 + bx + c\).</p>
+      
+      <link rel="stylesheet" href="andregradsfunksjon.css">
+
+<div id="andregradsfunksjon">
+
+    <div class="ag-kontroller">
+
+        <div id="agFunksjonsuttrykk">
+            <i>y</i> = 0,5<i>x</i><sup>2</sup> + 1
+        </div>
+
+        <label for="agA">
+            <strong>
+                \(a =\) <span id="agAVerdi">0,5</span>
+            </strong>
+        </label>
+
+        <input
+            type="range"
+            id="agA"
+            min="-2"
+            max="2"
+            step="0.1"
+            value="0.5"
+        >
+
+        <label for="agB">
+            <strong>
+                \(b =\) <span id="agBVerdi">-2</span>
+            </strong>
+        </label>
+
+        <input
+            type="range"
+            id="agB"
+            min="-2"
+            max="2"
+            step="0.1"
+            value="-2"
+        >
+
+        <label for="agC">
+            <strong>
+                \(c =\) <span id="agCVerdi">1</span>
+            </strong>
+        </label>
+
+        <input
+            type="range"
+            id="agC"
+            min="-2"
+            max="3"
+            step="0.1"
+            value="1"
+        >
+
+    </div>
+
+    <div class="ag-grafikk">
+
+        <canvas
+            id="agCanvas"
+            width="1000"
+            height="600"
+        ></canvas>
+
+    </div>
+
+</div>
+
+<script src="andregradsfunksjon.js" defer></script>
+
       Grafen til en andregradsfunksjon kalles en <em>parabel</em>, og er enten "blid" 😊 eller "sur" 😒.
 <img src="blisurand.png" alt="..." style="width: 96%;">
       Vi kan bestemme funksjonsuttrykket fra grafen ved hjelp av nullpunktene og skjæringen med \(y\)-aksen.

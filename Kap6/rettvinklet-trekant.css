@@ -1,0 +1,120 @@
+#rettvinklet-trekant {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+
+    max-width: 1100px;
+    margin: 25px auto;
+
+    font-family: Arial, sans-serif;
+}
+
+/* Kontroller */
+
+#rettvinklet-trekant .rt-kontroller {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    flex: 0 0 280px;
+    gap: 12px;
+}
+
+#rettvinklet-trekant label {
+    display: block;
+    font-size: 16px;
+}
+
+#rettvinklet-trekant input[type="range"] {
+    width: 200px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+/* Trigonometriske uttrykk */
+
+#rettvinklet-trekant .rt-formel {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    font-family: "Cambria Math", Georgia, serif;
+    font-size: 22px;
+    font-style: normal;
+
+    margin-bottom: 12px;
+}
+
+/* Brøker */
+
+#rettvinklet-trekant .rt-brok {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    text-align: center;
+    vertical-align: middle;
+
+    min-width: 48px;
+}
+
+#rettvinklet-trekant .rt-teller {
+    display: block;
+
+    padding: 3px 5px;
+
+    border-bottom: 1.3px solid #334155;
+}
+
+#rettvinklet-trekant .rt-nevner {
+    display: block;
+
+    padding: 3px 5px;
+}
+
+/* Farger på sidelengdene */
+
+#rettvinklet-trekant .rt-motstaaende {
+    color: #dc2626;
+}
+
+#rettvinklet-trekant .rt-hypotenus {
+    color: #2563eb;
+}
+
+/* Grafikk */
+
+#rettvinklet-trekant .rt-grafikk {
+    flex: 1;
+    min-width: 0;
+}
+
+#rettvinklet-trekant canvas {
+    display: block;
+
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+
+    background: white;
+}
+
+/* Mobilvisning */
+
+@media (max-width: 650px) {
+
+    #rettvinklet-trekant {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    #rettvinklet-trekant .rt-kontroller {
+        flex: none;
+        width: 100%;
+    }
+
+    #rettvinklet-trekant .rt-grafikk {
+        width: 100%;
+    }
+}
