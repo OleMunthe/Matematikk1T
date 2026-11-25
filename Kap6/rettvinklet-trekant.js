@@ -12,16 +12,17 @@
 
     // Sinus
     const sinTeller = root.querySelector("#rtSinTeller");
-    const sinNevner = root.querySelector("#rtSinNevner");
     const sinVerdi = root.querySelector("#rtSinVerdi");
 
     // Cosinus
-    const cosNevner = root.querySelector("#rtCosNevner");
+    const cosTeller = root.querySelector("#rtCosTeller");
     const cosVerdi = root.querySelector("#rtCosVerdi");
 
     // Tangens
     const tanTeller = root.querySelector("#rtTanTeller");
+    const tanNevner = root.querySelector("#rtTanNevner");
     const tanVerdi = root.querySelector("#rtTanVerdi");
+    const tanLikhet = root.querySelector("#rtTanLikhet");
 
     // Canvas med høy oppløsning
     const scale = 2;
@@ -31,18 +32,15 @@
 
     ctx.scale(scale, scale);
 
-    // Konstant grunnlinje
-    const grunnlinje = 4;
+    // Konstant hypotenus
+    const hypotenus = 2;
 
     // Samme målestokk i begge retninger
-    const enhet = 60;
+    const enhet = 170;
 
-    // Plassering av trekanten
-    const Ax = 90;
-    const Ay = 450;
-
-    const Bx = Ax + grunnlinje * enhet;
-    const By = Ay;
+    // Fast plassering av venstre hjørne
+    const Ax = 70;
+    const Ay = 360;
 
     // Farger
     const grunnlinjeFarge = "#334155";
@@ -94,9 +92,9 @@
     // TEGN TREKANTEN
     // ----------------------------------------
 
-    function tegnTrekant(Cx, Cy) {
+    function tegnTrekant(Bx, By, Cx, Cy) {
 
-        // Svak bakgrunnsfarge inni trekanten
+        // Svak bakgrunnsfarge
         ctx.fillStyle = "rgba(37, 99, 235, 0.04)";
 
         ctx.beginPath();
@@ -108,7 +106,7 @@
         ctx.closePath();
         ctx.fill();
 
-        // Grunnlinje
+        // Hosliggende katet
         tegnLinje(
             Ax, Ay,
             Bx, By,
@@ -135,18 +133,25 @@
     // MARKER RETT VINKEL
     // ----------------------------------------
 
-    function tegnRettVinkel(hoydePx) {
+    function tegnRettVinkel(Bx, By, grunnlinjePx, hoydePx) {
 
-        if (hoydePx <= 0) return;
+        if (hoydePx <= 0 || grunnlinjePx <= 0) return;
 
-        const storrelse = Math.min(16, hoydePx * 0.6);
+        const storrelse = Math.min(
+            16,
+            hoydePx * 0.6,
+            grunnlinjePx * 0.6
+        );
 
         ctx.strokeStyle = "#334155";
         ctx.lineWidth = 1.5;
 
         ctx.beginPath();
 
-        ctx.moveTo(Bx - storrelse, By);
+        ctx.moveTo(
+            Bx - storrelse,
+            By
+        );
 
         ctx.lineTo(
             Bx - storrelse,
@@ -201,7 +206,7 @@
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
 
-        // Ved små vinkler plasseres v over trekanten
+        // Flytt symbolet ved små vinkler
         if (vinkel < 15 * Math.PI / 180) {
 
             ctx.fillText(
@@ -225,25 +230,26 @@
     // TEGN SIDELENGDENE
     // ----------------------------------------
 
-    function tegnLengder(Cx, Cy, hoyde, hypotenus, vinkel) {
+    function tegnLengder(
+        Bx, By, Cx, Cy,
+        grunnlinje, hoyde, vinkel
+    ) {
 
         ctx.font = "18px Arial";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
 
-        // Grunnlinjens lengde
+        // Hosliggende katet
         ctx.fillStyle = grunnlinjeFarge;
 
         ctx.fillText(
-            "4",
+            formatLengde(grunnlinje),
             (Ax + Bx) / 2,
             Ay + 24
         );
 
 
         // Motstående katet
-        // Plasser teksten midt på siden, til høyre
-
         ctx.fillStyle = motstaaendeFarge;
         ctx.textAlign = "left";
 
@@ -260,7 +266,6 @@
         const midtX = (Ax + Cx) / 2;
         const midtY = (Ay + Cy) / 2;
 
-        // Avstand fra hypotenusen til teksten
         const avstand = 23;
 
         // Forskyv teksten vinkelrett på hypotenusen
@@ -274,7 +279,7 @@
         ctx.textAlign = "center";
 
         ctx.fillText(
-            formatLengde(hypotenus),
+            "2",
             tekstX,
             tekstY
         );
@@ -288,34 +293,42 @@
     // OPPDATER TRIGONOMETRISKE UTTRYKK
     // ----------------------------------------
 
-    function oppdaterFormler(hoyde, hypotenus) {
+    function oppdaterFormler(grunnlinje, hoyde) {
 
-        // Sinus = motstående katet / hypotenus
-
+        // Sinus
         sinTeller.textContent = formatLengde(hoyde);
-        sinNevner.textContent = formatLengde(hypotenus);
 
         sinVerdi.textContent = formatTrig(
             hoyde / hypotenus
         );
 
 
-        // Cosinus = hosliggende katet / hypotenus
-
-        cosNevner.textContent = formatLengde(hypotenus);
+        // Cosinus
+        cosTeller.textContent = formatLengde(grunnlinje);
 
         cosVerdi.textContent = formatTrig(
             grunnlinje / hypotenus
         );
 
 
-        // Tangens = motstående katet / hosliggende katet
-
+        // Tangens
         tanTeller.textContent = formatLengde(hoyde);
+        tanNevner.textContent = formatLengde(grunnlinje);
 
-        tanVerdi.textContent = formatTrig(
-            hoyde / grunnlinje
-        );
+        // Tangens er ikke definert ved 90 grader
+        if (grunnlinje === 0) {
+
+            tanLikhet.textContent = "";
+            tanVerdi.textContent = "Ikke definert";
+
+        } else {
+
+            tanLikhet.textContent = "≈";
+
+            tanVerdi.textContent = formatTrig(
+                hoyde / grunnlinje
+            );
+        }
     }
 
 
@@ -331,10 +344,17 @@
         // Omregning til radianer
         const vinkel = grader * Math.PI / 180;
 
-        // Beregn sidelengdene
-        const hoyde = grunnlinje * Math.tan(vinkel);
+        // Beregn katetene
+        let grunnlinje = hypotenus * Math.cos(vinkel);
+        let hoyde = hypotenus * Math.sin(vinkel);
 
-        const hypotenus = grunnlinje / Math.cos(vinkel);
+        // Fjern numeriske avrundingsfeil ved 0 og 90 grader
+        if (grader === 90) grunnlinje = 0;
+        if (grader === 0) hoyde = 0;
+
+        // Plassering av nederste høyre hjørne
+        const Bx = Ax + grunnlinje * enhet;
+        const By = Ay;
 
         // Plassering av øverste hjørne
         const Cx = Bx;
@@ -344,27 +364,29 @@
         vinkelVerdi.textContent = grader;
 
         // Oppdater trigonometriske uttrykk
-        oppdaterFormler(hoyde, hypotenus);
+        oppdaterFormler(grunnlinje, hoyde);
 
         // Tøm canvas
         ctx.clearRect(0, 0, W, H);
 
         // Tegn trekanten
-        tegnTrekant(Cx, Cy);
+        tegnTrekant(Bx, By, Cx, Cy);
 
         // Marker rett vinkel
-        tegnRettVinkel(hoyde * enhet);
+        tegnRettVinkel(
+            Bx,
+            By,
+            grunnlinje * enhet,
+            hoyde * enhet
+        );
 
         // Marker vinkelen til venstre
         tegnVinkel(vinkel);
 
         // Vis sidelengdene
         tegnLengder(
-            Cx,
-            Cy,
-            hoyde,
-            hypotenus,
-            vinkel
+            Bx, By, Cx, Cy,
+            grunnlinje, hoyde, vinkel
         );
     }
 

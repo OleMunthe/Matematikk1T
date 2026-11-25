@@ -1,0 +1,95 @@
+ <link rel="stylesheet" href="rettvinklet-trekant.css">
+
+<div id="rettvinklet-trekant">
+
+    <div class="rt-kontroller">
+
+        <label for="rtVinkel">
+            Vinkel:
+            <strong>
+                \(\textit{v} =\) <span id="rtVinkelVerdi">30</span>°
+            </strong>
+        </label>
+
+        <input
+            type="range"
+            id="rtVinkel"
+            min="0"
+            max="60"
+            step="1"
+            value="30"
+        >
+
+        <!-- Sinus -->
+
+        <div class="rt-formel">
+
+            <span>sin <i>v</i> =</span>
+
+            <span class="rt-brok">
+                <span class="rt-teller rt-motstaaende"
+                      id="rtSinTeller"></span>
+
+                <span class="rt-nevner rt-hypotenus"
+                      id="rtSinNevner"></span>
+            </span>
+
+            <span>≈</span>
+
+            <span id="rtSinVerdi"></span>
+
+        </div>
+
+        <!-- Cosinus -->
+
+        <div class="rt-formel">
+
+            <span>cos <i>v</i> =</span>
+
+            <span class="rt-brok">
+                <span class="rt-teller">4</span>
+
+                <span class="rt-nevner rt-hypotenus"
+                      id="rtCosNevner"></span>
+            </span>
+
+            <span>≈</span>
+
+            <span id="rtCosVerdi"></span>
+
+        </div>
+
+        <!-- Tangens -->
+
+        <div class="rt-formel">
+
+            <span>tan <i>v</i> =</span>
+
+            <span class="rt-brok">
+                <span class="rt-teller rt-motstaaende"
+                      id="rtTanTeller"></span>
+
+                <span class="rt-nevner">4</span>
+            </span>
+
+            <span>≈</span>
+
+            <span id="rtTanVerdi"></span>
+
+        </div>
+
+    </div>
+
+    <div class="rt-grafikk">
+
+        <canvas
+            id="rtCanvas"
+            width="1000"
+            height="1000"
+        ></canvas>
+
+    </div>
+
+</div>
+
+<script src="rettvinklet-trekant.js" defer></script>

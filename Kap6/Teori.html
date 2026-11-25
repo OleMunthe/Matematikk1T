@@ -184,9 +184,8 @@ Navnet på en sidekant er samme bokstav som navnet på hjørnet på motsatt side
 
 <p>Sinus-, cosinus- og tangensverdier til en vinkel er definert slik:</p>
         <img src="def.png" alt="..." style="width: 60%;">
-
-<p>Simuleringen nedenfor viser hvordan verdiene endrer seg når vinkelen endres:</p>
-        <link rel="stylesheet" href="rettvinklet-trekant.css">
+Simuleringen nedenfor viser hvordan verdiene endrer seg når vinkelen endres:
+       <link rel="stylesheet" href="rettvinklet-trekant.css">
 
 <div id="rettvinklet-trekant">
 
@@ -195,7 +194,7 @@ Navnet på en sidekant er samme bokstav som navnet på hjørnet på motsatt side
         <label for="rtVinkel">
             Vinkel:
             <strong>
-                \(\textit{v} =\) <span id="rtVinkelVerdi">30</span>°
+                <em>v</em> = <span id="rtVinkelVerdi">30</span>°
             </strong>
         </label>
 
@@ -203,7 +202,7 @@ Navnet på en sidekant er samme bokstav som navnet på hjørnet på motsatt side
             type="range"
             id="rtVinkel"
             min="0"
-            max="60"
+            max="90"
             step="1"
             value="30"
         >
@@ -218,8 +217,7 @@ Navnet på en sidekant er samme bokstav som navnet på hjørnet på motsatt side
                 <span class="rt-teller rt-motstaaende"
                       id="rtSinTeller"></span>
 
-                <span class="rt-nevner rt-hypotenus"
-                      id="rtSinNevner"></span>
+                <span class="rt-nevner rt-hypotenus">2</span>
             </span>
 
             <span>≈</span>
@@ -235,10 +233,10 @@ Navnet på en sidekant er samme bokstav som navnet på hjørnet på motsatt side
             <span>cos <i>v</i> =</span>
 
             <span class="rt-brok">
-                <span class="rt-teller">4</span>
+                <span class="rt-teller"
+                      id="rtCosTeller"></span>
 
-                <span class="rt-nevner rt-hypotenus"
-                      id="rtCosNevner"></span>
+                <span class="rt-nevner rt-hypotenus">2</span>
             </span>
 
             <span>≈</span>
@@ -257,10 +255,11 @@ Navnet på en sidekant er samme bokstav som navnet på hjørnet på motsatt side
                 <span class="rt-teller rt-motstaaende"
                       id="rtTanTeller"></span>
 
-                <span class="rt-nevner">4</span>
+                <span class="rt-nevner"
+                      id="rtTanNevner"></span>
             </span>
 
-            <span>≈</span>
+            <span id="rtTanLikhet">≈</span>
 
             <span id="rtTanVerdi"></span>
 
@@ -273,7 +272,7 @@ Navnet på en sidekant er samme bokstav som navnet på hjørnet på motsatt side
         <canvas
             id="rtCanvas"
             width="1000"
-            height="1000"
+            height="800"
         ></canvas>
 
     </div>
